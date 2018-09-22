@@ -1,0 +1,10 @@
+<?php /** @var Toolkit\Model\Comment\Meta\CommentMeta $data */ ?>
+
+<p>
+    <label for="<?php echo $data->slug; ?>">
+        <?php _e( $data->title); ?></label>
+    <input type='text'
+           name='<?php echo $data->slug; ?>'
+           id='<?php echo $data->slug; ?>'
+           value='<?php echo $data->getValue(); ?>' />
+</p>

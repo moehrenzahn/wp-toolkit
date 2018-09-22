@@ -1,0 +1,11 @@
+<?php /** @var \Toolkit\Block\Settings $block */?>
+<div class="wrap">
+<h1><?php echo __('Settings') ?> › <?php echo $block->getTitle(); ?></h1>
+<form method="POST" action="options.php">
+<?php
+settings_fields($block->getPage());
+do_settings_sections($block->getPage());
+submit_button();
+?>
+</form>
+</div>

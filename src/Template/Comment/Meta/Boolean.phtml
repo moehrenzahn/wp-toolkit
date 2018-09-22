@@ -1,0 +1,11 @@
+<?php /** @var Toolkit\Model\Comment\Meta\CommentMeta $data */ ?>
+
+<p>
+    <input type='checkbox'
+           name='<?php echo $data->slug; ?>'
+           id='<?php echo $data->slug; ?>'
+           value='1'
+           <?php echo ($data->getValue() === '1') ? 'checked' : ''; ?>/>
+    <label for="<?php echo $data->slug; ?>">
+        <?php _e( $data->title); ?></label>
+</p>

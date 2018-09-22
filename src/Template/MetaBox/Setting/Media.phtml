@@ -1,0 +1,37 @@
+<?php /** @var \Toolkit\Block\Settings\Setting $block */ ?>
+<?php
+$setting = $block->getSetting();
+$imageUrl = wp_get_attachment_url($setting->getValue()) ?? '';
+wp_enqueue_media();
+?>
+<input type='hidden'
+       name='<?php echo $setting->getId(); ?>'
+       id='<?php echo $setting->getId(); ?>'
+       value='<?php echo $setting->getValue(); ?>'>
+
+<label for="<?php echo $setting->getId(); ?>">
+    <?php echo $setting->getTitle(); ?>
+</label>
+<div>
+    <input id="<?php echo $setting->getId(); ?>-button"
+           type="image"
+           width="100"
+           style="min-height:50px;background: lightgrey"
+           alt="<?php echo $setting->getTitle(); ?>"
+           src='<?php echo $imageUrl; ?>'/>
+    <input id="<?php echo $setting->getId(); ?>-remove" type="button" class="button" value="Entfernen"/>
+</div>
+<p class="description">
+    <?php echo $setting->getDescription(); ?>
+</p>
+
+<script>
+    jQuery(document).ready(function ($) {
+        initMediaSelector(
+            '<?php echo $setting->getValue(); ?>',
+            '<?php echo $setting->getId(); ?>-button',
+            '<?php echo $setting->getId(); ?>',
+            '<?php echo $setting->getId(); ?>-remove'
+        );
+    });
+</script>

@@ -1,0 +1,5 @@
+<?php
+/** @var \Toolkit\Block\Comment\MetaBox $block */
+foreach ($this->getCommentMeta() as $meta) {
+    $this->renderPartial("../Wordpress/Template/Comment/Meta/$meta->type", null, $meta);
+}

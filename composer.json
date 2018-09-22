@@ -1,0 +1,22 @@
+{
+  "name": "moehrenzahn/wp-toolkit",
+  "description": "An object-oriented Framework around common WordPress functionality to jumpstart theme and plugin development",
+  "type": "library",
+  "keywords": ["wordpress", "oop"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Max Melzer",
+      "homepage": "http://moehrenzahn.de/",
+      "role": "Creator"
+    }
+  ],
+  "require": {
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Toolkit": "src/"
+    }
+  }
+}

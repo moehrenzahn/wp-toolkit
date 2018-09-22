@@ -1,0 +1,14 @@
+<?php /** @var Toolkit\Model\Comment\Meta\CommentMeta $data */ ?>
+
+<p>
+    <label for="<?php echo $data->slug; ?>">
+        <?php _e($data->title); ?></label>
+    <select name='<?php echo $data->slug; ?>'
+            id='<?php echo $data->slug; ?>'>
+        <?php foreach ($data->options as $option) : ?>
+            <option name="<?php echo $option; ?>"
+                    value="<?php echo $option; ?>"
+                    <?php echo ($data->getValue() === $option) ? 'selected' : ''; ?>><?php echo $option; ?></option>
+        <?php endforeach; ?>
+    </select>
+</p>

@@ -1,0 +1,9 @@
+<?php /** @var \Toolkit\Block\Settings\Setting $block */ ?>
+<?php $setting = $block->getSetting(); ?>
+<div>
+    <input name="<?php echo $setting->getId(); ?>"
+           type="text"
+           id="<?php echo $setting->getId(); ?>"
+           value="<?php echo $setting->getValue(); ?>">
+    <p class="description"><?php echo $setting->getDescription(); ?></p>
+</div>

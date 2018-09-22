@@ -1,0 +1,15 @@
+<?php /** @var \Toolkit\Block\Settings\Setting $block */ ?>
+<?php
+/** @var \Toolkit\AdminPage\Settings\Setting\Select $setting */
+$setting = $block->getSetting();
+?>
+<select name="<?php echo $setting->getId(); ?>"
+        id="<?php echo $setting->getId(); ?>">
+    <?php foreach ($setting->getOptions() as $optionSlug => $optionName) : ?>
+        <option value="<?php echo $optionSlug; ?>"
+            <?php echo ($optionSlug === $setting->getValue()) ? 'selected' : ''; ?>>
+            <?php echo $optionName; ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+<p class="description"><?php echo $setting->getDescription(); ?></p>

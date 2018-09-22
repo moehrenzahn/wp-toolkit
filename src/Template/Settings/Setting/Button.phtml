@@ -1,0 +1,10 @@
+<?php /** @var \Toolkit\Block\Settings\Setting $block */ ?>
+<?php
+/** @var \Toolkit\AdminPage\Settings\Setting $setting */
+$setting = $block->getSetting();
+?>
+<a class="button btn"
+   href="<?php echo admin_url('admin-post.php?action=' . $setting->getId()); ?>">
+    <?php echo $setting->getTitle(); ?>
+</a>
+<p class="description"><?php echo $setting->getDescription(); ?></p>
