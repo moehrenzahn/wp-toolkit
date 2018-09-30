@@ -21,16 +21,23 @@ class Block
     private $javascript;
 
     /**
+     * @var ImageSize
+     */
+    private $imageSize;
+
+    /**
      * Block constructor.
      *
      * @param Javascript $javascript
+     * @param ImageSize $imageSize
      * @param string $templatePath The path of a .phtml template file, relative to the composer project root.
      * @param string $templateType Template filename extension.
      *
      */
-    public function __construct(Javascript $javascript, string $templatePath = '', string $templateType = 'phtml')
+    public function __construct(Javascript $javascript, ImageSize $imageSize, string $templatePath = '', string $templateType = 'phtml')
     {
         $this->javascript = $javascript;
+        $this->imageSize = $imageSize;
         if (!$templatePath) {
             return;
         }
@@ -48,15 +55,6 @@ class Block
 
         $block = $this; // make the block instance avaliable as $block in the template
         require($this->templatePath);
-    }
-
-    /**
-     * @param string $path
-     * @param string $type
-     */
-    public function setTemplatePath(string $path, string $type = 'phtml')
-    {
-        $this->templatePath = $this->buildTemplatePath($path, $type);
     }
 
     /**
@@ -93,14 +91,15 @@ class Block
      * Retrieve HTML of a template part.
      *
      * @param string $path
+     * @param string $type
      * @param null|\WP_Post $postObject
      * @param mixed|null $data
      * @return string
      */
-    public function getPartial(string $path, $postObject = null, $data = null)
+    public function getPartial(string $path, string $type = 'phtml', $postObject = null, $data = null)
     {
         ob_start();
-        $this->renderPartial($path, $postObject, $data);
+        $this->renderPartial($path, $type, $postObject, $data);
         $html = ob_get_contents();
         ob_end_clean();
 
@@ -182,13 +181,6 @@ class Block
      */
     public function getLazyThumbnail(int $postId, string $size, array $classList = [])
     {
-        $classList = implode(' ', $classList);
-        $url = get_the_post_thumbnail_url($postId, $size);
-        $placeholderUrl = get_the_post_thumbnail_url($postId, 'placeholder');
-        $lazyLoadScript = '';
-        if (defined('DOING_AJAX') && DOING_AJAX) {
-            $lazyLoadScript = 'onload="lazyImages.reindexImages()"';
-        }
         $this->loadJsHelpers();
         $this->javascript->add(
             'lazy-images',
@@ -196,13 +188,21 @@ class Block
             '',
             ['utils', 'scroll-handler']
         );
-        $html = "<img $lazyLoadScript class='image-lazy loading js-only $classList' " .
-            "src='$placeholderUrl' " .
-            "data-full='$url' ".
-            "data-placeholder='$placeholderUrl'>" .
-            "<noscript><img src='$url' class='$classList'></noscript>";
 
-        return $html;
+        $placeholderSize = 'placeholder';
+        $this->imageSize->add($placeholderSize, 10);
+        $lazyLoadScript = '';
+        if (defined('DOING_AJAX') && DOING_AJAX) {
+            $lazyLoadScript = 'onload="lazyImages.reindexImages()"';
+        }
+        $data = [
+            'url' => get_the_post_thumbnail_url($postId, $size),
+            'placeholderUrl' => get_the_post_thumbnail_url($postId, $placeholderSize),
+            'classList' => implode(' ', $classList),
+            'lazyLoadScript' => $lazyLoadScript,
+        ];
+
+        return $this->getPartial(__DIR__ . '/Template/LazyImage', 'phtml', $data);
     }
 
     /**

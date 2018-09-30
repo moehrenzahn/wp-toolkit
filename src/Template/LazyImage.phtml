@@ -1,0 +1,12 @@
+<?php
+/** @var Toolkit\Block $block */
+/** @var array $data */
+?>
+<img class='image-lazy loading js-only <?php echo $data['classList']; ?>'
+     src='<?php echo $data['placeholderUrl']; ?>'
+     data-full='<?php echo $data['url']; ?>'
+     data-placeholder='<?php echo $data['placeholderUrl']; ?>'
+/>
+<noscript>
+    <img src='<?php echo $data['url']; ?>' class='<?php echo $data['classList']; ?>'/>
+</noscript>
