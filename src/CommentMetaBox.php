@@ -1,7 +1,6 @@
 <?php
 namespace Toolkit;
 
-use Toolkit\Loader;
 use Toolkit\Model\Comment\Meta\MetaManager;
 use Toolkit\Block\Comment\MetaBox as Block;
 

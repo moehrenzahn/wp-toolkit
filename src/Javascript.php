@@ -22,7 +22,7 @@ class Javascript
      */
     public function add(string $slug, string $filePath, string $version = '', array $dependencies = [])
     {
-        $this->models[] = new \Toolkit\Model\Javascript($slug, $filePath, $version, $dependencies);
+        $this->models[$slug] = new \Toolkit\Model\Javascript($slug, $filePath, $version, $dependencies);
     }
 
     /**

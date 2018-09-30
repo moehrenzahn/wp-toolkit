@@ -16,14 +16,21 @@ class Block
     protected $templatePath;
 
     /**
+     * @var Javascript
+     */
+    private $javascript;
+
+    /**
      * Block constructor.
      *
+     * @param Javascript $javascript
      * @param string $templatePath The path of a .phtml template file, relative to the composer project root.
      * @param string $templateType Template filename extension.
      *
      */
-    public function __construct(string $templatePath = '', string $templateType = 'phtml')
+    public function __construct(Javascript $javascript, string $templatePath = '', string $templateType = 'phtml')
     {
+        $this->javascript = $javascript;
         if (!$templatePath) {
             return;
         }
@@ -122,6 +129,38 @@ class Block
     }
 
     /**
+     * @param string $path Template path
+     * @param string $placeholder Placeholder template path
+     * @param string $type Template file extension
+     * @param WP_Post|null $postObject
+     * @param array|null $data
+     */
+    public function renderLazyPartial(
+        string $path,
+        string $placeholder,
+        string $type = 'phtml',
+        $postObject = null,
+        $data = null
+    ) {
+        $this->loadJsHelpers();
+        $this->javascript->add(
+            'ajax-load-template',
+            __DIR__ . 'JavaScript/ajax/load-template',
+            '',
+            ['utils', 'jquery', 'scroll-handler']
+        );
+
+        $data = array_merge(
+            $data,
+            [
+                'template' => $this->buildTemplatePath($path, $type),
+                'placeholder' => $this->buildTemplatePath($placeholder, $type),
+            ]
+        );
+        $this->renderPartial(__DIR__ . 'Template/LazyPartial', 'phtml', $postObject, $data);
+    }
+
+    /**
      * Retrieve an image. A relative path will be rooted in the composer project root
      *
      * @param string $path
@@ -150,6 +189,13 @@ class Block
         if (defined('DOING_AJAX') && DOING_AJAX) {
             $lazyLoadScript = 'onload="lazyImages.reindexImages()"';
         }
+        $this->loadJsHelpers();
+        $this->javascript->add(
+            'lazy-images',
+            __DIR__ . 'JavaScript/lazy-images',
+            '',
+            ['utils', 'scroll-handler']
+        );
         $html = "<img $lazyLoadScript class='image-lazy loading js-only $classList' " .
             "src='$placeholderUrl' " .
             "data-full='$url' ".
@@ -195,5 +241,20 @@ class Block
         }
 
         return $path;
+    }
+
+    /**
+     * Shortcut to load common js files.
+     */
+    private function loadJsHelpers()
+    {
+        $this->javascript->add(
+            'utils',
+            __DIR__ . 'JavaScript/utils'
+        );
+        $this->javascript->add(
+            'scroll-handler',
+            __DIR__ . 'JavaScript/scroll-handler'
+        );
     }
 }

@@ -1,0 +1,13 @@
+<?php
+/** @var Toolkit\Block $block */
+/** @var array $data */
+$id = uniqid('lazy-');
+?>
+<section id="<?php echo $id ?>">
+    <?php $block->renderPartial($data['placeholder']); ?>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function($) {
+        loadTemplate('<?php echo $data['template'] ?>', document.querySelector('#<?php echo $id; ?>'));
+    }, false);
+</script>
