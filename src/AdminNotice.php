@@ -1,7 +1,6 @@
 <?php
-namespace Toolkit;
 
-use Toolkit\Loader;
+namespace Toolkit;
 
 /**
  * Class AdminNotice
@@ -16,69 +15,39 @@ class AdminNotice
     const LEVEL_INFO = 'info';
 
     /**
-     * @var string
-     */
-    private $level;
-
-    /**
-     * @var string
-     */
-    private $text;
-
-    /**
-     * @var string
-     */
-    private $page;
-
-    /**
-     * @var bool
-     */
-    private $dismissible;
-
-    /**
      * @var Loader
      */
     private $loader;
 
     /**
+     * @var \Toolkit\Model\AdminNotice[]
+     */
+    private $notices = [];
+
+    /**
      * AdminNotice constructor.
      *
-     * @param Loader $loader
+     * @param \Toolkit\Loader $loader
+     */
+    public function __construct(\Toolkit\Loader $loader)
+    {
+        $this->loader = $loader;
+    }
+
+    /**
      * @param string $level
      * @param string $text
      * @param string $page
      * @param bool $dismissible
      */
-    public function __construct(
-        Loader $loader,
-        string $level,
-        string $text,
-        string $page,
-        bool $dismissible = false
-    ) {
-        $this->level = $level;
-        $this->text = $text;
-        $this->page = $page;
-        $this->dismissible = $dismissible;
-        $this->loader = $loader;
-
-        if ($this->isValidPage()) {
-            $this->loader->addAction('admin_notices', $this, 'render');
-        }
-    }
-
-    /**
-     * @return bool
-     */
-    private function isValidPage(): bool
+    public function add(string $level, string $text, string $page, bool $dismissible = false)
     {
-        global $pagenow;
-        return ($pagenow === $this->page );
+        $this->notices[] = new \Toolkit\Model\AdminNotice(
+            $this->loader,
+            $level,
+            $text,
+            $page,
+            $dismissible
+        );
     }
-
-    public function render()
-    {
-        echo "<div class='notice notice-$this->level is-dismissible'><p>$this->text</p></div>";
-    }
-
 }

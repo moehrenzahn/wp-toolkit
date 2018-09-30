@@ -12,7 +12,7 @@ class Shortcode
     /**
      * @var \Toolkit\Model\Shortcode[]
      */
-    private $models;
+    private $models = [];
 
     /**
      * @param string $shortcode

@@ -1,7 +1,7 @@
 <?php
-namespace Toolkit\AdminPage\Settings\Setting;
+namespace Toolkit\Model\AdminPage\Settings\Setting;
 
-use Toolkit\AdminPage\Settings\Setting;
+use Toolkit\Model\AdminPage\Settings\Setting;
 use Toolkit\Block\Settings\Setting as SettingBlock;
 
 /**
@@ -14,7 +14,7 @@ class Select extends Setting
     /**
      * string[]
      */
-    private $options;
+    private $options = [];
 
     /**
      * Select constructor.
@@ -40,7 +40,7 @@ class Select extends Setting
     /**
      * @return string[]
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }

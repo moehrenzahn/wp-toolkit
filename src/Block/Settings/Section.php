@@ -2,30 +2,39 @@
 
 namespace Toolkit\Block\Settings;
 
+use Toolkit\Api\Model\Settings\SectionInterface;
 use Toolkit\Block;
-use Toolkit\AdminPage\Settings\Section as SectionModel;
+use Toolkit\ImageSize;
+use Toolkit\Javascript;
 
+/**
+ * Class Section
+ *
+ * @package Toolkit\Block\Settings
+ */
 class Section extends Block
 {
     /**
-     * @var \Toolkit\AdminPage\Settings\Section
+     * @var SectionInterface
      */
     private $section;
 
     /**
      * Section constructor.
      *
-     * @param SectionModel $section
+     * @param Javascript $javascript
+     * @param ImageSize $imageSize
      */
-    public function __construct(SectionModel $section = null)
+    public function __construct(Javascript $javascript, ImageSize $imageSize)
     {
-        $this->section = $section;
+        $templatePath = 'Template/Settings/Section';
 
-        parent::__construct('Wordpress/Template/Settings/Section.phtml');
+        parent::__construct($javascript, $imageSize, $templatePath);
     }
 
+
     /**
-     * @return SectionModel
+     * @return SectionInterface
      */
     public function getSection()
     {
@@ -33,9 +42,9 @@ class Section extends Block
     }
 
     /**
-     * @param SectionModel $section
+     * @param SectionInterface $section
      */
-    public function setSection(SectionModel $section)
+    public function setSection(SectionInterface $section)
     {
         $this->section = $section;
     }

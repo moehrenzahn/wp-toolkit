@@ -29,7 +29,7 @@ class Javascript
     /**
      * @var string[]
      */
-    private $dependencies;
+    private $dependencies = [];
 
     /**
      * Javascript constructor.

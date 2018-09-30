@@ -1,6 +1,6 @@
 <?php
 
-namespace Toolkit\AdminPage;
+namespace Toolkit\Api\Model\AdminPage;
 
 use Toolkit\Loader;
 
@@ -31,11 +31,11 @@ abstract class AbstractPostAction
     /**
      * AbstractPostAction constructor.
      *
+     * @param Loader $loader
      * @param string $actionId
      * @param string $returnUrl
-     * @param Loader $loader
      */
-    public function __construct(string $actionId, string $returnUrl, Loader $loader)
+    public function __construct(Loader $loader, string $actionId, string $returnUrl)
     {
         $this->actionId = $actionId;
         $this->returnUrl = $returnUrl;

@@ -3,8 +3,15 @@
 namespace Toolkit\Block\Settings;
 
 use Toolkit\Block;
-use Toolkit\SettingInterface;
+use Toolkit\ImageSize;
+use Toolkit\Javascript;
+use Toolkit\Api\Model\Settings\SettingInterface;
 
+/**
+ * Class Setting
+ *
+ * @package Toolkit\Block
+ */
 class Setting extends Block
 {
     /**
@@ -15,14 +22,22 @@ class Setting extends Block
     /**
      * Setting constructor.
      *
-     * @param SettingInterface|null $setting
+     * @param Javascript $javascript
+     * @param ImageSize $imageSize
      * @param string $templatePath
+     * @param string $templateType
+     * @param SettingInterface $setting
      */
-    public function __construct($templatePath, $setting = null)
-    {
+    public function __construct(
+        Javascript $javascript,
+        ImageSize $imageSize,
+        string $templatePath = '',
+        string $templateType = 'phtml',
+        SettingInterface $setting
+    ) {
         $this->setting = $setting;
 
-        parent::__construct($templatePath);
+        parent::__construct($javascript, $imageSize, $templatePath, $templateType);
     }
 
     /**

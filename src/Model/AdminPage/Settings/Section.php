@@ -1,10 +1,16 @@
 <?php
 
-namespace Toolkit\AdminPage\Settings;
+namespace Toolkit\Model\AdminPage\Settings;
 
+use Toolkit\Api\Model\Settings\SectionInterface;
 use Toolkit\Block\Settings\Section as SectionBlock;
 
-class Section
+/**
+ * Class Section
+ *
+ * @package Toolkit\Model\AdminPage\Settings
+ */
+class Section implements SectionInterface
 {
     /**
      * @var string
@@ -24,7 +30,7 @@ class Section
     /**
      * @var Setting[]
      */
-    private $settings;
+    private $settings = [];
 
     /**
      * @var SectionBlock
@@ -58,7 +64,7 @@ class Section
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -66,7 +72,7 @@ class Section
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -74,7 +80,7 @@ class Section
     /**
      * @return Setting[]
      */
-    public function getSettings()
+    public function getSettings(): array
     {
         return $this->settings;
     }
@@ -82,7 +88,7 @@ class Section
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }

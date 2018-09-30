@@ -12,7 +12,7 @@ class Javascript
     /**
      * @var \Toolkit\Model\Javascript[]
      */
-    private $models;
+    private $models = [];
 
     /**
      * @param string $slug

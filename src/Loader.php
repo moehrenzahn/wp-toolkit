@@ -12,7 +12,6 @@ namespace Toolkit;
  */
 class Loader
 {
-
     /**
      * @var array
      */
@@ -28,28 +27,51 @@ class Loader
      */
     protected $shortcodes = [];
 
-    public function addAction($hook, $component, $callback)
+    /**
+     * @param string $hook
+     * @param mixed $component
+     * @param string $callback
+     */
+    public function addAction(string $hook, $component, string $callback)
     {
         $this->actions = $this->add($this->actions, $hook, $component, $callback);
     }
 
-    public function addFilter($hook, $component, $callback)
+    /**
+     * @param string $hook
+     * @param mixed $component
+     * @param string $callback
+     */
+    public function addFilter(string $hook, $component, string $callback)
     {
         $this->filters = $this->add($this->filters, $hook, $component, $callback);
     }
 
-    public function addShortcode($code, $component, $callback)
+    /**
+     * @param string $code
+     * @param mixed $component
+     * @param string $callback
+     */
+    public function addShortcode(string $code, $component, string $callback)
     {
         $this->shortcodes = $this->add($this->shortcodes, $code, $component, $callback);
     }
 
-    private function add($hooks, $hook, $component, $callback)
+    /**
+     * @param array $hooks
+     * @param string $hook
+     * @param $component
+     * @param string $callback
+     * @return array
+     */
+    private function add(array $hooks, string $hook, $component, string $callback): array
     {
         $hooks[] = [
             'hook'      => $hook,
             'component' => $component,
             'callback'  => $callback
         ];
+
         return $hooks;
     }
 

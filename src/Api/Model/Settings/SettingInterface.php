@@ -1,7 +1,12 @@
 <?php
 
-namespace Toolkit;
+namespace Toolkit\Api\Model\Settings;
 
+/**
+ * Interface SettingInterface
+ *
+ * @package Toolkit\Api\Model\Settings
+ */
 interface SettingInterface
 {
     /**

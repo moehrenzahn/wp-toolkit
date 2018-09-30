@@ -2,8 +2,10 @@
 
 namespace Toolkit\Block;
 
+use Toolkit\Api\Model\Settings\SectionInterface;
 use Toolkit\Block;
-use Toolkit\AdminPage\Settings\Section;
+use Toolkit\ImageSize;
+use Toolkit\Javascript;
 
 class Settings extends Block
 {
@@ -18,23 +20,32 @@ class Settings extends Block
     private $page;
 
     /**
+     * @var SectionInterface[]
+     */
+    private $sections = [];
+
+    /**
      * Settings constructor.
      *
+     * @param Javascript $javascript
+     * @param ImageSize $imageSize
      * @param string $title
      * @param string $page
      */
-    public function __construct($title, $page)
+    public function __construct(Javascript $javascript, ImageSize $imageSize, string $title, string $page)
     {
         $this->title = $title;
         $this->page = $page;
+        $templatePath = 'Template/Settings';
 
-        parent::__construct('Wordpress/Template/Settings.phtml');
+        parent::__construct($javascript, $imageSize, $templatePath);
     }
 
+
     /**
-     * @return Section[]
+     * @return SectionInterface[]
      */
-    public function getSections()
+    public function getSections(): array
     {
         return $this->sections;
     }
@@ -42,7 +53,7 @@ class Settings extends Block
     /**
      * @return string
      */
-    public function getPage()
+    public function getPage(): string
     {
         return $this->page;
     }
@@ -50,7 +61,7 @@ class Settings extends Block
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }

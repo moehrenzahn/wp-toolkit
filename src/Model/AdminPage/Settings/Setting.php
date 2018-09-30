@@ -1,10 +1,10 @@
 <?php
 
-namespace Toolkit\AdminPage\Settings;
+namespace Toolkit\Model\AdminPage\Settings;
 
 use Toolkit\ConfigAccessor;
 use \Toolkit\Block\Settings\Setting as SettingBlock;
-use Toolkit\SettingInterface;
+use Toolkit\Api\Model\Settings\SettingInterface;
 
 class Setting implements SettingInterface
 {
@@ -54,7 +54,7 @@ class Setting implements SettingInterface
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -62,7 +62,7 @@ class Setting implements SettingInterface
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -70,7 +70,7 @@ class Setting implements SettingInterface
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }

@@ -27,15 +27,10 @@ class Shortcode
      * @param $shortCode
      * @param Block $block
      */
-    public function __construct($shortCode, Block $block)
+    public function __construct(string $shortCode, Block $block)
     {
         $this->shortCode = $shortCode;
         $this->block = $block;
-        add_shortcode($this->shortCode, [$this, 'getTemplate']);
-    }
-
-    public function getTemplate()
-    {
-        return $this->block->getHtml();
+        add_shortcode($this->shortCode, [$this->block, 'getHtml']);
     }
 }

@@ -2,90 +2,111 @@
 
 namespace Toolkit;
 
-use Toolkit\Loader;
+use Toolkit\Api\Model\Settings\SectionInterface;
 
 /**
- * Generic Admin Page in Wordpress Dashboard
+ * Class AdminPage
+ *
+ * @package Toolkit
  */
 class AdminPage
 {
-    const ACTION = 'admin_menu';
+    /**
+     * @var AdminPage[]
+     */
+    private $adminPages = [];
 
     /**
      * @var Loader
      */
-    protected $loader;
+    private $loader;
 
     /**
-     * @var string
+     * @var Javascript
      */
-    protected $title;
+    private $javascript;
 
     /**
-     * @var string
+     * @var ImageSize
      */
-    protected $slug;
-
-    /**
-     * @var string
-     */
-    protected $icon;
-
-    /**
-     * @var int
-     */
-    protected $position;
-
-    /**
-     * @var Block
-     */
-    private $block;
+    private $imageSize;
 
     /**
      * AdminPage constructor.
      *
      * @param Loader $loader
-     * @param string $title
-     * @param string $slug
-     * @param string $icon
-     * @param int $position
-     * @param Block $block
+     * @param Javascript $javascript
+     * @param ImageSize $imageSize
      */
-    public function __construct(Loader $loader, string $title, string $slug, string $icon, int $position, Block $block)
+    public function __construct(Loader $loader, Javascript $javascript, ImageSize $imageSize)
     {
         $this->loader = $loader;
-        $this->title = $title;
-        $this->slug = $slug;
-        $this->icon = $icon;
-        $this->position = $position;
-        $this->block = $block;
-
-        $this->loader->addAction('admin_menu', $this, 'registerCallback');
-    }
-
-    public function registerCallback()
-    {
-        $this->register();
+        $this->javascript = $javascript;
+        $this->imageSize = $imageSize;
     }
 
     /**
-     * Register backend page with wordpress
+     * @param string $title
+     * @param int $slug
+     * @param string $icon
+     * @param int $position
+     * @param string $templatePath
+     * @param string $templateType
      */
-    protected function register()
-    {
-        add_menu_page(
-            $this->title,
-            $this->title,
-            "read",
-            $this->slug,
-            [$this, 'renderContent'],
-            $this->icon,
-            $this->position
+    public function add(
+        string $title,
+        int $slug,
+        string $icon,
+        int $position,
+        string $templatePath,
+        string $templateType = 'phtml'
+    ) {
+        $block = new Block(
+            $this->javascript,
+            $this->imageSize,
+            $templatePath,
+            $templateType
+        );
+        $this->adminPages[$slug] = new \Toolkit\Model\AdminPage(
+            $this->loader,
+            $title,
+            $slug,
+            $icon,
+            $position,
+            $block
         );
     }
 
-    public function renderContent()
+    /**
+     * @param string $title
+     * @param string $slug
+     * @param SectionInterface[] $sections
+     */
+    public function addSettings(
+        string $title,
+        string $slug,
+        array $sections
+    ) {
+        $block = new \Toolkit\Block\Settings(
+            $this->javascript,
+            $this->imageSize,
+            $title,
+            $slug
+        );
+        $this->adminPages[$slug] = new \Toolkit\Model\AdminPage\Settings(
+            $this->loader,
+            $block,
+            $title,
+            $slug,
+            $sections
+        );
+    }
+
+    /**
+     * @return AdminPage[]
+     */
+    public function getAdminPages(): array
     {
-        $this->block->renderTemplate();
+        return $this->adminPages;
     }
 }

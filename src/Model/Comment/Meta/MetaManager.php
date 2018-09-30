@@ -14,7 +14,7 @@ class MetaManager
      * @param string $slug
      * @return string
      */
-    public function get($commentId, $slug)
+    public function get($commentId, $slug): string
     {
         return get_comment_meta(
             $commentId,

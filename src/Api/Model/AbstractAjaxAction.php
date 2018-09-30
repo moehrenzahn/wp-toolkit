@@ -1,15 +1,15 @@
 <?php
 
-namespace Toolkit;
+namespace Toolkit\Api\Model;
 
 use Toolkit\Loader;
 
 /**
- * Class AbstractAjax
+ * Class AbstractAjaxAction
  *
- * @package Toolkit
+ * @package Toolkit\Model
  */
-abstract class AbstractAjax
+abstract class AbstractAjaxAction
 {
     /**
      * @var Loader
@@ -51,4 +51,12 @@ abstract class AbstractAjax
     }
 
     abstract public function action();
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
 }

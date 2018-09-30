@@ -2,8 +2,6 @@
 
 namespace Toolkit;
 
-use Toolkit\Loader;
-
 /**
  * Class PostMetaBox
  *
@@ -11,77 +9,56 @@ use Toolkit\Loader;
  */
 class PostMetaBox
 {
-    const SCREEN_NAME = 'post';
-
-    const HOOK = 'add_meta_boxes';
-
-    /**
-     * @var string
-     */
-    private $title;
-
-    /**
-     * @var string
-     */
-    private $slug;
-
-    /**
-     * @var Block
-     */
-    private $block;
-
     /**
      * @var Loader
      */
-    protected $loader;
+    private $loader;
 
+    /**
+     * @var Javascript
+     */
+    private $javascript;
+
+    /**
+     * @var ImageSize
+     */
+    private $imageSize;
+
+    /**
+     * @var \Toolkit\Model\PostMetaBox[]
+     */
+    private $metaBoxes = [];
 
     /**
      * PostMetaBox constructor.
      *
-     * @param string $title
-     * @param Block $block
      * @param Loader $loader
+     * @param Javascript $javascript
+     * @param ImageSize $imageSize
      */
-    public function __construct($title, Block $block, Loader $loader)
+    public function __construct(Loader $loader, Javascript $javascript, ImageSize $imageSize)
     {
-        $this->title = $title;
-        $this->slug = $this->generateSlug($title);
-        $this->block = $block;
         $this->loader = $loader;
-
-        $this->loader->addAction(self::HOOK, $this, 'register');
+        $this->javascript = $javascript;
+        $this->imageSize = $imageSize;
     }
 
     /**
-     * Register backend page with wordpress
+     * @param string $title
+     * @param string $templatePath
+     * @param string $templateType
      */
-    public function register()
+    public function add(string $title, string $templatePath, string $templateType = 'phtml')
     {
-        add_meta_box(
-            $this->slug,
-            $this->title,
-            [$this, 'renderTemplate'],
-            self::SCREEN_NAME,
-            'side',
-            'high'
-        );
-    }
-
-    public function renderTemplate()
-    {
-        $this->block->renderTemplate();
+        $block = new Block($this->javascript, $this->imageSize, $templatePath, $templateType);
+        $this->metaBoxes[$title] = new \Toolkit\Model\PostMetaBox($title, $block, $this->loader);
     }
 
     /**
-     * @param $title
-     * @return mixed|string
+     * @return Model\PostMetaBox[]
      */
-    private function generateSlug($title)
+    public function getMetaBoxes(): array
     {
-        $result = strtolower($title);
-        $result = str_replace(' ', '_', $result);
-
-        return $result;
+        return $this->metaBoxes;
     }
 }

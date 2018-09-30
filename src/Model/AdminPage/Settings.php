@@ -1,9 +1,10 @@
 <?php
 
-namespace Toolkit\AdminPage;
+namespace Toolkit\Model\AdminPage;
 
+use Toolkit\Api\Model\Settings\SectionInterface;
 use Toolkit\Loader;
-use Toolkit\AdminPage;
+use Toolkit\Model\AdminPage;
 use Toolkit\Block\Settings as SettingsBlock;
 
 /**
@@ -11,29 +12,34 @@ use Toolkit\Block\Settings as SettingsBlock;
  *
  * Wrapper around the Wordpress Settings API
  *
- * @package Devotionalium
+ * @package Toolkit\Model\AdminPage
  */
 class Settings extends AdminPage
 {
     /**
-     * @var Settings\Section[]
+     * @var SectionInterface[]
      */
-    private $sections;
+    private $sections = [];
 
     /**
      * Settings constructor.
      *
      * @param Loader $loader
+     * @param SettingsBlock $settingsBlock
      * @param string $title
      * @param string $slug
-     * @param Settings\Section[] $sections
+     * @param SectionInterface[] $sections
      */
-    public function __construct($loader, $title, $slug, $sections)
-    {
+    public function __construct(
+        Loader $loader,
+        SettingsBlock $settingsBlock,
+        string $title,
+        string $slug,
+        array $sections
+    ) {
         $this->sections = $sections;
-        $block = new SettingsBlock($title, $slug);
 
-        parent::__construct($loader, $title, $slug, '', 0, $block);
+        parent::__construct($loader, $title, $slug, '', 0, $settingsBlock);
     }
 
     public function register()

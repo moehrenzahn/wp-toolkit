@@ -11,9 +11,9 @@ class User
 {
     /**
      * Wrapper around wp_insert_user. Creates an abstract user without email, username or password.
-     * Has support for the simple_local_avatar plugin.
+     * Will store image id in simple_local_avatar user meta.
      *
-     * Returns created User Id
+     * Returns created user's id.
      *
      * @param string $firstName
      * @param string $lastName

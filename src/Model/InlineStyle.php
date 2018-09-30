@@ -1,13 +1,13 @@
 <?php
 
-namespace Toolkit;
+namespace Toolkit\Model;
 
 use Toolkit\Loader;
 
 /**
  * Class InlineStyle
  *
- * @package Toolkit
+ * @package Toolkit\Model
  */
 class InlineStyle
 {
@@ -38,7 +38,7 @@ class InlineStyle
 
     public function enqueueStyle()
     {
-        $dummyHandle = '___aaa-wordpress-dummy-handle';
+        $dummyHandle = uniqid('dummy-handle-');
         wp_register_style($dummyHandle, false);
         wp_enqueue_style($dummyHandle);
         wp_add_inline_style($dummyHandle, $this->css);

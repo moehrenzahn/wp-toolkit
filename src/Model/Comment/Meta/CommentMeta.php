@@ -67,7 +67,7 @@ class CommentMeta
      *
      * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->metaManager->get($_REQUEST['c'], $this->slug);
     }
