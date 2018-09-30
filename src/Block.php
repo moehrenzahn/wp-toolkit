@@ -2,6 +2,7 @@
 
 namespace Toolkit;
 
+use Toolkit\Helper\Composer;
 use Toolkit\Helper\Strings;
 
 /**
@@ -9,8 +10,6 @@ use Toolkit\Helper\Strings;
  */
 class Block
 {
-    const TEMPLATE_TYPE = '.phtml';
-
     /**
      * @var string
      */
@@ -19,11 +18,16 @@ class Block
     /**
      * Block constructor.
      *
-     * @param string $templatePath
+     * @param string $templatePath The path of a .phtml template file, relative to the composer project root.
+     * @param string $templateType Template filename extension.
+     *
      */
-    public function __construct($templatePath = null)
+    public function __construct(string $templatePath = '', string $templateType = 'phtml')
     {
-        $this->templatePath = $templatePath;
+        if (!$templatePath) {
+            return;
+        }
+        $this->templatePath = $this->buildTemplatePath($templatePath, $templateType);
     }
 
     /**
@@ -34,28 +38,27 @@ class Block
         if (!$this->templatePath) {
             return;
         }
-        if (!Strings::endsWith($this->templatePath, self::TEMPLATE_TYPE)) {
-            $this->templatePath .= self::TEMPLATE_TYPE;
-        }
+
         $block = $this; // make the block instance avaliable as $block in the template
-        require(__DIR__ . '/../' . $this->templatePath); // relative to library dir
+        require($this->templatePath);
     }
 
     /**
      * @param string $path
+     * @param string $type
      */
-    public function setTemplatePath($path)
+    public function setTemplatePath(string $path, string $type = 'phtml')
     {
-        $this->templatePath = $path;
+        $this->templatePath = $this->buildTemplatePath($path, $type);
     }
 
     /**
-     * Output template using native get_template_part function
+     * Output a template by slug using WordPress get_template_part function
      *
      * @param $slug
      * @param \WP_Post|null $postObject
      */
-    public function renderTemplatePart($slug, $postObject = null)
+    public function renderTemplatePart(string $slug, $postObject = null)
     {
         if ($postObject) {
             global $post;
@@ -65,7 +68,7 @@ class Block
     }
 
     /**
-     * Retrieve Template html
+     * Retrieve block template HTML
      *
      * @return string
      */
@@ -80,12 +83,14 @@ class Block
     }
 
     /**
-     * @param $path
+     * Retrieve HTML of a template part.
+     *
+     * @param string $path
      * @param null|\WP_Post $postObject
      * @param mixed|null $data
      * @return string
      */
-    public function getPartial($path, $postObject = null, $data = null)
+    public function getPartial(string $path, $postObject = null, $data = null)
     {
         ob_start();
         $this->renderPartial($path, $postObject, $data);
@@ -96,16 +101,47 @@ class Block
     }
 
     /**
-     * @param string $name
+     * Render a template part.
+     *
+     * @param string $path
+     * @param string $type
+     * @param null|\WP_Post $postObject
+     * @param mixed|null $data
+     */
+    public function renderPartial(string $path, string $type = 'phtml', $postObject = null, $data = null)
+    {
+        if ($postObject) {
+            $post = $postObject;
+        } else {
+            global $post;
+        }               // make $post available in the template.
+        $data = $data;   // make data object available as $data.
+        $block = $this; // make the block instance avaliable as $block.
+
+        require($this->buildTemplatePath($path, $type));
+    }
+
+    /**
+     * Retrieve an image. A relative path will be rooted in the composer project root
+     *
+     * @param string $path
      * @param string $type
      * @return string
      */
-    public function getImage($name, $type = 'jpg')
+    public function getImageUrl(string $path, string $type = 'jpg')
     {
-        return get_template_directory_uri() . "/library/Template/Images/$name.$type";
+        return $this->buildTemplatePath($path, $type);
     }
 
-    public function getLazyThumbnail(int $postId, string $size, $classList = [])
+    /**
+     * Get a posts thumbnail image as lazy-loaded <img> tag.
+     *
+     * @param int $postId
+     * @param string $size A WordPress image size class
+     * @param array $classList List of HTML classes
+     * @return string
+     */
+    public function getLazyThumbnail(int $postId, string $size, array $classList = [])
     {
         $classList = implode(' ', $classList);
         $url = get_the_post_thumbnail_url($postId, $size);
@@ -119,42 +155,45 @@ class Block
             "data-full='$url' ".
             "data-placeholder='$placeholderUrl'>" .
             "<noscript><img src='$url' class='$classList'></noscript>";
+
         return $html;
     }
 
     /**
-     * @param $path
-     * @param null|\WP_Post $postObject
-     * @param mixed|null $data
+     * Render the native WordPress page header template. Use only once per request.
+     *
+     * @param string|null $name Calls for header-name.php.
      */
-    public function renderPartial($path, $postObject = null, $data = null)
+    public function renderHeader(string $name = null)
     {
-        global $post;
-        if ($postObject) {
-            $post = $postObject;
-        }
-        if (!Strings::endsWith($path, self::TEMPLATE_TYPE)) {
-            $path .= self::TEMPLATE_TYPE;
-        }
-
-        $block = $this; // make the block instance avaliable as $block in the template
-        require(__DIR__ . '/../Template/' . $path);
+        $this->renderPartial(__DIR__ . '/Template/Head.phtml');
+        get_header($name);
     }
 
     /**
-     * Render the page header. Use only once per request
+     * Render the native WordPress page footer template.
+     *
+     * @param string $name Calls for footer-name.php.
      */
-    public function renderHeader()
+    public function renderFooter(string $name = null)
     {
-        $this->renderPartial('../Wordpress/Template/Head');
-        $this->renderPartial('../Wordpress/Template/Header');
+        get_footer($name);
     }
 
     /**
-     * Render the page footer. Use only once per request
+     * @param string $path
+     * @param string $type
+     * @return string
      */
-    public function renderFooter()
+    private function buildTemplatePath(string $path, string $type)
     {
-        $this->renderPartial('../Wordpress/Template/Footer');
+        if (!Strings::startsWith($path, '/')) {
+            $path = Composer::getRootDir() . '/' . $path;
+        }
+        if (!Strings::endsWith($path, $type)) {
+            $path .= ".$type";
+        }
+
+        return $path;
     }
 }
