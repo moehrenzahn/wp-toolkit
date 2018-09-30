@@ -1,6 +1,6 @@
 {
   "name": "moehrenzahn/wp-toolkit",
-  "description": "An object-oriented Framework around common WordPress functionality to jumpstart theme and plugin development",
+  "description": "An object-oriented framework around common WordPress functionality to jumpstart theme and plugin development.",
   "type": "library",
   "keywords": ["wordpress", "oop"],
   "license": "MIT",
