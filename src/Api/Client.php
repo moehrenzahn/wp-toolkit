@@ -5,11 +5,12 @@ namespace Toolkit\Api;
 use Toolkit\AdminNotice;
 use Toolkit\AdminPage;
 use Toolkit\Block;
+use Toolkit\CommentMeta;
 use Toolkit\CommentMetaBox;
 use Toolkit\ImageSize;
 use Toolkit\Javascript;
 use Toolkit\Loader;
-use Toolkit\Model\Comment\Meta\MetaManager;
+use Toolkit\Model\Comment\MetaAccessor;
 use Toolkit\PostMetaBox;
 use Toolkit\PostType;
 use Toolkit\Shortcode;
@@ -35,13 +36,16 @@ class Client
      * @param string $templateType
      * @return Block
      */
-    public function createBlock(string $templatePath, string $templateType)
+    public function createBlock(string $templatePath = '', string $templateType = 'phtml')
     {
-        return new Block(
-            $this->getJavascriptManager(),
-            $this->getImageSizeManager(),
-            $templatePath,
-            $templateType
+        return $this->createInstance(
+            Block::class,
+            [
+                $this->getJavascriptManager(),
+                $this->getImageSizeManager(),
+                $templatePath,
+                $templateType
+            ]
         );
     }
 
@@ -113,9 +117,20 @@ class Client
     }
 
     /**
+     * @return CommentMeta
+     */
+    public function getCommentMetaManager()
+    {
+        return $this->getSingleton(
+            CommentMeta::class,
+            [$this->getSingleton(MetaAccessor::class)]
+        );
+    }
+
+    /**
      * @return CommentMetaBox
      */
-    public function getCommentMetaBox()
+    public function getCommentMetaBoxManager()
     {
         return $this->getSingleton(
             CommentMetaBox::class,
@@ -123,7 +138,7 @@ class Client
                 $this->getLoader(),
                 $this->getJavascriptManager(),
                 $this->getImageSizeManager(),
-                $this->getSingleton(MetaManager::class)
+                $this->getSingleton(MetaAccessor::class)
             ]
         );
     }
@@ -161,12 +176,21 @@ class Client
      */
     private function getSingleton(string $class, array $args = [])
     {
-        if (isset($this->instances[$class])) {
-            $instance = $this->instances[$class];
-        } else {
-            $instance = new $class(...$args);
-            $this->instances[$class] = $instance;
+        if (!isset($this->instances[$class])) {
+            $this->instances[$class] = $this->createInstance($class, $args);
         }
+
+        return $this->instances[$class];
+    }
+
+    /**
+     * @param string $class
+     * @param mixed[] $args
+     * @return mixed
+     */
+    private function createInstance(string $class, array $args = [])
+    {
+        $instance = new $class(...$args);
 
         return $instance;
     }

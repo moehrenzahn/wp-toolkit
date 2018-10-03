@@ -1,6 +1,6 @@
 <?php
 
-namespace Toolkit\Model\Comment\Meta;
+namespace Toolkit\Model\Comment;
 
 /**
  * Class CommentMeta
@@ -35,9 +35,9 @@ class CommentMeta
     public $type;
 
     /**
-     * @var MetaManager;
+     * @var MetaAccessor;
      */
-    private $metaManager;
+    private $metaAccessor;
 
     /**
      * CommentMeta constructor.
@@ -45,30 +45,32 @@ class CommentMeta
      * @param string $title
      * @param string $slug
      * @param string $type
-     * @param MetaManager $metaManager
+     * @param MetaAccessor $metaAccessor
      * @param string[]|null $options
      */
     public function __construct(
-        $title,
-        $slug,
-        $type,
-        MetaManager $metaManager,
+        string $title,
+        string $slug,
+        string $type,
+        MetaAccessor $metaAccessor,
         $options = null
     ) {
         $this->title = $title;
         $this->slug = $slug;
         $this->type = $type;
         $this->options = $options;
-        $this->metaManager = $metaManager;
+        $this->metaAccessor = $metaAccessor;
     }
 
     /**
-     * @TODO: The comment ID needs to be passed in a better way.
-     *
      * @return string
      */
     public function getValue(): string
     {
-        return $this->metaManager->get($_REQUEST['c'], $this->slug);
+        /**
+         * Get the comment id from the current admin url.
+         * This will only work in the comment detail view in the admin area.
+         */
+        return $this->metaAccessor->get($_REQUEST['c'], $this->slug) ?? '';
     }
 }

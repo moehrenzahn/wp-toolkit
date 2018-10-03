@@ -3,7 +3,7 @@
 namespace Toolkit;
 
 use Toolkit\Block\Comment\MetaBox;
-use Toolkit\Model\Comment\Meta\MetaManager;
+use Toolkit\Model\Comment\MetaAccessor;
 
 /**
  * Class CommentMetaBox
@@ -23,9 +23,9 @@ class CommentMetaBox
     private $javascript;
 
     /**
-     * @var MetaManager
+     * @var MetaAccessor
      */
-    private $metaManager;
+    private $metaAccessor;
 
     /**
      * @var ImageSize
@@ -43,35 +43,44 @@ class CommentMetaBox
      * @param Loader $loader
      * @param Javascript $javascript
      * @param ImageSize $imageSize
-     * @param MetaManager $metaManager
+     * @param MetaAccessor $metaAccessor
      */
     public function __construct(
         Loader $loader,
         Javascript $javascript,
         ImageSize $imageSize,
-        MetaManager $metaManager
+        MetaAccessor $metaAccessor
     ) {
         $this->loader = $loader;
         $this->javascript = $javascript;
         $this->imageSize = $imageSize;
-        $this->metaManager = $metaManager;
+        $this->metaAccessor = $metaAccessor;
     }
 
     /**
      * @param string $slug
      * @param string $title
+     * @param array $commentMeta
      * @param string $templatePath
      * @param string $templateType
+     * @return Model\CommentMetaBox
      */
-    public function add(string $slug, string $title, string $templatePath, string $templateType = 'phtml')
-    {
-        $block = new MetaBox($this->javascript, $this->imageSize, $templatePath, $templateType);
+    public function add(
+        string $slug,
+        string $title,
+        array $commentMeta,
+        string $templatePath = 'Template/Comment/MetaBox',
+        string $templateType = 'phtml'
+    ) : \Toolkit\Model\CommentMetaBox {
+        $block = new MetaBox($this->javascript, $this->imageSize, $templatePath, $templateType, $commentMeta);
         $this->metaBoxes[$title] = new \Toolkit\Model\CommentMetaBox(
             $slug,
             $title,
             $block,
             $this->loader,
-            $this->metaManager
+            $this->metaAccessor
         );
+
+        return $this->metaBoxes[$title];
     }
 }

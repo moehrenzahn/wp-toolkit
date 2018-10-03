@@ -30,11 +30,11 @@ class Block
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
-     * @param string $templatePath The path of a .phtml template file, relative to the composer project root.
+     * @param string $templatePath The path of a template file, relative to the composer project root.
      * @param string $templateType Template filename extension.
      *
      */
-    public function __construct(Javascript $javascript, ImageSize $imageSize, string $templatePath = '', string $templateType = 'phtml')
+    public function __construct(Javascript $javascript, ImageSize $imageSize, string $templatePath, string $templateType)
     {
         $this->javascript = $javascript;
         $this->imageSize = $imageSize;

@@ -11,6 +11,9 @@ class Composer
 {
     public static function getRootDir()
     {
-        return dirname(\Composer\Factory::getComposerFile());
+        $reflection = new \ReflectionClass(\Composer\Autoload\ClassLoader::class);
+        $vendorDir = dirname(dirname($reflection->getFileName()));
+
+        return $vendorDir . '/moehrenzahn/wp-toolkit/src';
     }
 }

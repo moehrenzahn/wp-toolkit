@@ -1,13 +1,13 @@
 <?php
 
-namespace Toolkit\Model\Comment\Meta;
+namespace Toolkit\Model\Comment;
 
 /**
- * Class MetaManager
+ * Class MetaAccessor
  *
  * @package Toolkit
  */
-class MetaManager
+class MetaAccessor
 {
     /**
      * @param int $commentId

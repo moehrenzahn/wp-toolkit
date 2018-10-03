@@ -2,7 +2,7 @@
 namespace Toolkit\Model;
 
 use Toolkit\Loader;
-use Toolkit\Model\Comment\Meta\MetaManager;
+use Toolkit\Model\Comment\MetaAccessor;
 use Toolkit\Block\Comment\MetaBox as Block;
 
 /**
@@ -36,9 +36,9 @@ class CommentMetaBox
     private $loader;
 
     /**
-     * @var MetaManager
+     * @var MetaAccessor
      */
-    private $metaManager;
+    private $metaAccessor;
 
     /**
      * @var int
@@ -54,20 +54,20 @@ class CommentMetaBox
      * @param $title
      * @param Block $block
      * @param Loader $loader
-     * @param MetaManager $metaManager
+     * @param MetaAccessor $metaAccessor
      */
     public function __construct(
         string $slug,
         string $title,
         Block $block,
         Loader $loader,
-        MetaManager $metaManager
+        MetaAccessor $metaAccessor
     ) {
         $this->slug = $slug;
         $this->title = $title;
         $this->block = $block;
         $this->loader = $loader;
-        $this->metaManager = $metaManager;
+        $this->metaAccessor = $metaAccessor;
 
         $this->loader->addAction(self::HOOK_ADD, $this, 'addMetaBox');
         $this->loader->addAction(self::HOOK_EDIT, $this, 'saveData');
@@ -100,9 +100,9 @@ class CommentMetaBox
     {
         foreach ($this->block->getCommentMeta() as $meta) {
             if (isset($_POST[$meta->slug])) {
-                $this->metaManager->update($commentId, $meta->slug, esc_attr($_POST[$meta->slug]));
+                $this->metaAccessor->update($commentId, $meta->slug, esc_attr($_POST[$meta->slug]));
             } else {
-                $this->metaManager->remove($commentId, $meta->slug);
+                $this->metaAccessor->remove($commentId, $meta->slug);
             }
         }
     }
