@@ -2,6 +2,8 @@
 
 namespace Toolkit;
 
+use Toolkit\Block\Post\MetaBox;
+
 /**
  * Class PostMetaBox
  *
@@ -45,13 +47,29 @@ class PostMetaBox
 
     /**
      * @param string $title
+     * @param string $slug
      * @param string $templatePath
      * @param string $templateType
+     * @param \Toolkit\Model\Post\PostPreference[] $postPreferences
+     * @return Model\PostMetaBox
      */
-    public function add(string $title, string $templatePath, string $templateType = 'phtml')
-    {
-        $block = new Block($this->javascript, $this->imageSize, $templatePath, $templateType);
-        $this->metaBoxes[$title] = new \Toolkit\Model\PostMetaBox($title, $block, $this->loader);
+    public function add(
+        string $title,
+        string $slug,
+        array $postPreferences = [],
+        string $templatePath = 'Template/MetaBox/MetaBox.phtml',
+        string $templateType = 'phtml'
+    ) {
+        $block = new MetaBox($this->javascript, $this->imageSize, $templatePath, $templateType, $postPreferences);
+        $this->metaBoxes[$slug] = new \Toolkit\Model\PostMetaBox(
+            $title,
+            $slug,
+            $postPreferences,
+            $block,
+            $this->loader
+        );
+
+        return $this->metaBoxes[$title];
     }
 
     /**

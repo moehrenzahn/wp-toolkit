@@ -4,6 +4,7 @@ namespace Toolkit\Model;
 
 use Toolkit\Block;
 use Toolkit\Loader;
+use Toolkit\Model\Post\PostPreference;
 
 /**
  * Class PostMetaBox
@@ -14,12 +15,15 @@ class PostMetaBox
 {
     const SCREEN_NAME = 'post';
 
-    const HOOK = 'add_meta_boxes';
-
     /**
      * @var string
      */
     private $title;
+
+    /**
+     * @var PostPreference[]
+     */
+    private $postPreferences;
 
     /**
      * @var string
@@ -40,17 +44,26 @@ class PostMetaBox
      * PostMetaBox constructor.
      *
      * @param string $title
-     * @param Block $block
+     * @param string $slug
+     * @param PostPreference[] $postPreferences
+     * @param Block\Post\MetaBox $block
      * @param Loader $loader
      */
-    public function __construct(string $title, Block $block, Loader $loader)
-    {
+    public function __construct(
+        string $title,
+        string $slug,
+        array $postPreferences,
+        Block\Post\MetaBox $block,
+        Loader $loader
+    ) {
         $this->title = $title;
-        $this->slug = $this->generateSlug($title);
+        $this->slug = $slug;
+        $this->postPreferences = $postPreferences;
         $this->block = $block;
         $this->loader = $loader;
 
-        $this->loader->addAction(self::HOOK, $this, 'register');
+        $this->loader->addAction('add_meta_boxes', $this, 'register');
+        $this->loader->addAction('save_post', $this, 'handleSave');
     }
 
     /**
@@ -69,14 +82,40 @@ class PostMetaBox
     }
 
     /**
-     * @param $title
+     * WP Core hook target on post save.
+     *
+     * @param int $postId
+     */
+    public function handleSave($postId)
+    {
+        if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+            || !current_user_can('edit_post', $postId)
+        ) {
+            return;
+        }
+
+        foreach ($this->postPreferences as $preference) {
+            $preferenceId = $preference->getId();
+            if (isset($_REQUEST[$preferenceId])) {
+                $newValue = $_REQUEST[$preferenceId];
+                $preference->setValue($newValue, $postId);
+            }
+        }
+    }
+
+    /**
      * @return string
      */
-    private function generateSlug($title): string
+    public function getTitle(): string
     {
-        $result = strtolower($title);
-        $result = str_replace(' ', '_', $result);
+        return $this->title;
+    }
 
-        return $result;
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 }

@@ -11,7 +11,11 @@ use Toolkit\ImageSize;
 use Toolkit\Javascript;
 use Toolkit\Loader;
 use Toolkit\Model\Comment\MetaAccessor;
+use Toolkit\Model\Post\Storage\Meta;
+use Toolkit\Model\Post\Storage\Tag;
+use Toolkit\Model\Post\Storage\TagManager;
 use Toolkit\PostMetaBox;
+use Toolkit\PostPreference;
 use Toolkit\PostType;
 use Toolkit\Shortcode;
 use Toolkit\Stylesheet;
@@ -106,9 +110,23 @@ class Client
     }
 
     /**
+     * @return PostPreference
+     */
+    public function getPostPreferenceManager()
+    {
+        return $this->getSingleton(
+            PostPreference::class,
+            [
+                $this->getSingleton(Meta::class),
+                $this->getSingleton(Tag::class, [TagManager::class]),
+            ]
+        );
+    }
+
+    /**
      * @return PostMetaBox
      */
-    public function getPostMetaBox()
+    public function getPostMetaBoxManager()
     {
         return $this->getSingleton(
             PostMetaBox::class,
