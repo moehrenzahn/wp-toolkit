@@ -117,8 +117,8 @@ class Client
         return $this->getSingleton(
             PostPreference::class,
             [
-                $this->getSingleton(Meta::class),
-                $this->getSingleton(Tag::class, [TagManager::class]),
+                $this->getSingleton(Meta::class, [$this->getSingleton(TagManager::class)]),
+                $this->getSingleton(Tag::class, [$this->getSingleton(TagManager::class)]),
             ]
         );
     }

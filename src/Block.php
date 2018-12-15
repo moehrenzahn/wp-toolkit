@@ -34,14 +34,17 @@ class Block
      * @param string $templateType Template filename extension.
      *
      */
-    public function __construct(Javascript $javascript, ImageSize $imageSize, string $templatePath, string $templateType)
-    {
+    public function __construct(
+        Javascript $javascript,
+        ImageSize $imageSize,
+        string $templatePath,
+        string $templateType
+    ) {
         $this->javascript = $javascript;
         $this->imageSize = $imageSize;
-        if (!$templatePath) {
-            return;
+        if ($templatePath) {
+            $this->templatePath = $this->buildTemplatePath($templatePath, $templateType);
         }
-        $this->templatePath = $this->buildTemplatePath($templatePath, $templateType);
     }
 
     /**
@@ -233,9 +236,6 @@ class Block
      */
     private function buildTemplatePath(string $path, string $type)
     {
-        if (!Strings::startsWith($path, '/')) {
-            $path = Composer::getRootDir() . '/' . $path;
-        }
         if (!Strings::endsWith($path, $type)) {
             $path .= ".$type";
         }
