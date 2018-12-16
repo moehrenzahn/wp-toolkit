@@ -1,5 +1,10 @@
 <?php
 /** @var \Toolkit\Block\Post\MetaBox $block */
 foreach ($block->getPostPreferences() as $preference) {
-    $block->renderPartial("Template/MetaBox/Setting/$preference->type", 'phtml', null, $preference);
+    $block->renderPartial(
+        "Template/MetaBox/Setting/$preference->type",
+        'phtml',
+        null,
+        ['preference' => $preference]
+    );
 }

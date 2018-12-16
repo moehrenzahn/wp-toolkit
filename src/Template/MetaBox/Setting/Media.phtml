@@ -1,13 +1,12 @@
-<?php /** @var \Toolkit\Block\Settings\Setting $block */ ?>
 <?php
-$setting = $block->getSetting();
-$imageUrl = wp_get_attachment_url($setting->getValue()) ?? '';
+$setting = $block->getData('preference');
+$imageUrl = wp_get_attachment_url($setting->getValue($block->getPost()->ID)) ?? '';
 wp_enqueue_media();
 ?>
 <input type='hidden'
        name='<?php echo $setting->getId(); ?>'
        id='<?php echo $setting->getId(); ?>'
-       value='<?php echo $setting->getValue(); ?>'>
+       value='<?php echo $setting->getValue($block->getPost()->ID); ?>'>
 
 <label for="<?php echo $setting->getId(); ?>">
     <?php echo $setting->getTitle(); ?>
@@ -16,7 +15,7 @@ wp_enqueue_media();
     <input id="<?php echo $setting->getId(); ?>-button"
            type="image"
            width="100"
-           style="min-height:50px;background: lightgrey"
+           style="min-height:50px;background: lightgray"
            alt="<?php echo $setting->getTitle(); ?>"
            src='<?php echo $imageUrl; ?>'/>
     <input id="<?php echo $setting->getId(); ?>-remove" type="button" class="button" value="Entfernen"/>
@@ -28,7 +27,7 @@ wp_enqueue_media();
 <script>
     jQuery(document).ready(function ($) {
         initMediaSelector(
-            '<?php echo $setting->getValue(); ?>',
+            '<?php echo $setting->getValue($block->getPost()->ID); ?>',
             '<?php echo $setting->getId(); ?>-button',
             '<?php echo $setting->getId(); ?>',
             '<?php echo $setting->getId(); ?>-remove'

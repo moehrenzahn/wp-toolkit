@@ -1,5 +1,4 @@
-<?php /** @var \Toolkit\Block\Settings\Setting $block */ ?>
-<?php $setting = $block->getSetting(); ?>
+<?php $setting = $block->getData('preference'); ?>
 <label for="<?php echo $setting->getId(); ?>">
     <?php echo $setting->getTitle(); ?>
 </label>
@@ -7,6 +6,6 @@
     <textarea rows="10"
               name="<?php echo $setting->getId(); ?>"
               id="<?php echo $setting->getId(); ?>"
-    ><?php echo esc_textarea($setting->getValue()); ?></textarea>
+    ><?php echo esc_textarea($setting->getValue($block->getPost()->ID)); ?></textarea>
 </div>
 <p class="description"><?php echo $setting->getDescription(); ?></p>

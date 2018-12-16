@@ -1,7 +1,5 @@
-<?php /** @var \Toolkit\Block\Settings\Setting $block */ ?>
 <?php
-/** @var \Toolkit\AdminPage\Settings\Setting\Select $setting */
-$setting = $block->getSetting();
+$setting = $block->getData('preference');
 ?>
 <div>
     <label for="<?php echo $setting->getId(); ?>">
@@ -11,7 +9,7 @@ $setting = $block->getSetting();
             id="<?php echo $setting->getId(); ?>">
         <?php foreach ($setting->getOptions() as $optionSlug => $optionName) : ?>
             <option value="<?php echo $optionSlug; ?>"
-                <?php echo ($optionSlug === $setting->getValue()) ? 'selected' : ''; ?>>
+                <?php echo ($optionSlug === $setting->getValue($block->getPost()->ID)) ? 'selected' : ''; ?>>
                 <?php echo $optionName; ?>
             </option>
         <?php endforeach; ?>

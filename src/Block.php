@@ -26,22 +26,37 @@ class Block
     private $imageSize;
 
     /**
+     * @var \WP_Post|null
+     */
+    private $post;
+
+    /**
+     * @var mixed[]
+     */
+    private $data;
+
+    /**
      * Block constructor.
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
      * @param string $templatePath The path of a template file, relative to the composer project root.
      * @param string $templateType Template filename extension.
-     *
+     * @param \WP_Post|null $post
+     * @param mixed[] $data
      */
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
         string $templatePath,
-        string $templateType
+        string $templateType,
+        \WP_Post $post = null,
+        array $data = []
     ) {
         $this->javascript = $javascript;
         $this->imageSize = $imageSize;
+        $this->post = $post;
+        $this->data = $data;
         if ($templatePath) {
             $this->templatePath = $this->buildTemplatePath($templatePath, $templateType);
         }
@@ -119,12 +134,17 @@ class Block
      */
     public function renderPartial(string $path, string $type = 'phtml', $postObject = null, $data = null)
     {
+        global $post;
         if ($postObject) {
+            $this->post = $postObject;
             $post = $postObject;
-        } else {
-            global $post;
-        }               // make $post available in the template.
-        $data = $data;   // make data object available as $data.
+        }
+        if ($data) {
+            $this->data = $data;
+        }
+        if (!Strings::endsWith($path, ".$type")) {
+            $path .= ".$type";
+        }
         $block = $this; // make the block instance avaliable as $block.
 
         require($this->buildTemplatePath($path, $type));
@@ -256,5 +276,42 @@ class Block
             'scroll-handler',
             __DIR__ . 'JavaScript/scroll-handler'
         );
+    }
+
+    /**
+     * @return \WP_Post
+     */
+    public function getPost(): \WP_Post
+    {
+        return $this->post ?? get_post();
+    }
+
+    /**
+     * @param null|\WP_Post $post
+     */
+    public function setPost(\WP_Post $post)
+    {
+        $this->post = $post;
+    }
+
+    /**
+     * @param string|null $index
+     * @return mixed
+     */
+    public function getData(string $index = null)
+    {
+        if ($index && isset($this->data[$index])) {
+            return $this->data[$index];
+        }
+
+        return $this->data;
+    }
+
+    /**
+     * @param mixed[] $data
+     */
+    public function setData(array $data)
+    {
+        $this->data = $data;
     }
 }

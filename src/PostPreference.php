@@ -46,8 +46,8 @@ class PostPreference
 
 
     /**
-     * @param string $title
      * @param string $slug
+     * @param string $title
      * @param string $description
      * @param string $type The input type for rendering, see \Toolkit\Model\Post\PostPreference
      * @param string $storageType The storage type, 'meta' or 'tag'
@@ -55,10 +55,10 @@ class PostPreference
      * @return \Toolkit\Model\Post\PostPreference
      */
     public function add(
-        string $title,
         string $slug,
-        string $description,
-        string $type,
+        string $title,
+        string $description = '',
+        string $type = \Toolkit\Model\Post\PostPreference::TYPE_BOOLEAN,
         string $storageType = self::TYPE_META,
         $options = null
     ) {
