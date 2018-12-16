@@ -1,5 +1,5 @@
 <?php
-namespace Toolkit\Api;
+namespace Toolkit;
 
 /**
  * Class Transient

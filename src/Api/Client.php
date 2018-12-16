@@ -20,6 +20,7 @@ use Toolkit\PostPreference;
 use Toolkit\PostType;
 use Toolkit\Shortcode;
 use Toolkit\Stylesheet;
+use Toolkit\Transient;
 use Toolkit\User;
 
 /**
@@ -108,6 +109,14 @@ class Client
     public function getUserManager()
     {
         return $this->getSingleton(User::class);
+    }
+
+    /**
+     * @return Transient
+     */
+    public function getTransientManager()
+    {
+        return $this->getSingleton(Transient::class);
     }
 
     /**
