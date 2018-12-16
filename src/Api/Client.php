@@ -7,6 +7,7 @@ use Toolkit\AdminPage;
 use Toolkit\Block;
 use Toolkit\CommentMeta;
 use Toolkit\CommentMetaBox;
+use Toolkit\ConfigAccessor;
 use Toolkit\ImageSize;
 use Toolkit\Javascript;
 use Toolkit\Loader;
@@ -83,6 +84,14 @@ class Client
     public function getShortcodeManager()
     {
         return $this->getSingleton(Shortcode::class);
+    }
+
+    /**
+     * @return ConfigAccessor
+     */
+    public function getConfigAccessor()
+    {
+        return $this->getSingleton(ConfigAccessor::class);
     }
 
     /**
