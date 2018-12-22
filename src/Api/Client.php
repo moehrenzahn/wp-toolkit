@@ -40,18 +40,28 @@ class Client
      *
      * @param string $templatePath
      * @param string $templateType
+     * @param string $blockClass
+     * @param mixed[] $additionalParams
      * @return Block
      */
-    public function createBlock(string $templatePath = '', string $templateType = 'phtml')
-    {
-        return $this->createInstance(
-            Block::class,
+    public function createBlock(
+        string $templatePath = '',
+        string $templateType = 'phtml',
+        string $blockClass = Block::class,
+        array $additionalParams = []
+    ) {
+        $params = array_merge(
             [
                 $this->getJavascriptManager(),
                 $this->getImageSizeManager(),
                 $templatePath,
                 $templateType
-            ]
+            ],
+            $additionalParams
+        );
+        return $this->createInstance(
+            $blockClass,
+            $params
         );
     }
 
@@ -84,7 +94,7 @@ class Client
      */
     public function getShortcodeManager()
     {
-        return $this->getSingleton(Shortcode::class);
+        return $this->getSingleton(Shortcode::class, [$this->getLoader()]);
     }
 
     /**

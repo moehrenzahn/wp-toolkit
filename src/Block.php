@@ -154,15 +154,15 @@ class Block
      * @param string $path Template path
      * @param string $placeholder Placeholder template path
      * @param string $type Template file extension
-     * @param WP_Post|null $postObject
-     * @param array|null $data
+     * @param \WP_Post|null $postObject
+     * @param mixed[] $data
      */
     public function renderLazyPartial(
         string $path,
         string $placeholder,
         string $type = 'phtml',
         $postObject = null,
-        $data = null
+        $data = []
     ) {
         $this->loadJsHelpers();
         $this->javascript->add(
@@ -179,7 +179,7 @@ class Block
                 'placeholder' => $this->buildTemplatePath($placeholder, $type),
             ]
         );
-        $this->renderPartial(__DIR__ . 'Template/LazyPartial', 'phtml', $postObject, $data);
+        $this->renderPartial(__DIR__ . '/Template/LazyPartial', 'phtml', $postObject, $data);
     }
 
     /**
@@ -225,7 +225,7 @@ class Block
             'lazyLoadScript' => $lazyLoadScript,
         ];
 
-        return $this->getPartial(__DIR__ . '/Template/LazyImage', 'phtml', $data);
+        return $this->getPartial(__DIR__ . '/Template/LazyImage', 'phtml', null, $data);
     }
 
     /**

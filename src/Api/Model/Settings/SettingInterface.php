@@ -2,6 +2,8 @@
 
 namespace Toolkit\Api\Model\Settings;
 
+use Toolkit\Block;
+
 /**
  * Interface SettingInterface
  *
@@ -28,4 +30,9 @@ interface SettingInterface
      * @return mixed
      */
     public function getValue();
+
+    /**
+     * @return Block
+     */
+    public function getBlock();
 }

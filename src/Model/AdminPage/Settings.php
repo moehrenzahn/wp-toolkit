@@ -55,7 +55,7 @@ class Settings extends AdminPage
                 add_settings_field(
                     $setting->getId(),
                     $setting->getTitle(),
-                    [$setting->block, 'renderTemplate'],
+                    [$setting->getBlock(), 'renderTemplate'],
                     $this->slug,
                     $section->getId()
                 );

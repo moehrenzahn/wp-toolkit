@@ -31,7 +31,7 @@ class Setting implements SettingInterface
     /**
      * @var SettingBlock
      */
-    public $block;
+    private $block;
 
     /**
      * Setting constructor.
@@ -81,5 +81,13 @@ class Setting implements SettingInterface
     public function getValue()
     {
         return $this->configAccessor->getConfigValue($this->id);
+    }
+
+    /**
+     * @return SettingBlock
+     */
+    public function getBlock(): SettingBlock
+    {
+        return $this->block;
     }
 }

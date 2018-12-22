@@ -10,9 +10,24 @@ namespace Toolkit;
 class Shortcode
 {
     /**
+     * @var Loader
+     */
+    private $loader;
+
+    /**
      * @var \Toolkit\Model\Shortcode[]
      */
     private $models = [];
+
+    /**
+     * Shortcode constructor.
+     *
+     * @param Loader $loader
+     */
+    public function __construct(Loader $loader)
+    {
+        $this->loader = $loader;
+    }
 
     /**
      * @param string $shortcode
@@ -20,7 +35,7 @@ class Shortcode
      */
     public function add(string $shortcode, Block $block)
     {
-        $this->models[] = new \Toolkit\Model\Shortcode($shortcode, $block);
+        $this->models[] = new \Toolkit\Model\Shortcode($this->loader, $shortcode, $block);
     }
 
     /**

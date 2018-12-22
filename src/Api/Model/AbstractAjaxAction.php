@@ -2,6 +2,7 @@
 
 namespace Toolkit\Api\Model;
 
+use Toolkit\Api\Client;
 use Toolkit\Loader;
 
 /**
@@ -17,6 +18,11 @@ abstract class AbstractAjaxAction
     private $loader;
 
     /**
+     * @var Client
+     */
+    protected $toolkit;
+
+    /**
      * @var string
      */
     protected $slug;
@@ -27,15 +33,21 @@ abstract class AbstractAjaxAction
     protected $requestData;
 
     /**
-     * Ajax constructor.
+     * AbstractAjaxAction constructor.
      *
      * @param Loader $loader
+     * @param Client $toolkit
      * @param string $slug
      * @param bool $public
      */
-    public function __construct(Loader $loader, string $slug, bool $public = false)
+    public function __construct(Loader $loader, Client $toolkit, string $slug, bool $public = false)
     {
         $this->loader = $loader;
+        /**
+         * @TODO: Once there is a separate object manager,
+         *        it should be the dependency here and not the full Client.
+         */
+        $this->toolkit = $toolkit;
         $this->slug = $slug;
         $this->loader->addAction("wp_ajax_$this->slug", $this, 'doRequest');
         if ($public) {
