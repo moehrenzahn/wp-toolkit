@@ -25,19 +25,17 @@ class Setting extends Block
      * @param Javascript $javascript
      * @param ImageSize $imageSize
      * @param string $templatePath
-     * @param string $templateType
      * @param SettingInterface $setting
      */
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
         string $templatePath = '',
-        string $templateType = 'phtml',
         SettingInterface $setting
     ) {
         $this->setting = $setting;
 
-        parent::__construct($javascript, $imageSize, $templatePath, $templateType);
+        parent::__construct($javascript, $imageSize, $templatePath);
     }
 
     /**

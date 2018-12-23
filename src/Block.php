@@ -2,11 +2,14 @@
 
 namespace Toolkit;
 
-use Toolkit\Helper\Composer;
 use Toolkit\Helper\Strings;
 
 /**
+ * Class Block
+ *
  * Generic block class for template management.
+ *
+ * @package Toolkit
  */
 class Block
 {
@@ -36,12 +39,16 @@ class Block
     private $data;
 
     /**
+     * @var string
+     */
+    private $defaultTemplateExtension = 'phtml';
+
+    /**
      * Block constructor.
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
      * @param string $templatePath The path of a template file, relative to the composer project root.
-     * @param string $templateType Template filename extension.
      * @param \WP_Post|null $post
      * @param mixed[] $data
      */
@@ -49,7 +56,6 @@ class Block
         Javascript $javascript,
         ImageSize $imageSize,
         string $templatePath,
-        string $templateType,
         \WP_Post $post = null,
         array $data = []
     ) {
@@ -58,7 +64,7 @@ class Block
         $this->post = $post;
         $this->data = $data;
         if ($templatePath) {
-            $this->templatePath = $this->buildTemplatePath($templatePath, $templateType);
+            $this->templatePath = $this->buildTemplatePath($templatePath);
         }
     }
 
@@ -109,15 +115,14 @@ class Block
      * Retrieve HTML of a template part.
      *
      * @param string $path
-     * @param string $type
      * @param null|\WP_Post $postObject
      * @param mixed|null $data
      * @return string
      */
-    public function getPartial(string $path, string $type = 'phtml', $postObject = null, $data = null)
+    public function getPartial(string $path, $postObject = null, $data = null)
     {
         ob_start();
-        $this->renderPartial($path, $type, $postObject, $data);
+        $this->renderPartial($path, $postObject, $data);
         $html = ob_get_contents();
         ob_end_clean();
 
@@ -128,11 +133,10 @@ class Block
      * Render a template part.
      *
      * @param string $path
-     * @param string $type
      * @param null|\WP_Post $postObject
      * @param mixed|null $data
      */
-    public function renderPartial(string $path, string $type = 'phtml', $postObject = null, $data = null)
+    public function renderPartial(string $path, $postObject = null, $data = null)
     {
         global $post;
         if ($postObject) {
@@ -142,25 +146,20 @@ class Block
         if ($data) {
             $this->data = $data;
         }
-        if (!Strings::endsWith($path, ".$type")) {
-            $path .= ".$type";
-        }
         $block = $this; // make the block instance avaliable as $block.
 
-        require($this->buildTemplatePath($path, $type));
+        require($this->buildTemplatePath($path));
     }
 
     /**
      * @param string $path Template path
      * @param string $placeholder Placeholder template path
-     * @param string $type Template file extension
      * @param \WP_Post|null $postObject
      * @param mixed[] $data
      */
     public function renderLazyPartial(
         string $path,
         string $placeholder,
-        string $type = 'phtml',
         $postObject = null,
         $data = []
     ) {
@@ -175,23 +174,22 @@ class Block
         $data = array_merge(
             $data,
             [
-                'template' => $this->buildTemplatePath($path, $type),
-                'placeholder' => $this->buildTemplatePath($placeholder, $type),
+                'template' => $this->buildTemplatePath($path),
+                'placeholder' => $this->buildTemplatePath($placeholder),
             ]
         );
-        $this->renderPartial(__DIR__ . '/Template/LazyPartial', 'phtml', $postObject, $data);
+        $this->renderPartial(__DIR__ . '/Template/LazyPartial', $postObject, $data);
     }
 
     /**
      * Retrieve an image. A relative path will be rooted in the composer project root
      *
      * @param string $path
-     * @param string $type
      * @return string
      */
-    public function getImageUrl(string $path, string $type = 'jpg')
+    public function getImageUrl(string $path)
     {
-        return $this->buildTemplatePath($path, $type);
+        return $this->buildTemplatePath($path);
     }
 
     /**
@@ -225,7 +223,7 @@ class Block
             'lazyLoadScript' => $lazyLoadScript,
         ];
 
-        return $this->getPartial(__DIR__ . '/Template/LazyImage', 'phtml', null, $data);
+        return $this->getPartial(__DIR__ . '/Template/LazyImage', null, $data);
     }
 
     /**
@@ -251,13 +249,12 @@ class Block
 
     /**
      * @param string $path
-     * @param string $type
      * @return string
      */
-    private function buildTemplatePath(string $path, string $type)
+    private function buildTemplatePath(string $path)
     {
-        if (!Strings::endsWith($path, $type)) {
-            $path .= ".$type";
+        if (!Strings::contains($path, '.')) {
+            $path .= ".$this->defaultTemplateExtension";
         }
 
         return $path;
@@ -313,5 +310,13 @@ class Block
     public function setData(array $data)
     {
         $this->data = $data;
+    }
+
+    /**
+     * @param string $extension
+     */
+    public function setDefaultTemplateExtension(string $extension)
+    {
+        $this->defaultTemplateExtension = $extension;
     }
 }

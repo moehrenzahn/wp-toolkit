@@ -25,19 +25,17 @@ class MetaBox extends Block
      * @param Javascript $javascript
      * @param ImageSize $imageSize
      * @param string $templatePath
-     * @param string $templateType
      * @param array $postPreferences
      */
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
         string $templatePath,
-        string $templateType,
         array $postPreferences
     ) {
         $this->postPreferences = $postPreferences;
 
-        parent::__construct($javascript, $imageSize, $templatePath, $templateType);
+        parent::__construct($javascript, $imageSize, $templatePath);
     }
 
     /**

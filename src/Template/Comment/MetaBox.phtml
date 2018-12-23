@@ -1,5 +1,5 @@
 <?php
 /** @var \Toolkit\Block\Comment\MetaBox $block */
 foreach ($block->getCommentMeta() as $meta) {
-    $block->renderPartial("Template/Comment/Meta/$meta->type", 'phtml', null, $meta);
+    $block->renderPartial("Template/Comment/Meta/$meta->type", null, $meta);
 }

@@ -39,14 +39,12 @@ class Client
      * Returns a new Block instance
      *
      * @param string $templatePath
-     * @param string $templateType
      * @param string $blockClass
      * @param mixed[] $additionalParams
      * @return Block
      */
     public function createBlock(
         string $templatePath = '',
-        string $templateType = 'phtml',
         string $blockClass = Block::class,
         array $additionalParams = []
     ) {
@@ -55,7 +53,6 @@ class Client
                 $this->getJavascriptManager(),
                 $this->getImageSizeManager(),
                 $templatePath,
-                $templateType
             ],
             $additionalParams
         );

@@ -49,7 +49,6 @@ class PostMetaBox
      * @param string $title
      * @param string $slug
      * @param string $templatePath
-     * @param string $templateType
      * @param \Toolkit\Model\Post\PostPreference[] $postPreferences
      * @return Model\PostMetaBox
      */
@@ -57,10 +56,9 @@ class PostMetaBox
         string $title,
         string $slug,
         array $postPreferences = [],
-        string $templatePath = 'Template/MetaBox/MetaBox.phtml',
-        string $templateType = 'phtml'
+        string $templatePath = 'Template/MetaBox/MetaBox'
     ) {
-        $block = new MetaBox($this->javascript, $this->imageSize, $templatePath, $templateType, $postPreferences);
+        $block = new MetaBox($this->javascript, $this->imageSize, $templatePath, $postPreferences);
         $this->metaBoxes[$slug] = new \Toolkit\Model\PostMetaBox(
             $title,
             $slug,

@@ -25,19 +25,17 @@ class MetaBox extends Block
      * @param Javascript $javascript
      * @param ImageSize $imageSize
      * @param string $templatePath
-     * @param string $templateType
      * @param array $commentMeta
      */
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
         string $templatePath,
-        string $templateType,
         array $commentMeta
     ) {
         $this->commentMeta = $commentMeta;
 
-        parent::__construct($javascript, $imageSize, $templatePath, $templateType);
+        parent::__construct($javascript, $imageSize, $templatePath);
     }
 
 

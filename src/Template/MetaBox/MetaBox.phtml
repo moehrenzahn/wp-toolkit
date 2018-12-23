@@ -3,8 +3,7 @@
 foreach ($block->getPostPreferences() as $preference) {
     $block->renderPartial(
         "Template/MetaBox/Setting/$preference->type",
-        'phtml',
-        null,
+            null,
         ['preference' => $preference]
     );
 }
