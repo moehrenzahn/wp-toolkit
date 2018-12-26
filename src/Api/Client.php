@@ -18,6 +18,7 @@ use Toolkit\PostPreference;
 use Toolkit\PostType;
 use Toolkit\Shortcode;
 use Toolkit\Stylesheet;
+use Toolkit\TermMeta;
 use Toolkit\Transient;
 use Toolkit\User;
 
@@ -38,7 +39,7 @@ class Client
      */
     public function __construct()
     {
-        $this->objectManager = ObjectManager::create(ObjectManager::class);
+        $this->objectManager = new ObjectManager();
         define('TOOLKIT_ROOT_FOLDER', dirname(__DIR__));
         define('TOOLKIT_TEMPLATE_FOLDER', TOOLKIT_ROOT_FOLDER . '/Template/');
         define('TOOLKIT_PUB_URL', 'vendor/moehrenzahn/wp-toolkit/src/public/');
@@ -205,5 +206,21 @@ class Client
     public function getPostActionManager()
     {
         return $this->objectManager->getSingleton(PostAction::class);
+    }
+
+    /**
+     * @return TermMeta
+     */
+    public function getTermMetaManager()
+    {
+        return $this->objectManager->getSingleton(TermMeta::class);
+    }
+
+    /**
+     * @return ObjectManager
+     */
+    public function getObjectManager(): ObjectManager
+    {
+        return $this->objectManager;
     }
 }
