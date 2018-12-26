@@ -32,6 +32,11 @@ interface SettingInterface
     public function getValue();
 
     /**
+     * @return string[]
+     */
+    public function getOptions();
+
+    /**
      * @return Block
      */
     public function getBlock();

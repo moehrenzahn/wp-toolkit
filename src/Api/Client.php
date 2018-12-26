@@ -15,6 +15,7 @@ use Toolkit\Model\Comment\MetaAccessor;
 use Toolkit\Model\Post\Storage\Meta;
 use Toolkit\Model\Post\Storage\Tag;
 use Toolkit\Model\Post\Storage\TagManager;
+use Toolkit\PostAction;
 use Toolkit\PostMetaBox;
 use Toolkit\PostPreference;
 use Toolkit\PostType;
@@ -36,12 +37,21 @@ class Client
     private $instances;
 
     /**
+     * Client constructor.
+     */
+    public function __construct()
+    {
+        define('TOOLKIT_ROOT_FOLDER', dirname(__DIR__));
+        define('TOOLKIT_TEMPLATE_FOLDER', TOOLKIT_ROOT_FOLDER . '/Template/');
+    }
+
+    /**
      * Returns a new Block instance
      *
      * @param string $templatePath
      * @param string $blockClass
      * @param mixed[] $additionalParams
-     * @return Block
+     * @return BlockInterface
      */
     public function createBlock(
         string $templatePath = '',
@@ -200,6 +210,20 @@ class Client
             ]
         );
     }
+    /**
+     * @return AdminPage\SettingsSectionBuilder
+     */
+    public function getSettingsSectionBuilder()
+    {
+        return $this->getSingleton(
+            AdminPage\SettingsSectionBuilder::class,
+            [
+                $this,
+                $this->createInstance(AdminPage\SettingBuilder::class, [$this]),
+                $this->getImageSizeManager()
+            ]
+        );
+    }
 
     /**
      * @return AdminNotice
@@ -208,6 +232,17 @@ class Client
     {
         return $this->getSingleton(
             AdminNotice::class,
+            [$this->getLoader()]
+        );
+    }
+
+    /**
+     * @return PostAction
+     */
+    public function getPostActionManager()
+    {
+        return $this->getSingleton(
+            PostAction::class,
             [$this->getLoader()]
         );
     }

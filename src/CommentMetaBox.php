@@ -72,7 +72,7 @@ class CommentMetaBox
         string $templatePath = 'Template/Comment/MetaBox',
         string $templateType = 'phtml'
     ) : \Toolkit\Model\CommentMetaBox {
-        $block = new MetaBox($this->javascript, $this->imageSize, $templatePath, $templateType, $commentMeta);
+        $block = new MetaBox($this->javascript, $this->imageSize, $templatePath, $commentMeta);
         $this->metaBoxes[$title] = new \Toolkit\Model\CommentMetaBox(
             $slug,
             $title,

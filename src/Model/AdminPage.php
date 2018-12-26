@@ -40,7 +40,7 @@ class AdminPage
     /**
      * @var Block
      */
-    private $block;
+    protected $block;
 
     /**
      * AdminPage constructor.
@@ -68,6 +68,15 @@ class AdminPage
         $this->block = $block;
 
         $this->loader->addAction('admin_menu', $this, 'registerCallback');
+    }
+
+    /**
+     * Get the full WordPress admin are url for this page
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return admin_url('options-general.php?page=' . $this->slug);
     }
 
     public function registerCallback()

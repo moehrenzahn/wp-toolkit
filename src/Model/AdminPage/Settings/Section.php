@@ -3,6 +3,7 @@
 namespace Toolkit\Model\AdminPage\Settings;
 
 use Toolkit\Api\Model\Settings\SectionInterface;
+use Toolkit\Api\Model\Settings\SettingInterface;
 use Toolkit\Block\Settings\Section as SectionBlock;
 
 /**
@@ -28,7 +29,7 @@ class Section implements SectionInterface
     private $description;
 
     /**
-     * @var Setting[]
+     * @var SettingInterface[]
      */
     private $settings = [];
 
@@ -42,16 +43,16 @@ class Section implements SectionInterface
      *
      * @param string $id
      * @param string $title
-     * @param Setting[] $settings
+     * @param SettingInterface[] $settings
      * @param SectionBlock $block
      * @param string $description
      */
     public function __construct(
-        $id,
-        $title,
-        $settings,
+        string $id,
+        string $title,
+        array $settings,
         SectionBlock $block,
-        $description = ''
+        string $description = ''
     ) {
         $this->id = $id;
         $this->title = $title;
@@ -78,7 +79,7 @@ class Section implements SectionInterface
     }
 
     /**
-     * @return Setting[]
+     * @return SettingInterface[]
      */
     public function getSettings(): array
     {

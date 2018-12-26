@@ -71,7 +71,7 @@ class Settings extends AdminPage
             $this->title,
             "manage_options",
             $this->slug,
-            [$this, 'renderContent']
+            [$this->block, 'renderTemplate']
         );
     }
 }

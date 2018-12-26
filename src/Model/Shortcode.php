@@ -2,7 +2,7 @@
 
 namespace Toolkit\Model;
 
-use Toolkit\Block;
+use Toolkit\Api\BlockInterface;
 use Toolkit\Loader;
 
 /**
@@ -23,7 +23,7 @@ class Shortcode
     private $shortCode;
 
     /**
-     * @var Block
+     * @var BlockInterface
      */
     private $block;
 
@@ -32,9 +32,9 @@ class Shortcode
      *
      * @param Loader $loader
      * @param string $shortCode
-     * @param Block $block
+     * @param BlockInterface $block
      */
-    public function __construct(Loader $loader, string $shortCode, Block $block)
+    public function __construct(Loader $loader, string $shortCode, BlockInterface $block)
     {
         $this->loader = $loader;
         $this->shortCode = $shortCode;

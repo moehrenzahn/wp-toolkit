@@ -2,6 +2,7 @@
 
 namespace Toolkit;
 
+use Toolkit\Api\BlockInterface;
 use Toolkit\Helper\Strings;
 
 /**
@@ -11,7 +12,7 @@ use Toolkit\Helper\Strings;
  *
  * @package Toolkit
  */
-class Block
+class Block implements BlockInterface
 {
     /**
      * @var string

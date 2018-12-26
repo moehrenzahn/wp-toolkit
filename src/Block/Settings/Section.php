@@ -14,24 +14,12 @@ use Toolkit\Javascript;
  */
 class Section extends Block
 {
+    const DEFAULT_TEMPLATE = 'Settings/Section';
+
     /**
      * @var SectionInterface
      */
     private $section;
-
-    /**
-     * Section constructor.
-     *
-     * @param Javascript $javascript
-     * @param ImageSize $imageSize
-     */
-    public function __construct(Javascript $javascript, ImageSize $imageSize)
-    {
-        $templatePath = 'Template/Settings/Section';
-
-        parent::__construct($javascript, $imageSize, $templatePath);
-    }
-
 
     /**
      * @return SectionInterface

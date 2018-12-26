@@ -29,10 +29,10 @@ class Loader
 
     /**
      * @param string $hook
-     * @param mixed $component
-     * @param string $callback
+     * @param object $component
+     * @param string|callable $callback
      */
-    public function addAction(string $hook, $component, string $callback)
+    public function addAction(string $hook, $component, $callback)
     {
         $this->actions = $this->add($this->actions, $hook, $component, $callback);
     }
@@ -61,10 +61,10 @@ class Loader
      * @param array $hooks
      * @param string $hook
      * @param $component
-     * @param string $callback
+     * @param string|callable $callback
      * @return array
      */
-    private function add(array $hooks, string $hook, $component, string $callback): array
+    private function add(array $hooks, string $hook, $component, $callback): array
     {
         $hooks[] = [
             'hook'      => $hook,

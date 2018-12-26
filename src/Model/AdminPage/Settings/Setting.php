@@ -6,8 +6,18 @@ use Toolkit\ConfigAccessor;
 use \Toolkit\Block\Settings\Setting as SettingBlock;
 use Toolkit\Api\Model\Settings\SettingInterface;
 
+/**
+ * Class Setting
+ *
+ * @package Toolkit\Model\AdminPage\Settings
+ */
 class Setting implements SettingInterface
 {
+    /**
+     * @var ConfigAccessor
+     */
+    private $configAccessor;
+
     /**
      * @var string
      */
@@ -24,9 +34,9 @@ class Setting implements SettingInterface
     private $description;
 
     /**
-     * @var ConfigAccessor
+     * @var string[]
      */
-    private $configAccessor;
+    private $options;
 
     /**
      * @var SettingBlock
@@ -36,19 +46,28 @@ class Setting implements SettingInterface
     /**
      * Setting constructor.
      *
-     * @param string $id
-     * @param string $title
-     * @param string $description
+     * @param ConfigAccessor $configAccessor
+     * @param $id
+     * @param $title
+     * @param $description
+     * @param string[] $options
      * @param SettingBlock $block
      */
-    public function __construct($id, $title, $description, SettingBlock $block)
-    {
+    public function __construct(
+        ConfigAccessor $configAccessor,
+        $id,
+        $title,
+        $description,
+        array $options,
+        SettingBlock $block
+    ) {
+        $this->configAccessor = $configAccessor;
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
+        $this->options = $options;
         $this->block = $block;
         $this->block->setSetting($this);
-        $this->configAccessor = new ConfigAccessor();
     }
 
     /**
@@ -73,6 +92,14 @@ class Setting implements SettingInterface
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
     }
 
     /**

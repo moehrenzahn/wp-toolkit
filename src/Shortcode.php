@@ -2,6 +2,8 @@
 
 namespace Toolkit;
 
+use Toolkit\Api\BlockInterface;
+
 /**
  * Class Shortcode
  *
@@ -31,9 +33,9 @@ class Shortcode
 
     /**
      * @param string $shortcode
-     * @param Block $block
+     * @param BlockInterface $block
      */
-    public function add(string $shortcode, Block $block)
+    public function add(string $shortcode, BlockInterface $block)
     {
         $this->models[] = new \Toolkit\Model\Shortcode($this->loader, $shortcode, $block);
     }

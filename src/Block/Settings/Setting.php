@@ -15,7 +15,7 @@ use Toolkit\Api\Model\Settings\SettingInterface;
 class Setting extends Block
 {
     /**
-     * @var SettingInterface
+     * @var SettingInterface|null
      */
     private $setting;
 
@@ -25,13 +25,13 @@ class Setting extends Block
      * @param Javascript $javascript
      * @param ImageSize $imageSize
      * @param string $templatePath
-     * @param SettingInterface $setting
+     * @param SettingInterface|null $setting
      */
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
         string $templatePath = '',
-        SettingInterface $setting
+        SettingInterface $setting = null
     ) {
         $this->setting = $setting;
 

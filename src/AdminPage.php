@@ -12,7 +12,7 @@ use Toolkit\Api\Model\Settings\SectionInterface;
 class AdminPage
 {
     /**
-     * @var AdminPage[]
+     * @var \Toolkit\Model\AdminPage[]
      */
     private $adminPages = [];
 
@@ -47,25 +47,23 @@ class AdminPage
 
     /**
      * @param string $title
-     * @param int $slug
+     * @param string $slug
      * @param string $icon
      * @param int $position
      * @param string $templatePath
-     * @param string $templateType
+     * @return Model\AdminPage
      */
     public function add(
         string $title,
-        int $slug,
+        string $slug,
         string $icon,
         int $position,
-        string $templatePath,
-        string $templateType = 'phtml'
+        string $templatePath
     ) {
         $block = new Block(
             $this->javascript,
             $this->imageSize,
-            $templatePath,
-            $templateType
+            $templatePath
         );
         $this->adminPages[$slug] = new \Toolkit\Model\AdminPage(
             $this->loader,
@@ -75,6 +73,8 @@ class AdminPage
             $position,
             $block
         );
+
+        return $this->adminPages[$slug];
     }
 
     /**
@@ -82,7 +82,7 @@ class AdminPage
      * @param string $slug
      * @param SectionInterface[] $sections
      */
-    public function addSettings(
+    public function addSettingsPage(
         string $title,
         string $slug,
         array $sections
@@ -108,5 +108,14 @@ class AdminPage
     public function getAdminPages(): array
     {
         return $this->adminPages;
+    }
+
+    /**
+     * @param string $id
+     * @return null|\Toolkit\Model\AdminPage
+     */
+    public function getAdminPageById(string $id)
+    {
+        return $this->adminPages[$id] ?? null;
     }
 }
