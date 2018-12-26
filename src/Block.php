@@ -167,7 +167,7 @@ class Block implements BlockInterface
         $this->loadJsHelpers();
         $this->javascript->add(
             'ajax-load-template',
-            __DIR__ . 'JavaScript/ajax/load-template',
+            TOOLKIT_PUB_URL . 'js/ajax/load-template',
             '',
             ['utils', 'jquery', 'scroll-handler']
         );
@@ -179,7 +179,7 @@ class Block implements BlockInterface
                 'placeholder' => $this->buildTemplatePath($placeholder),
             ]
         );
-        $this->renderPartial(__DIR__ . '/Template/LazyPartial', $postObject, $data);
+        $this->renderPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyPartial', $postObject, $data);
     }
 
     /**
@@ -190,7 +190,11 @@ class Block implements BlockInterface
      */
     public function getImageUrl(string $path)
     {
-        return $this->buildTemplatePath($path);
+        if (!Strings::startsWith($path, '/')) {
+            $path = '/' . $path;
+        }
+
+        return get_template_directory_uri() . $this->buildTemplatePath($path);
     }
 
     /**
@@ -206,7 +210,7 @@ class Block implements BlockInterface
         $this->loadJsHelpers();
         $this->javascript->add(
             'lazy-images',
-            __DIR__ . 'JavaScript/lazy-images',
+            TOOLKIT_PUB_URL . 'js/lazy-images',
             '',
             ['utils', 'scroll-handler']
         );
@@ -224,7 +228,7 @@ class Block implements BlockInterface
             'lazyLoadScript' => $lazyLoadScript,
         ];
 
-        return $this->getPartial(__DIR__ . '/Template/LazyImage', null, $data);
+        return $this->getPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyImage', null, $data);
     }
 
     /**
@@ -234,7 +238,7 @@ class Block implements BlockInterface
      */
     public function renderHeader(string $name = null)
     {
-        $this->renderPartial(__DIR__ . '/Template/Head.phtml');
+        $this->renderPartial(TOOLKIT_TEMPLATE_FOLDER . 'Head.phtml');
         get_header($name);
     }
 
@@ -268,11 +272,11 @@ class Block implements BlockInterface
     {
         $this->javascript->add(
             'utils',
-            __DIR__ . 'JavaScript/utils'
+            TOOLKIT_PUB_URL . 'js/utils'
         );
         $this->javascript->add(
             'scroll-handler',
-            __DIR__ . 'JavaScript/scroll-handler'
+            TOOLKIT_PUB_URL . 'js/scroll-handler'
         );
     }
 

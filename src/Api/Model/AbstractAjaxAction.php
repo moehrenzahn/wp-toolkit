@@ -59,7 +59,7 @@ abstract class AbstractAjaxAction
     {
         $this->requestData = $_POST;
         $this->action();
-        die();
+        wp_die();
     }
 
     abstract public function action();

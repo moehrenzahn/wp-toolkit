@@ -8,13 +8,10 @@ use Toolkit\Block;
 use Toolkit\CommentMeta;
 use Toolkit\CommentMetaBox;
 use Toolkit\ConfigAccessor;
+use Toolkit\Helper\ObjectManager;
 use Toolkit\ImageSize;
 use Toolkit\Javascript;
 use Toolkit\Loader;
-use Toolkit\Model\Comment\MetaAccessor;
-use Toolkit\Model\Post\Storage\Meta;
-use Toolkit\Model\Post\Storage\Tag;
-use Toolkit\Model\Post\Storage\TagManager;
 use Toolkit\PostAction;
 use Toolkit\PostMetaBox;
 use Toolkit\PostPreference;
@@ -32,17 +29,19 @@ use Toolkit\User;
 class Client
 {
     /**
-     * @var array
+     * @var ObjectManager
      */
-    private $instances;
+    private $objectManager;
 
     /**
      * Client constructor.
      */
     public function __construct()
     {
+        $this->objectManager = ObjectManager::create(ObjectManager::class);
         define('TOOLKIT_ROOT_FOLDER', dirname(__DIR__));
         define('TOOLKIT_TEMPLATE_FOLDER', TOOLKIT_ROOT_FOLDER . '/Template/');
+        define('TOOLKIT_PUB_URL', 'vendor/moehrenzahn/wp-toolkit/src/public/');
     }
 
     /**
@@ -51,7 +50,7 @@ class Client
      * @param string $templatePath
      * @param string $blockClass
      * @param mixed[] $additionalParams
-     * @return BlockInterface
+     * @return BlockInterface|false
      */
     public function createBlock(
         string $templatePath = '',
@@ -59,17 +58,18 @@ class Client
         array $additionalParams = []
     ) {
         $params = array_merge(
-            [
-                $this->getJavascriptManager(),
-                $this->getImageSizeManager(),
-                $templatePath,
-            ],
+            ['templatePath' => $templatePath],
             $additionalParams
         );
-        return $this->createInstance(
-            $blockClass,
-            $params
-        );
+        try {
+            return $this->objectManager->create(
+                $blockClass,
+                $params
+            );
+        } catch (\Exception $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 
     /**
@@ -77,7 +77,7 @@ class Client
      */
     public function getLoader()
     {
-        return $this->getSingleton(Loader::class);
+        return $this->objectManager->getSingleton(Loader::class);
     }
 
     /**
@@ -85,7 +85,7 @@ class Client
      */
     public function getJavascriptManager()
     {
-        return $this->getSingleton(Javascript::class);
+        return $this->objectManager->getSingleton(Javascript::class);
     }
 
     /**
@@ -93,7 +93,7 @@ class Client
      */
     public function getImageSizeManager()
     {
-        return $this->getSingleton(ImageSize::class);
+        return $this->objectManager->getSingleton(ImageSize::class);
     }
 
     /**
@@ -101,7 +101,7 @@ class Client
      */
     public function getShortcodeManager()
     {
-        return $this->getSingleton(Shortcode::class, [$this->getLoader()]);
+        return $this->objectManager->getSingleton(Shortcode::class);
     }
 
     /**
@@ -109,7 +109,7 @@ class Client
      */
     public function getConfigAccessor()
     {
-        return $this->getSingleton(ConfigAccessor::class);
+        return $this->objectManager->getSingleton(ConfigAccessor::class);
     }
 
     /**
@@ -117,7 +117,7 @@ class Client
      */
     public function getStylesheetManager()
     {
-        return $this->getSingleton(Stylesheet::class, [$this->getLoader()]);
+        return $this->objectManager->getSingleton(Stylesheet::class);
     }
 
     /**
@@ -125,7 +125,7 @@ class Client
      */
     public function getUserManager()
     {
-        return $this->getSingleton(User::class);
+        return $this->objectManager->getSingleton(User::class);
     }
 
     /**
@@ -133,7 +133,7 @@ class Client
      */
     public function getTransientManager()
     {
-        return $this->getSingleton(Transient::class);
+        return $this->objectManager->getSingleton(Transient::class);
     }
 
     /**
@@ -141,7 +141,7 @@ class Client
      */
     public function getPostTypeManager()
     {
-        return $this->getSingleton(PostType::class);
+        return $this->objectManager->getSingleton(PostType::class);
     }
 
     /**
@@ -149,13 +149,7 @@ class Client
      */
     public function getPostPreferenceManager()
     {
-        return $this->getSingleton(
-            PostPreference::class,
-            [
-                $this->getSingleton(Meta::class, [$this->getSingleton(TagManager::class)]),
-                $this->getSingleton(Tag::class, [$this->getSingleton(TagManager::class)]),
-            ]
-        );
+        return $this->objectManager->getSingleton(PostPreference::class);
     }
 
     /**
@@ -163,10 +157,7 @@ class Client
      */
     public function getPostMetaBoxManager()
     {
-        return $this->getSingleton(
-            PostMetaBox::class,
-            [$this->getLoader(), $this->getJavascriptManager(), $this->getImageSizeManager()]
-        );
+        return $this->objectManager->getSingleton(PostMetaBox::class);
     }
 
     /**
@@ -174,10 +165,7 @@ class Client
      */
     public function getCommentMetaManager()
     {
-        return $this->getSingleton(
-            CommentMeta::class,
-            [$this->getSingleton(MetaAccessor::class)]
-        );
+        return $this->objectManager->getSingleton(CommentMeta::class);
     }
 
     /**
@@ -185,15 +173,7 @@ class Client
      */
     public function getCommentMetaBoxManager()
     {
-        return $this->getSingleton(
-            CommentMetaBox::class,
-            [
-                $this->getLoader(),
-                $this->getJavascriptManager(),
-                $this->getImageSizeManager(),
-                $this->getSingleton(MetaAccessor::class)
-            ]
-        );
+        return $this->objectManager->getSingleton(CommentMetaBox::class);
     }
 
     /**
@@ -201,28 +181,14 @@ class Client
      */
     public function getAdminPageManager()
     {
-        return $this->getSingleton(
-            AdminPage::class,
-            [
-                $this->getLoader(),
-                $this->getJavascriptManager(),
-                $this->getImageSizeManager()
-            ]
-        );
+        return $this->objectManager->getSingleton(AdminPage::class);
     }
     /**
      * @return AdminPage\SettingsSectionBuilder
      */
     public function getSettingsSectionBuilder()
     {
-        return $this->getSingleton(
-            AdminPage\SettingsSectionBuilder::class,
-            [
-                $this,
-                $this->createInstance(AdminPage\SettingBuilder::class, [$this]),
-                $this->getImageSizeManager()
-            ]
-        );
+        return $this->objectManager->getSingleton(AdminPage\SettingsSectionBuilder::class);
     }
 
     /**
@@ -230,10 +196,7 @@ class Client
      */
     public function getAdminNoticeManager()
     {
-        return $this->getSingleton(
-            AdminNotice::class,
-            [$this->getLoader()]
-        );
+        return $this->objectManager->getSingleton(AdminNotice::class);
     }
 
     /**
@@ -241,35 +204,6 @@ class Client
      */
     public function getPostActionManager()
     {
-        return $this->getSingleton(
-            PostAction::class,
-            [$this->getLoader()]
-        );
-    }
-
-    /**
-     * @param string $class Fully qualified class name of object
-     * @param mixed[] $args object dependencies
-     * @return mixed Requested object
-     */
-    private function getSingleton(string $class, array $args = [])
-    {
-        if (!isset($this->instances[$class])) {
-            $this->instances[$class] = $this->createInstance($class, $args);
-        }
-
-        return $this->instances[$class];
-    }
-
-    /**
-     * @param string $class
-     * @param mixed[] $args
-     * @return mixed
-     */
-    private function createInstance(string $class, array $args = [])
-    {
-        $instance = new $class(...$args);
-
-        return $instance;
+        return $this->objectManager->getSingleton(PostAction::class);
     }
 }

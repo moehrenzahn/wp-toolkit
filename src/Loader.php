@@ -28,6 +28,14 @@ class Loader
     protected $shortcodes = [];
 
     /**
+     * Loader constructor.
+     */
+    public function __construct()
+    {
+        return true;
+    }
+
+    /**
      * @param string $hook
      * @param object $component
      * @param string|callable $callback
