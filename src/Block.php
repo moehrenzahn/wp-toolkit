@@ -157,19 +157,22 @@ class Block implements BlockInterface
      * @param string $placeholder Placeholder template path
      * @param \WP_Post|null $postObject
      * @param mixed[] $data
+     * @param string $blockClass Full class name of the block type to use for the partial. Defaults to the parent block.
      */
     public function renderLazyPartial(
         string $path,
         string $placeholder,
         $postObject = null,
-        $data = []
+        $data = [],
+        $blockClass = ''
     ) {
+        $blockClass = $blockClass ?: static::class;
         $this->loadJsHelpers();
         $this->javascript->add(
             'ajax-load-template',
             TOOLKIT_PUB_URL . 'js/ajax/load-template',
             '',
-            ['utils', 'jquery', 'scroll-handler']
+            ['toolkit-utils', 'jquery', 'scroll-handler']
         );
 
         $data = array_merge(
@@ -177,6 +180,7 @@ class Block implements BlockInterface
             [
                 'template' => $this->buildTemplatePath($path),
                 'placeholder' => $this->buildTemplatePath($placeholder),
+                'blockClass' => $blockClass
             ]
         );
         $this->renderPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyPartial', $postObject, $data);
@@ -212,7 +216,7 @@ class Block implements BlockInterface
             'lazy-images',
             TOOLKIT_PUB_URL . 'js/lazy-images',
             '',
-            ['utils', 'scroll-handler']
+            ['toolkit-utils', 'scroll-handler']
         );
 
         $placeholderSize = 'placeholder';
@@ -271,7 +275,7 @@ class Block implements BlockInterface
     private function loadJsHelpers()
     {
         $this->javascript->add(
-            'utils',
+            'toolkit-utils',
             TOOLKIT_PUB_URL . 'js/utils'
         );
         $this->javascript->add(

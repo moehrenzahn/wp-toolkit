@@ -24,7 +24,7 @@ class ObjectManager
 
     /**
      * @param string $class Fully qualified class name of object
-     * @return object       Requested object
+     * @return mixed Requested object
      * @api
      */
     public function getSingleton(string $class)
@@ -39,7 +39,7 @@ class ObjectManager
     /**
      * @param string $class
      * @param mixed[] $params
-     * @return object
+     * @return mixed
      */
     public function create(string $class, $params = [])
     {

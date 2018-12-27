@@ -1,7 +1,7 @@
 <?php
 namespace Toolkit;
 
-use Toolkit\Api\Model\AbstractAjaxAction;
+use Toolkit\Api\ActionInterface;
 
 /**
  * Class AjaxAction
@@ -16,11 +16,6 @@ class AjaxAction
     private $loader;
 
     /**
-     * @var AbstractAjaxAction[]
-     */
-    private $actions;
-
-    /**
      * AdminNotice constructor.
      *
      * @param \Toolkit\Loader $loader
@@ -31,10 +26,29 @@ class AjaxAction
     }
 
     /**
-     * @param AbstractAjaxAction $ajaxAction
+     * @param string $actionId
+     * @param ActionInterface $action
+     * @param bool $public
      */
-    public function add(AbstractAjaxAction $ajaxAction)
+    public function add(string $actionId, ActionInterface $action, $public = false)
     {
-        $this->actions[$ajaxAction->getSlug()] = $ajaxAction;
+        $this->loader->addAction(
+            "wp_ajax_$actionId",
+            null,
+            function () use ($action) {
+                $action->doAction($_POST);
+                wp_die();
+            }
+        );
+        if ($public) {
+            $this->loader->addAction(
+                "wp_ajax_nopriv_$actionId",
+                null,
+                function () use ($action) {
+                    $action->doAction($_POST);
+                    wp_die();
+                }
+            );
+        }
     }
 }

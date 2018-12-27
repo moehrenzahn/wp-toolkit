@@ -4,6 +4,7 @@ namespace Toolkit\Api;
 
 use Toolkit\AdminNotice;
 use Toolkit\AdminPage;
+use Toolkit\AjaxAction;
 use Toolkit\Block;
 use Toolkit\CommentMeta;
 use Toolkit\CommentMetaBox;
@@ -201,6 +202,14 @@ class Client
     public function getAdminNoticeManager()
     {
         return $this->objectManager->getSingleton(AdminNotice::class);
+    }
+
+    /**
+     * @return AjaxAction
+     */
+    public function getAjaxActionManager()
+    {
+        return $this->objectManager->getSingleton(AjaxAction::class);
     }
 
     /**

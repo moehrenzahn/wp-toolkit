@@ -7,7 +7,11 @@ $id = uniqid('lazy-');
     <?php $block->renderPartial($data['placeholder']); ?>
 </section>
 <script>
-    document.addEventListener('DOMContentLoaded', function($) {
-        loadTemplate('<?php echo $data['template'] ?>', document.querySelector('#<?php echo $id; ?>'));
+    document.addEventListener('DOMContentLoaded', function() {
+        loadTemplate(
+            '<?php echo $data['template']; ?>',
+            document.querySelector('#<?php echo $id; ?>'),
+            '<?php echo addslashes($data['blockClass']); ?>'
+        );
     }, false);
 </script>

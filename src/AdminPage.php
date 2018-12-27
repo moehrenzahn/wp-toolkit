@@ -3,6 +3,8 @@
 namespace Toolkit;
 
 use Toolkit\Api\Model\Settings\SectionInterface;
+use Toolkit\Block\Settings;
+use Toolkit\Helper\ObjectManager;
 
 /**
  * Class AdminPage
@@ -22,27 +24,20 @@ class AdminPage
     private $loader;
 
     /**
-     * @var Javascript
+     * @var ObjectManager
      */
-    private $javascript;
-
-    /**
-     * @var ImageSize
-     */
-    private $imageSize;
+    private $objectManager;
 
     /**
      * AdminPage constructor.
      *
      * @param Loader $loader
-     * @param Javascript $javascript
-     * @param ImageSize $imageSize
+     * @param ObjectManager $objectManager
      */
-    public function __construct(Loader $loader, Javascript $javascript, ImageSize $imageSize)
+    public function __construct(Loader $loader, ObjectManager $objectManager)
     {
         $this->loader = $loader;
-        $this->javascript = $javascript;
-        $this->imageSize = $imageSize;
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -60,11 +55,7 @@ class AdminPage
         int $position,
         string $templatePath
     ) {
-        $block = new Block(
-            $this->javascript,
-            $this->imageSize,
-            $templatePath
-        );
+        $block = $this->objectManager->create(Block::class, ['templatePath' => $templatePath]);
         $this->adminPages[$slug] = new \Toolkit\Model\AdminPage(
             $this->loader,
             $title,
@@ -87,12 +78,7 @@ class AdminPage
         string $slug,
         array $sections
     ) {
-        $block = new \Toolkit\Block\Settings(
-            $this->javascript,
-            $this->imageSize,
-            $title,
-            $slug
-        );
+        $block = $this->objectManager->create(Settings::class, ['title' => $title, 'page' => $slug]);
         $this->adminPages[$slug] = new \Toolkit\Model\AdminPage\Settings(
             $this->loader,
             $block,

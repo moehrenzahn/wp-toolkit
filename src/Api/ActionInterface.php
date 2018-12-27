@@ -5,12 +5,15 @@ namespace Toolkit\Api;
 /**
  * Interface ActionInterface
  *
+ * This Interface can be implemented to specify actions for POST and AJAX requests.
+ * Use with Toolkit\AjaxAction or Toolkit\PostAction.
+ *
  * @package Toolkit\Api
  */
 interface ActionInterface
 {
     /**
-     * @param array $request
+     * @param mixed[] $request
      */
-    public function doPostAction(array $request);
+    public function doAction(array $request);
 }

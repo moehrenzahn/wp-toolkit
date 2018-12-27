@@ -36,7 +36,7 @@ class PostAction
             "admin_post_$actionId",
             null,
             function () use ($action, $returnUrl) {
-                $action->doPostAction($_POST);
+                $action->doAction($_POST);
                 wp_redirect($returnUrl);
                 exit;
             }

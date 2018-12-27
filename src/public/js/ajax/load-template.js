@@ -1,8 +1,9 @@
 /**
- * @param {string} templatePath
+ * @param {string} templatePath The template path for the PHP block
  * @param {Element} container
+ * @param {string} blockClass   The FQN of a custom PHP block class
  */
-function loadTemplate(templatePath, container)
+function loadTemplate(templatePath, container, blockClass)
 {
     container.classList.add('ajax-container');
     var loading = false;
@@ -16,7 +17,8 @@ function loadTemplate(templatePath, container)
             loading = true;
             var data = {
                 'action': 'load_template',
-                'templatePath': templatePath
+                'templatePath': templatePath,
+                'blockClass': blockClass
             };
             jQuery.post(ajaxData.ajaxUrl, data)
                 .done(function (response) {
