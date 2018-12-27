@@ -56,7 +56,7 @@ class Block implements BlockInterface
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
-        string $templatePath,
+        string $templatePath = '',
         \WP_Post $post = null,
         array $data = []
     ) {

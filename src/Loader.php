@@ -28,14 +28,6 @@ class Loader
     protected $shortcodes = [];
 
     /**
-     * Loader constructor.
-     */
-    public function __construct()
-    {
-        return true;
-    }
-
-    /**
      * @param string $hook
      * @param object $component
      * @param string|callable $callback
@@ -47,20 +39,20 @@ class Loader
 
     /**
      * @param string $hook
-     * @param mixed $component
-     * @param string $callback
+     * @param object|null $component
+     * @param string|callable $callback
      */
-    public function addFilter(string $hook, $component, string $callback)
+    public function addFilter(string $hook, $component, $callback)
     {
         $this->filters = $this->add($this->filters, $hook, $component, $callback);
     }
 
     /**
      * @param string $code
-     * @param mixed $component
-     * @param string $callback
+     * @param object|null $component
+     * @param string|callable $callback
      */
-    public function addShortcode(string $code, $component, string $callback)
+    public function addShortcode(string $code, $component, $callback)
     {
         $this->shortcodes = $this->add($this->shortcodes, $code, $component, $callback);
     }
@@ -68,7 +60,7 @@ class Loader
     /**
      * @param array $hooks
      * @param string $hook
-     * @param $component
+     * @param object|null $component
      * @param string|callable $callback
      * @return array
      */

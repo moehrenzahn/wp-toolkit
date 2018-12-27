@@ -8,6 +8,7 @@ use Toolkit\Block;
 use Toolkit\CommentMeta;
 use Toolkit\CommentMetaBox;
 use Toolkit\ConfigAccessor;
+use Toolkit\Filter;
 use Toolkit\Helper\ObjectManager;
 use Toolkit\ImageSize;
 use Toolkit\Javascript;
@@ -69,6 +70,7 @@ class Client
             );
         } catch (\Exception $exception) {
             error_log($exception->getMessage());
+
             return false;
         }
     }
@@ -184,6 +186,7 @@ class Client
     {
         return $this->objectManager->getSingleton(AdminPage::class);
     }
+
     /**
      * @return AdminPage\SettingsSectionBuilder
      */
@@ -214,6 +217,14 @@ class Client
     public function getTermMetaManager()
     {
         return $this->objectManager->getSingleton(TermMeta::class);
+    }
+
+    /**
+     * @return Filter
+     */
+    public function getFilterManager(): Filter
+    {
+        return $this->objectManager->getSingleton(Filter::class);
     }
 
     /**
