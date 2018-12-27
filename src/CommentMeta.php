@@ -76,5 +76,4 @@ class CommentMeta
         }
         throw new \Exception("Comment meta '$slug' was never initialized.");
     }
-
 }

@@ -60,17 +60,15 @@ class CommentMetaBox
     /**
      * @param string $slug
      * @param string $title
-     * @param array $commentMeta
+     * @param \Toolkit\Model\Comment\CommentMeta[] $commentMeta
      * @param string $templatePath
-     * @param string $templateType
      * @return Model\CommentMetaBox
      */
     public function add(
         string $slug,
         string $title,
         array $commentMeta,
-        string $templatePath = 'Template/Comment/MetaBox',
-        string $templateType = 'phtml'
+        string $templatePath = 'Template/Comment/MetaBox'
     ) : \Toolkit\Model\CommentMetaBox {
         $block = new MetaBox($this->javascript, $this->imageSize, $templatePath, $commentMeta);
         $this->metaBoxes[$title] = new \Toolkit\Model\CommentMetaBox(

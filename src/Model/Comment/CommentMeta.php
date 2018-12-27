@@ -5,7 +5,7 @@ namespace Toolkit\Model\Comment;
 /**
  * Class CommentMeta
  *
- * @package Toolkit
+ * @package Toolkit\Model\Comment
  */
 class CommentMeta
 {
@@ -63,14 +63,13 @@ class CommentMeta
     }
 
     /**
+     * Get the comment id from the current admin url.
+     * This will only work in the comment detail view in the admin area.
+     *
      * @return string
      */
     public function getValue(): string
     {
-        /**
-         * Get the comment id from the current admin url.
-         * This will only work in the comment detail view in the admin area.
-         */
         return $this->metaAccessor->get($_REQUEST['c'], $this->slug) ?? '';
     }
 }
