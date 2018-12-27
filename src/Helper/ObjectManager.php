@@ -74,7 +74,9 @@ class ObjectManager
                         $dependencies[] = $parameter->getDefaultValue();
                     } else {
                         // get dependency via reflection
-                        $dependencies[] = $this->resolveDependencies($paramClassName);
+                        $object = $this->resolveDependencies($paramClassName);
+                        $this->instances[$paramClassName] = $object;
+                        $dependencies[] = $object;
                     }
                 }
             }
