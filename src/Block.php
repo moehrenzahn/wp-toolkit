@@ -77,6 +77,11 @@ class Block implements BlockInterface
         if ($templatePath) {
             $this->templatePath = $this->buildTemplatePath($templatePath);
         }
+
+        /**
+         * @TODO: Move this somewhere more appropriate.
+         */
+        $this->loadJsHelpers();
     }
 
     /**
@@ -188,7 +193,6 @@ class Block implements BlockInterface
             return;
         }
 
-        $this->loadJsHelpers();
         $this->javascript->add(
             'ajax-load-template',
             TOOLKIT_PUB_URL . 'js/ajax/load-template',
@@ -232,7 +236,6 @@ class Block implements BlockInterface
             /** Do not do any javascript magic if in IE */
             return $this->getPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyImageFallback', null, $data);
         }
-        $this->loadJsHelpers();
 
         return $this->getPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyImage', null, $data);
     }
@@ -295,16 +298,25 @@ class Block implements BlockInterface
             'toolkit-utils',
             TOOLKIT_PUB_URL . 'js/utils'
         );
-        $this->javascript->add(
-            'scroll-handler',
-            TOOLKIT_PUB_URL . 'js/scroll-handler'
-        );
-        $this->javascript->add(
-            'lazy-images',
-            TOOLKIT_PUB_URL . 'js/lazy-images',
-            '',
-            ['toolkit-utils', 'scroll-handler']
-        );
+        if (is_admin()) {
+            $this->javascript->add(
+                'media-selector',
+                TOOLKIT_PUB_URL. 'js/media-selector',
+                '1.0',
+                ['jquery']
+            );
+        } else {
+            $this->javascript->add(
+                'scroll-handler',
+                TOOLKIT_PUB_URL . 'js/scroll-handler'
+            );
+            $this->javascript->add(
+                'lazy-images',
+                TOOLKIT_PUB_URL . 'js/lazy-images',
+                '',
+                ['toolkit-utils', 'scroll-handler']
+            );
+        }
     }
 
     /**
