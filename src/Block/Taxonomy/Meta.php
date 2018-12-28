@@ -24,6 +24,19 @@ class Meta extends Block
     private $slug;
 
     /**
+     * @var string
+     */
+    private $title;
+    /**
+     * @var string[]
+     */
+    private $options;
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
      * @var int|null
      */
     private $termId;
@@ -36,8 +49,9 @@ class Meta extends Block
      * @param TaxonomyMetaAccessor $metaAccessor
      * @param string $templatePath
      * @param string $slug
-     * @param \WP_Post|null $post
-     * @param array $data
+     * @param string $title
+     * @param string[] $options
+     * @param string $description
      */
     public function __construct(
         Javascript $javascript,
@@ -45,13 +59,17 @@ class Meta extends Block
         TaxonomyMetaAccessor $metaAccessor,
         string $templatePath,
         string $slug,
-        \WP_Post $post = null,
-        $data = []
+        string $title,
+        array $options,
+        string $description
     ) {
         $this->metaAccessor = $metaAccessor;
         $this->slug = $slug;
+        $this->title = $title;
+        $this->options = $options;
+        $this->description = $description;
 
-        parent::__construct($javascript, $imageSize, $templatePath, $post, $data);
+        parent::__construct($javascript, $imageSize, $templatePath);
     }
 
 
@@ -61,6 +79,30 @@ class Meta extends Block
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     /**

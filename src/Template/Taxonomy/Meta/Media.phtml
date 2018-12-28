@@ -1,0 +1,36 @@
+<?php
+/** @var \Toolkit\Block\Taxonomy\Meta $block */
+$imageUrl = wp_get_attachment_url($block->getValue() ?? '');
+wp_enqueue_media();
+?>
+<input type='hidden'
+       name='<?php echo $block->getSlug(); ?>'
+       id='<?php echo $block->getSlug(); ?>'
+       value='<?php echo $block->getValue(); ?>'>
+
+<tr class="form-field">
+    <th><?php echo $block->getTitle(); ?></th>
+    <td>
+        <label  for="<?php echo $block->getSlug(); ?>">
+            <input id="<?php echo $block->getSlug(); ?>-button"
+                   type="image"
+                   width="100"
+                   style="min-height:50px;background: lightgray"
+                   alt="<?php echo $block->getTitle(); ?>"
+                   src='<?php echo $imageUrl; ?>'/>
+            <input id="<?php echo $block->getSlug(); ?>-remove" type="button" class="button" value="Entfernen"/>
+            <?php echo $block->getDescription(); ?>
+        </label>
+    </td>
+</tr>
+
+<script>
+    jQuery(document).ready(function ($) {
+        initMediaSelector(
+            '<?php echo $block->getValue(); ?>',
+            '<?php echo $block->getSlug(); ?>-button',
+            '<?php echo $block->getSlug(); ?>',
+            '<?php echo $block->getSlug(); ?>-remove'
+        );
+    });
+</script>

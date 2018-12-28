@@ -1,0 +1,15 @@
+<?php
+/** @var \Toolkit\Block\Taxonomy\Meta $block */
+?>
+<tr class="form-field">
+    <th><?php echo $block->getTitle(); ?></th>
+    <td>
+        <label  for="<?php echo $block->getSlug(); ?>">
+            <input name="<?php echo $block->getSlug(); ?>"
+                   type="text"
+                   id="<?php echo $block->getSlug(); ?>"
+                   value="<?php echo $block->getValue(); ?>">
+            <?php echo $block->getDescription(); ?>
+        </label>
+    </td>
+</tr>

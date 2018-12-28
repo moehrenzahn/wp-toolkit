@@ -1,0 +1,19 @@
+<?php
+/** @var \Toolkit\Block\Taxonomy\Meta $block */
+?>
+<tr class="form-field">
+    <th><label for="<?php echo $block->getSlug(); ?>"><?php echo $block->getTitle(); ?></label></th>
+    <td>
+        <p>
+        <label for="<?php echo $block->getSlug(); ?>">
+            <input type="checkbox"
+                   value="<?php echo $block->getSlug(); ?>"
+                   name="<?php echo $block->getSlug(); ?>"
+                   id="<?php echo $block->getSlug(); ?>"
+                <?php echo $block->getValue() ? 'checked' : ''; ?>
+            >
+            <?php echo $block->getDescription(); ?>
+        </label>
+        </p>
+    </td>
+</tr>

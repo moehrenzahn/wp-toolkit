@@ -1,0 +1,16 @@
+<?php
+/** @var \Toolkit\Block\Taxonomy\Meta $block */
+?>
+
+<tr class="form-field">
+    <th><?php echo $block->getTitle(); ?></th>
+    <td>
+        <label  for="<?php echo $block->getSlug(); ?>">
+            <textarea rows="10"
+                      name="<?php echo $block->getSlug(); ?>"
+                      id="<?php echo $block->getSlug(); ?>"
+            ><?php echo esc_textarea($block->getValue()); ?></textarea>
+            <?php echo $block->getDescription(); ?>
+        </label>
+    </td>
+</tr>
