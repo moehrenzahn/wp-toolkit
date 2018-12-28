@@ -3,7 +3,7 @@
 namespace Toolkit;
 
 use Toolkit\Block\Comment\MetaBox;
-use Toolkit\Model\Comment\MetaAccessor;
+use Toolkit\Helper\ObjectManager;
 
 /**
  * Class CommentMetaBox
@@ -13,24 +13,9 @@ use Toolkit\Model\Comment\MetaAccessor;
 class CommentMetaBox
 {
     /**
-     * @var Loader
+     * @var ObjectManager
      */
-    private $loader;
-
-    /**
-     * @var Javascript
-     */
-    private $javascript;
-
-    /**
-     * @var MetaAccessor
-     */
-    private $metaAccessor;
-
-    /**
-     * @var ImageSize
-     */
-    private $imageSize;
+    private $objectManager;
 
     /**
      * @var \Toolkit\Model\CommentMetaBox[]
@@ -40,21 +25,11 @@ class CommentMetaBox
     /**
      * CommentMetaBox constructor.
      *
-     * @param Loader $loader
-     * @param Javascript $javascript
-     * @param ImageSize $imageSize
-     * @param MetaAccessor $metaAccessor
+     * @param ObjectManager $objectManager
      */
-    public function __construct(
-        Loader $loader,
-        Javascript $javascript,
-        ImageSize $imageSize,
-        MetaAccessor $metaAccessor
-    ) {
-        $this->loader = $loader;
-        $this->javascript = $javascript;
-        $this->imageSize = $imageSize;
-        $this->metaAccessor = $metaAccessor;
+    public function __construct(ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -70,15 +45,27 @@ class CommentMetaBox
         array $commentMeta,
         string $templatePath = 'Template/Comment/MetaBox'
     ) : \Toolkit\Model\CommentMetaBox {
-        $block = new MetaBox($this->javascript, $this->imageSize, $templatePath, $commentMeta);
-        $this->metaBoxes[$title] = new \Toolkit\Model\CommentMetaBox(
-            $slug,
-            $title,
-            $block,
-            $this->loader,
-            $this->metaAccessor
+        $block = $this->objectManager->create(
+            MetaBox::class,
+            ['templatePath' => $templatePath, 'commentMeta' => $commentMeta]
+        );
+        $this->metaBoxes[$title] = $this->objectManager->create(
+            \Toolkit\Model\CommentMetaBox::class,
+            [
+                'slug' => $slug,
+                'title' => $title,
+                'block' => $block,
+            ]
         );
 
         return $this->metaBoxes[$title];
+    }
+
+    /**
+     * @return Model\CommentMetaBox[]
+     */
+    public function getMetaBoxes(): array
+    {
+        return $this->metaBoxes;
     }
 }

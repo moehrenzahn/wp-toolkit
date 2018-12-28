@@ -29,16 +29,22 @@ class Settings extends Block
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
+     * @param BlockFactory $blockFactory
      * @param string $title
      * @param string $page
      */
-    public function __construct(Javascript $javascript, ImageSize $imageSize, string $title, string $page)
-    {
+    public function __construct(
+        Javascript $javascript,
+        ImageSize $imageSize,
+        BlockFactory $blockFactory,
+        string $title,
+        string $page
+    ) {
         $this->title = $title;
         $this->page = $page;
         $templatePath = 'Template/Settings';
 
-        parent::__construct($javascript, $imageSize, $templatePath);
+        parent::__construct($javascript, $imageSize, $blockFactory, $templatePath);
     }
 
 

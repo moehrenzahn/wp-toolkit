@@ -46,6 +46,7 @@ class Meta extends Block
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
+     * @param Block\BlockFactory $blockFactory
      * @param TaxonomyMetaAccessor $metaAccessor
      * @param string $templatePath
      * @param string $slug
@@ -56,6 +57,7 @@ class Meta extends Block
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
+        Block\BlockFactory $blockFactory,
         TaxonomyMetaAccessor $metaAccessor,
         string $templatePath,
         string $slug,
@@ -69,7 +71,7 @@ class Meta extends Block
         $this->options = $options;
         $this->description = $description;
 
-        parent::__construct($javascript, $imageSize, $templatePath);
+        parent::__construct($javascript, $imageSize, $blockFactory, $templatePath);
     }
 
 

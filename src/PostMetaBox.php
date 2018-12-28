@@ -2,7 +2,9 @@
 
 namespace Toolkit;
 
+use Toolkit\Block\BlockFactory;
 use Toolkit\Block\Post\MetaBox;
+use Toolkit\Helper\ObjectManager;
 
 /**
  * Class PostMetaBox
@@ -17,14 +19,9 @@ class PostMetaBox
     private $loader;
 
     /**
-     * @var Javascript
+     * @var ObjectManager
      */
-    private $javascript;
-
-    /**
-     * @var ImageSize
-     */
-    private $imageSize;
+    private $objectManager;
 
     /**
      * @var \Toolkit\Model\PostMetaBox[]
@@ -35,14 +32,12 @@ class PostMetaBox
      * PostMetaBox constructor.
      *
      * @param Loader $loader
-     * @param Javascript $javascript
-     * @param ImageSize $imageSize
+     * @param ObjectManager $objectManager
      */
-    public function __construct(Loader $loader, Javascript $javascript, ImageSize $imageSize)
+    public function __construct(Loader $loader, ObjectManager $objectManager)
     {
         $this->loader = $loader;
-        $this->javascript = $javascript;
-        $this->imageSize = $imageSize;
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -58,13 +53,22 @@ class PostMetaBox
         array $postPreferences = [],
         string $templatePath = 'Template/MetaBox/MetaBox'
     ) {
-        $block = new MetaBox($this->javascript, $this->imageSize, $templatePath, $postPreferences);
-        $this->metaBoxes[$slug] = new \Toolkit\Model\PostMetaBox(
-            $title,
-            $slug,
-            $postPreferences,
-            $block,
-            $this->loader
+        /** @var MetaBox $block */
+        $block = $this->objectManager->create(
+            MetaBox::class,
+            [
+                'templatePath' => $templatePath,
+                'postPreferences' => $postPreferences
+            ]
+        );
+        $this->metaBoxes[$slug] = $this->objectManager->create(
+            \Toolkit\Model\PostMetaBox::class,
+            [
+                'title' => $title,
+                'slug' => $slug,
+                'postPreferences' => $postPreferences,
+                'block' => $block,
+            ]
         );
 
         return $this->metaBoxes[$title];

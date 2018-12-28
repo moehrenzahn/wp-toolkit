@@ -24,18 +24,20 @@ class Setting extends Block
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
+     * @param Block\BlockFactory $blockFactory
      * @param string $templatePath
      * @param SettingInterface|null $setting
      */
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
+        Block\BlockFactory $blockFactory,
         string $templatePath = '',
         SettingInterface $setting = null
     ) {
         $this->setting = $setting;
 
-        parent::__construct($javascript, $imageSize, $templatePath);
+        parent::__construct($javascript, $imageSize, $blockFactory, $templatePath);
     }
 
     /**

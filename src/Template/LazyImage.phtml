@@ -1,5 +1,5 @@
 <?php
-/** @var Toolkit\Block $block */
+/** @var \Toolkit\Api\BlockInterface $block */
 /** @var array $data */
 ?>
 <img class='image-lazy loading js-only <?php echo $data['classList']; ?>'
@@ -9,5 +9,5 @@
      <?php echo $data['lazyLoadScript']; ?>
 />
 <noscript>
-    <img src='<?php echo $data['url']; ?>' class='<?php echo $data['classList']; ?>'/>
+    <?php echo $block->renderPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyImageFallback', null, $data); ?>
 </noscript>

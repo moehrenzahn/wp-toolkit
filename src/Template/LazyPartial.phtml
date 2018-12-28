@@ -11,7 +11,8 @@ $id = uniqid('lazy-');
         loadTemplate(
             '<?php echo $data['template']; ?>',
             document.querySelector('#<?php echo $id; ?>'),
-            '<?php echo addslashes($data['blockClass']); ?>'
+            '<?php echo addslashes($data['blockClass']); ?>',
+            <?php echo $data['postId']; ?>
         );
     }, false);
 </script>

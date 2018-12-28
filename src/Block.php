@@ -3,6 +3,8 @@
 namespace Toolkit;
 
 use Toolkit\Api\BlockInterface;
+use Toolkit\Block\BlockFactory;
+use Toolkit\Helper\Browser;
 use Toolkit\Helper\Strings;
 
 /**
@@ -30,6 +32,11 @@ class Block implements BlockInterface
     private $imageSize;
 
     /**
+     * @var BlockFactory
+     */
+    private $blockFactory;
+
+    /**
      * @var \WP_Post|null
      */
     private $post;
@@ -49,6 +56,7 @@ class Block implements BlockInterface
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
+     * @param BlockFactory $blockFactory
      * @param string $templatePath The path of a template file, relative to the composer project root.
      * @param \WP_Post|null $post
      * @param mixed[] $data
@@ -56,12 +64,14 @@ class Block implements BlockInterface
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
+        BlockFactory $blockFactory,
         string $templatePath = '',
         \WP_Post $post = null,
         array $data = []
     ) {
         $this->javascript = $javascript;
         $this->imageSize = $imageSize;
+        $this->blockFactory = $blockFactory;
         $this->post = $post;
         $this->data = $data;
         if ($templatePath) {
@@ -144,16 +154,20 @@ class Block implements BlockInterface
             $this->post = $postObject;
             $post = $postObject;
         }
+        /** @deprecated Use $block->getData to read data in templates. */
         if ($data) {
             $this->data = $data;
         }
         $block = $this; // make the block instance avaliable as $block.
-
         require($this->buildTemplatePath($path));
     }
 
     /**
-     * @inheritdoc
+     * @param string $path
+     * @param string $placeholder
+     * @param \WP_Post|null $postObject
+     * @param mixed[] $data
+     * @param string $blockClass
      */
     public function renderLazyPartial(
         string $path,
@@ -163,6 +177,17 @@ class Block implements BlockInterface
         $blockClass = ''
     ) {
         $blockClass = $blockClass ?: static::class;
+
+        if (Browser::isInternetExplorer()) {
+            if ($blockClass !== static::class) {
+                $block = $this->blockFactory->create('', $blockClass);
+                $block->renderPartial($path, $postObject, $data);
+            } else {
+                $this->renderPartial($path, $postObject, $data);
+            }
+            return;
+        }
+
         $this->loadJsHelpers();
         $this->javascript->add(
             'ajax-load-template',
@@ -170,31 +195,18 @@ class Block implements BlockInterface
             '',
             ['toolkit-utils', 'jquery', 'scroll-handler']
         );
-
-        $data = array_merge(
-            $data,
-            [
-                'template' => $this->buildTemplatePath($path),
-                'placeholder' => $this->buildTemplatePath($placeholder),
-                'blockClass' => $blockClass
-            ]
+        wp_localize_script(
+            'ajax-load-template',
+            'ToolkitTemplateAjaxData',
+            ['ajaxUrl' => admin_url('admin-ajax.php')]
         );
+
+        $data['template'] = $this->buildTemplatePath($path);
+        $data['placeholder'] = $this->buildTemplatePath($placeholder);
+        $data['blockClass'] = $blockClass;
+        $data['postId'] = $postObject->ID ?? 0;
+
         $this->renderPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyPartial', $postObject, $data);
-    }
-
-    /**
-     * Retrieve an image. A relative path will be rooted in the composer project root
-     *
-     * @param string $path
-     * @return string
-     */
-    public function getImageUrl(string $path)
-    {
-        if (!Strings::startsWith($path, '/')) {
-            $path = '/' . $path;
-        }
-
-        return get_template_directory_uri() . $this->buildTemplatePath($path);
     }
 
     /**
@@ -207,28 +219,37 @@ class Block implements BlockInterface
      */
     public function getLazyThumbnail(int $postId, string $size, array $classList = [])
     {
-        $this->loadJsHelpers();
-        $this->javascript->add(
-            'lazy-images',
-            TOOLKIT_PUB_URL . 'js/lazy-images',
-            '',
-            ['toolkit-utils', 'scroll-handler']
-        );
-
-        $placeholderSize = 'placeholder';
-        $this->imageSize->add($placeholderSize, 10);
-        $lazyLoadScript = '';
-        if (defined('DOING_AJAX') && DOING_AJAX) {
-            $lazyLoadScript = 'onload="lazyImages.reindexImages()"';
-        }
+        $this->imageSize->add('placeholder', 10);
+        $lazyLoadScript = defined('DOING_AJAX') && DOING_AJAX ? 'onload="lazyImages.reindexImages()"' : '';
         $data = [
             'url' => get_the_post_thumbnail_url($postId, $size),
-            'placeholderUrl' => get_the_post_thumbnail_url($postId, $placeholderSize),
+            'placeholderUrl' => get_the_post_thumbnail_url($postId, 'placeholder'),
             'classList' => implode(' ', $classList),
             'lazyLoadScript' => $lazyLoadScript,
         ];
 
+        if (Browser::isInternetExplorer()) {
+            /** Do not do any javascript magic if in IE */
+            return $this->getPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyImageFallback', null, $data);
+        }
+        $this->loadJsHelpers();
+
         return $this->getPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyImage', null, $data);
+    }
+
+    /**
+     * Retrieve an image by relative path from the template directory uri.
+     *
+     * @param string $path
+     * @return string
+     */
+    public function getImageUrl(string $path)
+    {
+        if (!Strings::startsWith($path, '/')) {
+            $path = '/' . $path;
+        }
+
+        return get_template_directory_uri() . $this->buildTemplatePath($path);
     }
 
     /**
@@ -277,6 +298,12 @@ class Block implements BlockInterface
         $this->javascript->add(
             'scroll-handler',
             TOOLKIT_PUB_URL . 'js/scroll-handler'
+        );
+        $this->javascript->add(
+            'lazy-images',
+            TOOLKIT_PUB_URL . 'js/lazy-images',
+            '',
+            ['toolkit-utils', 'scroll-handler']
         );
     }
 

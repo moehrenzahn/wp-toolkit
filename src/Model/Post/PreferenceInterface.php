@@ -2,14 +2,12 @@
 
 namespace Toolkit\Model\Post;
 
-use Eule\Wordpress\SettingInterface;
-
 /**
  * Generic Preference Item
  *
  * @package Eule\Model\Preference
  */
-interface PreferenceInterface extends SettingInterface
+interface PreferenceInterface
 {
     /**
      * @param string $value
