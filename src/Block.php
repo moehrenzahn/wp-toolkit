@@ -153,11 +153,7 @@ class Block implements BlockInterface
     }
 
     /**
-     * @param string $path Template path
-     * @param string $placeholder Placeholder template path
-     * @param \WP_Post|null $postObject
-     * @param mixed[] $data
-     * @param string $blockClass Full class name of the block type to use for the partial. Defaults to the parent block.
+     * @inheritdoc
      */
     public function renderLazyPartial(
         string $path,

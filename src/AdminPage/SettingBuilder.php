@@ -2,8 +2,9 @@
 
 namespace Toolkit\AdminPage;
 
-use Toolkit\Api\Client;
 use Toolkit\Api\Model\Settings\SettingInterface;
+use Toolkit\Block\BlockFactory;
+use Toolkit\ConfigAccessor;
 use Toolkit\Model\AdminPage\Settings\Setting;
 
 /**
@@ -16,7 +17,6 @@ use Toolkit\Model\AdminPage\Settings\Setting;
  */
 class SettingBuilder
 {
-
     const SETTINGS = [
         SettingsSectionBuilder::SETTING_TYPE_BOOLEAN,
         SettingsSectionBuilder::SETTING_TYPE_BUTTON,
@@ -27,18 +27,25 @@ class SettingBuilder
     ];
 
     /**
-     * @var Client
+     * @var ConfigAccessor
      */
-    private $toolkit;
+    private $configAccessor;
+
+    /**
+     * @var BlockFactory
+     */
+    private $blockFactory;
 
     /**
      * SettingBuilder constructor.
      *
-     * @param Client $toolkit
+     * @param ConfigAccessor $configAccessor
+     * @param BlockFactory $blockFactory
      */
-    public function __construct(Client $toolkit)
+    public function __construct(ConfigAccessor $configAccessor, BlockFactory $blockFactory)
     {
-        $this->toolkit = $toolkit;
+        $this->configAccessor = $configAccessor;
+        $this->blockFactory = $blockFactory;
     }
 
     /**
@@ -59,13 +66,13 @@ class SettingBuilder
         $settingModel = $this->getModelForType($type);
         $template = $this->getTemplateForType($type);
         /** @var \Toolkit\Block\Settings\Setting $block */
-        $block = $this->toolkit->createBlock(
+        $block = $this->blockFactory->create(
             $template,
             \Toolkit\Block\Settings\Setting::class,
             []
         );
         /** @var SettingInterface $setting */
-        $setting = new $settingModel($this->toolkit->getConfigAccessor(), $id, $title, $description, $options, $block);
+        $setting = new $settingModel($this->configAccessor, $id, $title, $description, $options, $block);
 
         return $setting;
     }

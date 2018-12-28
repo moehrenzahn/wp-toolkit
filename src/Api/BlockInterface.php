@@ -2,6 +2,8 @@
 
 namespace Toolkit\Api;
 
+use Toolkit\Block;
+
 /**
  * Interface BlockInterface
  *
@@ -53,12 +55,14 @@ interface BlockInterface
      * @param string $placeholder Placeholder template path
      * @param \WP_Post|null $postObject
      * @param mixed[] $data
+     * @param string $blockClass Full class name of the block type to use for the partial. Defaults to the parent block.
      */
     public function renderLazyPartial(
         string $path,
         string $placeholder,
         $postObject = null,
-        $data = []
+        $data = [],
+        $blockClass = ''
     );
 
     /**

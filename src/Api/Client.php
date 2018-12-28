@@ -48,40 +48,19 @@ class Client
     }
 
     /**
-     * Returns a new Block instance
-     *
-     * @param string $templatePath
-     * @param string $blockClass
-     * @param mixed[] $additionalParams
-     * @return BlockInterface|false
-     */
-    public function createBlock(
-        string $templatePath = '',
-        string $blockClass = Block::class,
-        array $additionalParams = []
-    ) {
-        $params = array_merge(
-            ['templatePath' => $templatePath],
-            $additionalParams
-        );
-        try {
-            return $this->objectManager->create(
-                $blockClass,
-                $params
-            );
-        } catch (\Exception $exception) {
-            error_log($exception->getMessage());
-
-            return false;
-        }
-    }
-
-    /**
      * @return Loader
      */
     public function getLoader()
     {
         return $this->objectManager->getSingleton(Loader::class);
+    }
+
+    /**
+     * @return Block\BlockFactory
+     */
+    public function getBlockFactory()
+    {
+        return $this->objectManager->getSingleton(Block\BlockFactory::class);
     }
 
     /**

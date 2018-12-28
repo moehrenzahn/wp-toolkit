@@ -2,8 +2,8 @@
 
 namespace Toolkit\AdminPage;
 
-use Toolkit\Api\Client;
 use Toolkit\Api\Model\Settings\SettingInterface;
+use Toolkit\Block\BlockFactory;
 use Toolkit\Block\Settings\Section;
 
 /**
@@ -21,9 +21,9 @@ class SettingsSectionBuilder
     const SETTING_TYPE_TEXTAREA = 'Textarea';
 
     /**
-     * @var Client
+     * @var BlockFactory
      */
-    private $toolkit;
+    private $blockFactory;
 
     /**
      * @var SettingBuilder
@@ -38,12 +38,12 @@ class SettingsSectionBuilder
     /**
      * SettingsSectionBuilder constructor.
      *
-     * @param Client $toolkit
+     * @param BlockFactory $blockFactory
      * @param SettingBuilder $settingBuilder
      */
-    public function __construct(Client $toolkit, SettingBuilder $settingBuilder)
+    public function __construct(BlockFactory $blockFactory, SettingBuilder $settingBuilder)
     {
-        $this->toolkit = $toolkit;
+        $this->toolkit = $blockFactory;
         $this->settingBuilder = $settingBuilder;
     }
 
@@ -76,7 +76,7 @@ class SettingsSectionBuilder
         string $description = ''
     ) {
         /** @var Section $block */
-        $block = $this->toolkit->createBlock(
+        $block = $this->toolkit->create(
             TOOLKIT_TEMPLATE_FOLDER . Section::DEFAULT_TEMPLATE,
             Section::class
         );
