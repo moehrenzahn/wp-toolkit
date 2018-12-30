@@ -3,6 +3,7 @@
 namespace Moehrenzahn\Toolkit\Model;
 
 use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\Helper\Request;
 use Moehrenzahn\Toolkit\Loader;
 use Moehrenzahn\Toolkit\Model\Post\PostPreference;
 
@@ -88,7 +89,7 @@ class PostMetaBox
      */
     public function handleSave($postId)
     {
-        if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        if (Request::isAutosave()
             || !current_user_can('edit_post', $postId)
         ) {
             return;

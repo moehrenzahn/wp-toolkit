@@ -5,7 +5,9 @@ namespace Moehrenzahn\Toolkit;
 use Moehrenzahn\Toolkit\Api\BlockInterface;
 use Moehrenzahn\Toolkit\Block\BlockFactory;
 use Moehrenzahn\Toolkit\Helper\Browser;
+use Moehrenzahn\Toolkit\Helper\Request;
 use Moehrenzahn\Toolkit\Helper\Strings;
+use Moehrenzahn\Toolkit\Model\Action\TemplateAjax;
 
 /**
  * Class Block
@@ -224,7 +226,7 @@ class Block implements BlockInterface
     public function getLazyThumbnail(int $postId, string $size, array $classList = [])
     {
         $this->imageSize->add('placeholder', 10);
-        $lazyLoadScript = defined('DOING_AJAX') && DOING_AJAX ? 'onload="lazyImages.reindexImages()"' : '';
+        $lazyLoadScript = Request::isAjax() ? 'onload="lazyImages.reindexImages()"' : '';
         $data = [
             'url' => get_the_post_thumbnail_url($postId, $size),
             'placeholderUrl' => get_the_post_thumbnail_url($postId, 'placeholder'),

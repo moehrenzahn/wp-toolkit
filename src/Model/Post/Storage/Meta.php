@@ -2,6 +2,7 @@
 
 namespace Moehrenzahn\Toolkit\Model\Post\Storage;
 
+use Moehrenzahn\Toolkit\Helper\Request;
 use Moehrenzahn\Toolkit\Model\Post\PreferenceInterface;
 
 /**
@@ -53,7 +54,7 @@ class Meta implements StorageInterface
     public function save(PreferenceInterface $preference, int $postId = 0)
     {
         $key = $preference->getId();
-        if (!(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) {
+        if (!Request::isAutosave()) {
             update_post_meta(
                 $postId,
                 $key,

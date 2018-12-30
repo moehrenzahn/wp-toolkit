@@ -8,13 +8,14 @@ use Moehrenzahn\Toolkit\AjaxAction;
 use Moehrenzahn\Toolkit\Block;
 use Moehrenzahn\Toolkit\CommentMeta;
 use Moehrenzahn\Toolkit\CommentMetaBox;
-use Moehrenzahn\Toolkit\ConfigAccessor;
 use Moehrenzahn\Toolkit\Filter;
 use Moehrenzahn\Toolkit\Head;
 use Moehrenzahn\Toolkit\Helper\ObjectManager;
+use Moehrenzahn\Toolkit\Helper\Request;
 use Moehrenzahn\Toolkit\ImageSize;
 use Moehrenzahn\Toolkit\Javascript;
 use Moehrenzahn\Toolkit\Loader;
+use Moehrenzahn\Toolkit\Model\Action\TemplateAjax;
 use Moehrenzahn\Toolkit\PostAction;
 use Moehrenzahn\Toolkit\PostMetaBox;
 use Moehrenzahn\Toolkit\PostPreference;
@@ -43,6 +44,9 @@ class Client
     public function __construct()
     {
         $this->objectManager = new ObjectManager();
+        if (Request::isAjax()) {
+            $this->loadAjaxActions();
+        }
         define('TOOLKIT_ROOT_FOLDER', dirname(__DIR__));
         define('TOOLKIT_TEMPLATE_FOLDER', TOOLKIT_ROOT_FOLDER . '/Template/');
         define('TOOLKIT_PUB_URL', 'vendor/moehrenzahn/wp-toolkit/src/public/');
@@ -222,5 +226,18 @@ class Client
     public function getSettingsSectionBuilder(): AdminPage\SettingsSectionBuilder
     {
         return $this->objectManager->getSingleton(AdminPage\SettingsSectionBuilder::class);
+    }
+
+    /**
+     * We cannot know during an AJAX call if we will need a particular AJAX action.
+     * Therefore we preload every built-in ajax action on every AJAX request.
+     */
+    private function loadAjaxActions()
+    {
+        $this->getAjaxActionManager()->add(
+            'load_template',
+            $this->objectManager->create(TemplateAjax::class),
+            true
+        );
     }
 }

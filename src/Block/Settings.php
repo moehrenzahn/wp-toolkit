@@ -7,6 +7,11 @@ use Moehrenzahn\Toolkit\Block;
 use Moehrenzahn\Toolkit\ImageSize;
 use Moehrenzahn\Toolkit\Javascript;
 
+/**
+ * Class Settings
+ *
+ * @package Moehrenzahn\Toolkit\Block
+ */
 class Settings extends Block
 {
     /**
