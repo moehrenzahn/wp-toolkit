@@ -42,7 +42,7 @@ class Settings extends Block
     ) {
         $this->title = $title;
         $this->page = $page;
-        $templatePath = 'Template/Settings';
+        $templatePath = TOOLKIT_TEMPLATE_FOLDER . 'Settings';
 
         parent::__construct($javascript, $imageSize, $blockFactory, $templatePath);
     }

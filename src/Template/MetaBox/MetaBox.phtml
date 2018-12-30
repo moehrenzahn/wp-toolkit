@@ -2,7 +2,7 @@
 /** @var \Toolkit\Block\Post\MetaBox $block */
 foreach ($block->getPostPreferences() as $preference) {
     $block->renderPartial(
-        "Template/MetaBox/Setting/$preference->type",
+        TOOLKIT_TEMPLATE_FOLDER . "MetaBox/Setting/$preference->type",
             null,
         ['preference' => $preference]
     );
