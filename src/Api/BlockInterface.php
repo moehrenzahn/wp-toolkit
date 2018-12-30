@@ -66,7 +66,7 @@ interface BlockInterface
     );
 
     /**
-     * Retrieve an image. A relative path will be rooted in the composer project root
+     * Retrieve an image by relative path from the template directory uri.
      *
      * @param string $path
      * @return string

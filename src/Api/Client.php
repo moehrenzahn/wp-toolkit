@@ -10,6 +10,7 @@ use Toolkit\CommentMeta;
 use Toolkit\CommentMetaBox;
 use Toolkit\ConfigAccessor;
 use Toolkit\Filter;
+use Toolkit\Head;
 use Toolkit\Helper\ObjectManager;
 use Toolkit\ImageSize;
 use Toolkit\Javascript;
@@ -50,7 +51,7 @@ class Client
     /**
      * @return Loader
      */
-    public function getLoader()
+    public function getLoader(): Loader
     {
         return $this->objectManager->getSingleton(Loader::class);
     }
@@ -58,7 +59,7 @@ class Client
     /**
      * @return Block\BlockFactory
      */
-    public function getBlockFactory()
+    public function getBlockFactory(): Block\BlockFactory
     {
         return $this->objectManager->getSingleton(Block\BlockFactory::class);
     }
@@ -66,7 +67,7 @@ class Client
     /**
      * @return Javascript
      */
-    public function getJavascriptManager()
+    public function getJavascriptManager(): Javascript
     {
         return $this->objectManager->getSingleton(Javascript::class);
     }
@@ -74,7 +75,7 @@ class Client
     /**
      * @return ImageSize
      */
-    public function getImageSizeManager()
+    public function getImageSizeManager(): ImageSize
     {
         return $this->objectManager->getSingleton(ImageSize::class);
     }
@@ -82,23 +83,15 @@ class Client
     /**
      * @return Shortcode
      */
-    public function getShortcodeManager()
+    public function getShortcodeManager(): Shortcode
     {
         return $this->objectManager->getSingleton(Shortcode::class);
     }
 
     /**
-     * @return ConfigAccessor
-     */
-    public function getConfigAccessor()
-    {
-        return $this->objectManager->getSingleton(ConfigAccessor::class);
-    }
-
-    /**
      * @return Stylesheet
      */
-    public function getStylesheetManager()
+    public function getStylesheetManager(): Stylesheet
     {
         return $this->objectManager->getSingleton(Stylesheet::class);
     }
@@ -106,7 +99,7 @@ class Client
     /**
      * @return User
      */
-    public function getUserManager()
+    public function getUserManager(): User
     {
         return $this->objectManager->getSingleton(User::class);
     }
@@ -114,7 +107,7 @@ class Client
     /**
      * @return Transient
      */
-    public function getTransientManager()
+    public function getTransientManager(): Transient
     {
         return $this->objectManager->getSingleton(Transient::class);
     }
@@ -122,7 +115,7 @@ class Client
     /**
      * @return PostType
      */
-    public function getPostTypeManager()
+    public function getPostTypeManager(): PostType
     {
         return $this->objectManager->getSingleton(PostType::class);
     }
@@ -130,7 +123,7 @@ class Client
     /**
      * @return PostPreference
      */
-    public function getPostPreferenceManager()
+    public function getPostPreferenceManager(): PostPreference
     {
         return $this->objectManager->getSingleton(PostPreference::class);
     }
@@ -138,7 +131,7 @@ class Client
     /**
      * @return PostMetaBox
      */
-    public function getPostMetaBoxManager()
+    public function getPostMetaBoxManager(): PostMetaBox
     {
         return $this->objectManager->getSingleton(PostMetaBox::class);
     }
@@ -146,7 +139,7 @@ class Client
     /**
      * @return CommentMeta
      */
-    public function getCommentMetaManager()
+    public function getCommentMetaManager(): CommentMeta
     {
         return $this->objectManager->getSingleton(CommentMeta::class);
     }
@@ -154,7 +147,7 @@ class Client
     /**
      * @return CommentMetaBox
      */
-    public function getCommentMetaBoxManager()
+    public function getCommentMetaBoxManager(): CommentMetaBox
     {
         return $this->objectManager->getSingleton(CommentMetaBox::class);
     }
@@ -162,23 +155,15 @@ class Client
     /**
      * @return AdminPage
      */
-    public function getAdminPageManager()
+    public function getAdminPageManager(): AdminPage
     {
         return $this->objectManager->getSingleton(AdminPage::class);
     }
 
     /**
-     * @return AdminPage\SettingsSectionBuilder
-     */
-    public function getSettingsSectionBuilder()
-    {
-        return $this->objectManager->getSingleton(AdminPage\SettingsSectionBuilder::class);
-    }
-
-    /**
      * @return AdminNotice
      */
-    public function getAdminNoticeManager()
+    public function getAdminNoticeManager(): AdminNotice
     {
         return $this->objectManager->getSingleton(AdminNotice::class);
     }
@@ -186,7 +171,7 @@ class Client
     /**
      * @return AjaxAction
      */
-    public function getAjaxActionManager()
+    public function getAjaxActionManager(): AjaxAction
     {
         return $this->objectManager->getSingleton(AjaxAction::class);
     }
@@ -194,7 +179,7 @@ class Client
     /**
      * @return PostAction
      */
-    public function getPostActionManager()
+    public function getPostActionManager(): PostAction
     {
         return $this->objectManager->getSingleton(PostAction::class);
     }
@@ -202,7 +187,7 @@ class Client
     /**
      * @return TermMeta
      */
-    public function getTermMetaManager()
+    public function getTermMetaManager(): TermMeta
     {
         return $this->objectManager->getSingleton(TermMeta::class);
     }
@@ -216,10 +201,26 @@ class Client
     }
 
     /**
+     * @return Head
+     */
+    public function getHeadManager(): Head
+    {
+        return $this->objectManager->getSingleton(Head::class);
+    }
+
+    /**
      * @return ObjectManager
      */
     public function getObjectManager(): ObjectManager
     {
         return $this->objectManager;
+    }
+
+    /**
+     * @return AdminPage\SettingsSectionBuilder
+     */
+    public function getSettingsSectionBuilder(): AdminPage\SettingsSectionBuilder
+    {
+        return $this->objectManager->getSingleton(AdminPage\SettingsSectionBuilder::class);
     }
 }
