@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit\Model\Comment;
+namespace Moehrenzahn\Toolkit\Model\Comment;
 
 /**
  * Class CommentMeta
  *
- * @package Toolkit\Model\Comment
+ * @package Moehrenzahn\Toolkit\Model\Comment
  */
 class CommentMeta
 {

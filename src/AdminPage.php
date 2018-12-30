@@ -1,10 +1,10 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Api\Model\Settings\SectionInterface;
-use Toolkit\Block\Settings;
-use Toolkit\Helper\ObjectManager;
+use Moehrenzahn\Toolkit\Api\Model\Settings\SectionInterface;
+use Moehrenzahn\Toolkit\Block\Settings;
+use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
  * Class AdminPage
@@ -14,7 +14,7 @@ use Toolkit\Helper\ObjectManager;
 class AdminPage
 {
     /**
-     * @var \Toolkit\Model\AdminPage[]
+     * @var \Moehrenzahn\Toolkit\Model\AdminPage[]
      */
     private $adminPages = [];
 
@@ -56,7 +56,7 @@ class AdminPage
         string $templatePath
     ) {
         $block = $this->objectManager->create(Block::class, ['templatePath' => $templatePath]);
-        $this->adminPages[$slug] = new \Toolkit\Model\AdminPage(
+        $this->adminPages[$slug] = new \Moehrenzahn\Toolkit\Model\AdminPage(
             $this->loader,
             $title,
             $slug,
@@ -79,7 +79,7 @@ class AdminPage
         array $sections
     ) {
         $block = $this->objectManager->create(Settings::class, ['title' => $title, 'page' => $slug]);
-        $this->adminPages[$slug] = new \Toolkit\Model\AdminPage\Settings(
+        $this->adminPages[$slug] = new \Moehrenzahn\Toolkit\Model\AdminPage\Settings(
             $this->loader,
             $block,
             $title,
@@ -98,7 +98,7 @@ class AdminPage
 
     /**
      * @param string $id
-     * @return null|\Toolkit\Model\AdminPage
+     * @return null|\Moehrenzahn\Toolkit\Model\AdminPage
      */
     public function getAdminPageById(string $id)
     {

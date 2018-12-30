@@ -1,15 +1,15 @@
 <?php
-namespace Toolkit\Block\Taxonomy;
+namespace Moehrenzahn\Toolkit\Block\Taxonomy;
 
-use Toolkit\Block;
-use Toolkit\ImageSize;
-use Toolkit\Javascript;
-use Toolkit\TaxonomyMetaAccessor;
+use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\ImageSize;
+use Moehrenzahn\Toolkit\Javascript;
+use Moehrenzahn\Toolkit\TaxonomyMetaAccessor;
 
 /**
  * Class Meta
  *
- * @package Toolkit\Block\Taxonomy
+ * @package Moehrenzahn\Toolkit\Block\Taxonomy
  */
 class Meta extends Block
 {

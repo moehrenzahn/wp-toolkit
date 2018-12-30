@@ -1,14 +1,14 @@
 <?php
 
-namespace Toolkit\Model;
+namespace Moehrenzahn\Toolkit\Model;
 
-use Toolkit\Api\BlockInterface;
-use Toolkit\Loader;
+use Moehrenzahn\Toolkit\Api\BlockInterface;
+use Moehrenzahn\Toolkit\Loader;
 
 /**
  * Generic ShortCode Class
  *
- * @package Toolkit\Model
+ * @package Moehrenzahn\Toolkit\Model
  */
 class Shortcode
 {

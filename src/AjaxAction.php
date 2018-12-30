@@ -1,7 +1,7 @@
 <?php
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Api\ActionInterface;
+use Moehrenzahn\Toolkit\Api\ActionInterface;
 
 /**
  * Class AjaxAction
@@ -18,9 +18,9 @@ class AjaxAction
     /**
      * AdminNotice constructor.
      *
-     * @param \Toolkit\Loader $loader
+     * @param \Moehrenzahn\Toolkit\Loader $loader
      */
-    public function __construct(\Toolkit\Loader $loader)
+    public function __construct(\Moehrenzahn\Toolkit\Loader $loader)
     {
         $this->loader = $loader;
     }

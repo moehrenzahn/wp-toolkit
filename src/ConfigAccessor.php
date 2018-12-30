@@ -1,6 +1,6 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
 /**
  * Class ConfigAccessor

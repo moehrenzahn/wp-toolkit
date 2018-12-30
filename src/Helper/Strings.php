@@ -1,6 +1,6 @@
 <?php
 
-namespace Toolkit\Helper;
+namespace Moehrenzahn\Toolkit\Helper;
 
 class Strings
 {

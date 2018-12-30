@@ -1,8 +1,8 @@
 <?php
 
-namespace Toolkit\Model\Post\Storage;
+namespace Moehrenzahn\Toolkit\Model\Post\Storage;
 
-use Toolkit\Model\Post\PreferenceInterface;
+use Moehrenzahn\Toolkit\Model\Post\PreferenceInterface;
 
 /**
  * Interface StorageInterface

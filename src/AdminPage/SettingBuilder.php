@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit\AdminPage;
+namespace Moehrenzahn\Toolkit\AdminPage;
 
-use Toolkit\Api\Model\Settings\SettingInterface;
-use Toolkit\Block\BlockFactory;
-use Toolkit\ConfigAccessor;
-use Toolkit\Model\AdminPage\Settings\Setting;
+use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
+use Moehrenzahn\Toolkit\Block\BlockFactory;
+use Moehrenzahn\Toolkit\ConfigAccessor;
+use Moehrenzahn\Toolkit\Model\AdminPage\Settings\Setting;
 
 /**
  * Class SettingBuilder
@@ -13,7 +13,7 @@ use Toolkit\Model\AdminPage\Settings\Setting;
  * This class is used to build SettingInterface instances. It should only be used via SettingsSectionBuilder.
  *
  * @internal
- * @package Toolkit\AdminPage\SettingBuilder
+ * @package Moehrenzahn\Toolkit\AdminPage\SettingBuilder
  */
 class SettingBuilder
 {
@@ -65,10 +65,10 @@ class SettingBuilder
     ) {
         $settingModel = $this->getModelForType($type);
         $template = $this->getTemplateForType($type);
-        /** @var \Toolkit\Block\Settings\Setting $block */
+        /** @var \Moehrenzahn\Toolkit\Block\Settings\Setting $block */
         $block = $this->blockFactory->create(
             $template,
-            \Toolkit\Block\Settings\Setting::class,
+            \Moehrenzahn\Toolkit\Block\Settings\Setting::class,
             []
         );
         /** @var SettingInterface $setting */
@@ -100,8 +100,8 @@ class SettingBuilder
             return $type;
         }
 
-        if (class_exists("\Toolkit\Block\Settings\Setting\\$type")) {
-            return "\Toolkit\Block\Settings\Setting\\$type";
+        if (class_exists("\Moehrenzahn\Toolkit\Block\Settings\Setting\\$type")) {
+            return "\Moehrenzahn\Toolkit\Block\Settings\Setting\\$type";
         }
 
         return Setting::class;

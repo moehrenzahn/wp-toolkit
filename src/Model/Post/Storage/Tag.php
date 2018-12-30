@@ -1,8 +1,8 @@
 <?php
 
-namespace Toolkit\Model\Post\Storage;
+namespace Moehrenzahn\Toolkit\Model\Post\Storage;
 
-use Toolkit\Model\Post\PreferenceInterface;
+use Moehrenzahn\Toolkit\Model\Post\PreferenceInterface;
 
 /**
  * Class Tag
@@ -10,7 +10,7 @@ use Toolkit\Model\Post\PreferenceInterface;
  * Use the preference slug as tag name.
  * The presence of the tag stores the boolean value of the preference
  *
- * @package Toolkit\Model\Post\Storage
+ * @package Moehrenzahn\Toolkit\Model\Post\Storage
  */
 class Tag implements StorageInterface
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit\Block\Comment;
+namespace Moehrenzahn\Toolkit\Block\Comment;
 
-use Toolkit\Block;
-use Toolkit\ImageSize;
-use Toolkit\Javascript;
-use Toolkit\Model\Comment\CommentMeta;
+use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\ImageSize;
+use Moehrenzahn\Toolkit\Javascript;
+use Moehrenzahn\Toolkit\Model\Comment\CommentMeta;
 
 /**
  * Class MetaBox

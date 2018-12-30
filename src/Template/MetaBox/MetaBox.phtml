@@ -1,5 +1,5 @@
 <?php
-/** @var \Toolkit\Block\Post\MetaBox $block */
+/** @var \Moehrenzahn\Toolkit\Block\Post\MetaBox $block */
 foreach ($block->getPostPreferences() as $preference) {
     $block->renderPartial(
         TOOLKIT_TEMPLATE_FOLDER . "MetaBox/Setting/$preference->type",

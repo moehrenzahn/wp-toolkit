@@ -1,14 +1,14 @@
 <?php
 
-namespace Toolkit\Api;
+namespace Moehrenzahn\Toolkit\Api;
 
 /**
  * Interface ActionInterface
  *
  * This Interface can be implemented to specify actions for POST and AJAX requests.
- * Use with Toolkit\AjaxAction or Toolkit\PostAction.
+ * Use with Moehrenzahn\Toolkit\AjaxAction or Moehrenzahn\Toolkit\PostAction.
  *
- * @package Toolkit\Api
+ * @package Moehrenzahn\Toolkit\Api
  */
 interface ActionInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Model\InlineStyle;
+use Moehrenzahn\Toolkit\Model\InlineStyle;
 
 /**
  * Class Stylesheet
@@ -12,7 +12,7 @@ use Toolkit\Model\InlineStyle;
 class Stylesheet
 {
     /**
-     * @var \Toolkit\Model\Stylesheet[]
+     * @var \Moehrenzahn\Toolkit\Model\Stylesheet[]
      */
     private $models = [];
 
@@ -38,7 +38,7 @@ class Stylesheet
      */
     public function add(string $slug, string $filePath, string $version = '1.0.0')
     {
-        $this->models[$slug] = new \Toolkit\Model\Stylesheet($slug, $filePath, $version);
+        $this->models[$slug] = new \Moehrenzahn\Toolkit\Model\Stylesheet($slug, $filePath, $version);
     }
 
     /**
@@ -50,7 +50,7 @@ class Stylesheet
     }
 
     /**
-     * @return \Toolkit\Model\Stylesheet[]
+     * @return \Moehrenzahn\Toolkit\Model\Stylesheet[]
      */
     public function getScripts(): array
     {

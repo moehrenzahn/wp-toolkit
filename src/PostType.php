@@ -1,16 +1,16 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
 /**
  * Class PostType
  *
- * @package Toolkit\Model
+ * @package Moehrenzahn\Toolkit\Model
  */
 class PostType
 {
     /**
-     * @var \Toolkit\Model\PostType[]
+     * @var \Moehrenzahn\Toolkit\Model\PostType[]
      */
     private $types = [];
 
@@ -26,7 +26,7 @@ class PostType
         string $description = '',
         string $icon = 'dashicons-admin-post'
     ) {
-        $this->types[$label] = new \Toolkit\Model\PostType(
+        $this->types[$label] = new \Moehrenzahn\Toolkit\Model\PostType(
             $label,
             $plural,
             $description,

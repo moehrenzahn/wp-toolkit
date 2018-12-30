@@ -1,15 +1,15 @@
 <?php
 
-namespace Toolkit\AdminPage;
+namespace Moehrenzahn\Toolkit\AdminPage;
 
-use Toolkit\Api\Model\Settings\SettingInterface;
-use Toolkit\Block\BlockFactory;
-use Toolkit\Block\Settings\Section;
+use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
+use Moehrenzahn\Toolkit\Block\BlockFactory;
+use Moehrenzahn\Toolkit\Block\Settings\Section;
 
 /**
  * Class SettingsSectionBuilder
  *
- * @package Toolkit\AdminPage\SettingsSectionBuilder
+ * @package Moehrenzahn\Toolkit\AdminPage\SettingsSectionBuilder
  */
 class SettingsSectionBuilder
 {
@@ -68,7 +68,7 @@ class SettingsSectionBuilder
      * @param string $id
      * @param string $title
      * @param string $description
-     * @return \Toolkit\Model\AdminPage\Settings\Section
+     * @return \Moehrenzahn\Toolkit\Model\AdminPage\Settings\Section
      */
     public function create(
         string $id,
@@ -80,7 +80,7 @@ class SettingsSectionBuilder
             TOOLKIT_TEMPLATE_FOLDER . Section::DEFAULT_TEMPLATE,
             Section::class
         );
-        $section = new \Toolkit\Model\AdminPage\Settings\Section($id, $title, $this->settings, $block, $description);
+        $section = new \Moehrenzahn\Toolkit\Model\AdminPage\Settings\Section($id, $title, $this->settings, $block, $description);
 
         $this->resetData();
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Toolkit\Model\Post\Storage;
+namespace Moehrenzahn\Toolkit\Model\Post\Storage;
 
-use Toolkit\Model\Post\PreferenceInterface;
+use Moehrenzahn\Toolkit\Model\Post\PreferenceInterface;
 
 /**
  * Class Meta
  *
- * @package Toolkit\Model\Post\Storage
+ * @package Moehrenzahn\Toolkit\Model\Post\Storage
  */
 class Meta implements StorageInterface
 {

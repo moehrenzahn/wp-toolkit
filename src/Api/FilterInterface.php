@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit\Api;
+namespace Moehrenzahn\Toolkit\Api;
 
 /**
  * Interface FilterInterface
  *
- * @package Toolkit\Api
+ * @package Moehrenzahn\Toolkit\Api
  */
 interface FilterInterface
 {

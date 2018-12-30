@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit\Helper;
+namespace Moehrenzahn\Toolkit\Helper;
 
 /**
  * Class Dom
  *
- * @package Toolkit\Helper
+ * @package Moehrenzahn\Toolkit\Helper
  */
 class Dom
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Toolkit\Model;
+namespace Moehrenzahn\Toolkit\Model;
 
-use Toolkit\Block;
-use Toolkit\Loader;
-use Toolkit\Model\Post\PostPreference;
+use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\Loader;
+use Moehrenzahn\Toolkit\Model\Post\PostPreference;
 
 /**
  * Class PostMetaBox
  *
- * @package Toolkit\Model
+ * @package Moehrenzahn\Toolkit\Model
  */
 class PostMetaBox
 {

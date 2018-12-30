@@ -1,8 +1,8 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Api\FilterInterface;
+use Moehrenzahn\Toolkit\Api\FilterInterface;
 
 /**
  * Class Filter

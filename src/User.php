@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
 /**
  * Class User
  *
- * @package Toolkit\User
+ * @package Moehrenzahn\Toolkit\User
  */
 class User
 {

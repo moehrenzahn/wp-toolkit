@@ -1,15 +1,15 @@
 <?php
 
-namespace Toolkit\Model\AdminPage\Settings;
+namespace Moehrenzahn\Toolkit\Model\AdminPage\Settings;
 
-use Toolkit\Api\Model\Settings\SectionInterface;
-use Toolkit\Api\Model\Settings\SettingInterface;
-use Toolkit\Block\Settings\Section as SectionBlock;
+use Moehrenzahn\Toolkit\Api\Model\Settings\SectionInterface;
+use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
+use Moehrenzahn\Toolkit\Block\Settings\Section as SectionBlock;
 
 /**
  * Class Section
  *
- * @package Toolkit\Model\AdminPage\Settings
+ * @package Moehrenzahn\Toolkit\Model\AdminPage\Settings
  */
 class Section implements SectionInterface
 {

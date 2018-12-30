@@ -1,18 +1,18 @@
 <?php
 
-namespace Toolkit\Model\AdminPage;
+namespace Moehrenzahn\Toolkit\Model\AdminPage;
 
-use Toolkit\Api\Model\Settings\SectionInterface;
-use Toolkit\Loader;
-use Toolkit\Model\AdminPage;
-use Toolkit\Block\Settings as SettingsBlock;
+use Moehrenzahn\Toolkit\Api\Model\Settings\SectionInterface;
+use Moehrenzahn\Toolkit\Loader;
+use Moehrenzahn\Toolkit\Model\AdminPage;
+use Moehrenzahn\Toolkit\Block\Settings as SettingsBlock;
 
 /**
  * Class Settings
  *
  * Wrapper around the Wordpress Settings API
  *
- * @package Toolkit\Model\AdminPage
+ * @package Moehrenzahn\Toolkit\Model\AdminPage
  */
 class Settings extends AdminPage
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Toolkit\Block\Settings;
+namespace Moehrenzahn\Toolkit\Block\Settings;
 
-use Toolkit\Block;
-use Toolkit\ImageSize;
-use Toolkit\Javascript;
-use Toolkit\Api\Model\Settings\SettingInterface;
+use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\ImageSize;
+use Moehrenzahn\Toolkit\Javascript;
+use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
 
 /**
  * Class Setting
  *
- * @package Toolkit\Block
+ * @package Moehrenzahn\Toolkit\Block
  */
 class Setting extends Block
 {

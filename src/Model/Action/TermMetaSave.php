@@ -1,7 +1,7 @@
 <?php
-namespace Toolkit\Model\Action;
+namespace Moehrenzahn\Toolkit\Model\Action;
 
-use Toolkit\TaxonomyMetaAccessor;
+use Moehrenzahn\Toolkit\TaxonomyMetaAccessor;
 
 /**
  * Class TermMetaSave
@@ -9,7 +9,7 @@ use Toolkit\TaxonomyMetaAccessor;
  * Save controller for use in hook edited_$taxonomy.
  *
  * @url https://codex.wordpress.org/Plugin_API/Action_Reference/edited_$taxonomy
- * @package Toolkit\Model\Action
+ * @package Moehrenzahn\Toolkit\Model\Action
  */
 class TermMetaSave
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Model\Comment\MetaAccessor;
+use Moehrenzahn\Toolkit\Model\Comment\MetaAccessor;
 
 /**
  * Class CommentMeta
@@ -17,7 +17,7 @@ class CommentMeta
     private $metaAccessor;
 
     /**
-     * @var \Toolkit\Model\Comment\CommentMeta[]
+     * @var \Moehrenzahn\Toolkit\Model\Comment\CommentMeta[]
      */
     private $commentMeta;
 
@@ -37,7 +37,7 @@ class CommentMeta
      * @param string $slug
      * @param string $type
      * @param string|null $options
-     * @return \Toolkit\Model\Comment\CommentMeta
+     * @return \Moehrenzahn\Toolkit\Model\Comment\CommentMeta
      */
     public function add(
         string $title,
@@ -45,7 +45,7 @@ class CommentMeta
         string $type,
         $options = null
     ) {
-        $this->commentMeta[$slug] = new \Toolkit\Model\Comment\CommentMeta(
+        $this->commentMeta[$slug] = new \Moehrenzahn\Toolkit\Model\Comment\CommentMeta(
             $title,
             $slug,
             $type,
@@ -69,7 +69,7 @@ class CommentMeta
      * @return Model\Comment\CommentMeta
      * @throws \Exception
      */
-    public function getBySlug(string $slug): \Toolkit\Model\Comment\CommentMeta
+    public function getBySlug(string $slug): \Moehrenzahn\Toolkit\Model\Comment\CommentMeta
     {
         if (isset($this->commentMeta[$slug])) {
             return $this->commentMeta[$slug];

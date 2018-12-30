@@ -1,6 +1,6 @@
 <?php
 
-namespace Toolkit\Model\Comment;
+namespace Moehrenzahn\Toolkit\Model\Comment;
 
 /**
  * Class MetaAccessor

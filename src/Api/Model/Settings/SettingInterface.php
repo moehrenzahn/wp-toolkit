@@ -1,13 +1,13 @@
 <?php
 
-namespace Toolkit\Api\Model\Settings;
+namespace Moehrenzahn\Toolkit\Api\Model\Settings;
 
-use Toolkit\Block;
+use Moehrenzahn\Toolkit\Block;
 
 /**
  * Interface SettingInterface
  *
- * @package Toolkit\Api\Model\Settings
+ * @package Moehrenzahn\Toolkit\Api\Model\Settings
  */
 interface SettingInterface
 {

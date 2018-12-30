@@ -1,13 +1,13 @@
 <?php
 
-namespace Toolkit\Api;
+namespace Moehrenzahn\Toolkit\Api;
 
-use Toolkit\Block;
+use Moehrenzahn\Toolkit\Block;
 
 /**
  * Interface BlockInterface
  *
- * @package Toolkit\Api
+ * @package Moehrenzahn\Toolkit\Api
  */
 interface BlockInterface
 {

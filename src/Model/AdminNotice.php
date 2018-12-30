@@ -1,12 +1,12 @@
 <?php
-namespace Toolkit\Model;
+namespace Moehrenzahn\Toolkit\Model;
 
-use Toolkit\Loader;
+use Moehrenzahn\Toolkit\Loader;
 
 /**
  * Class AdminNotice
  *
- * @package Toolkit\Wordpress
+ * @package Moehrenzahn\Toolkit\Wordpress
  */
 class AdminNotice
 {

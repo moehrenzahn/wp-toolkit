@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit\Block\Post;
+namespace Moehrenzahn\Toolkit\Block\Post;
 
-use Toolkit\Block;
-use Toolkit\ImageSize;
-use Toolkit\Javascript;
-use Toolkit\Model\Post\PostPreference;
+use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\ImageSize;
+use Moehrenzahn\Toolkit\Javascript;
+use Moehrenzahn\Toolkit\Model\Post\PostPreference;
 
 /**
  * Class MetaBox

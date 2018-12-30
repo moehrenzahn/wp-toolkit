@@ -1,13 +1,13 @@
 <?php
 
-namespace Toolkit\Model\Post\Storage;
+namespace Moehrenzahn\Toolkit\Model\Post\Storage;
 
 /**
  * Class TagManager
  *
  * Add, remove and check for post tags.
  *
- * @package Toolkit\Model\Post\Storage
+ * @package Moehrenzahn\Toolkit\Model\Post\Storage
  */
 class TagManager
 {

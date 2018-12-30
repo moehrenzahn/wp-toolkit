@@ -1,8 +1,8 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Api\BlockInterface;
+use Moehrenzahn\Toolkit\Api\BlockInterface;
 
 /**
  * Class Shortcode
@@ -17,7 +17,7 @@ class Shortcode
     private $loader;
 
     /**
-     * @var \Toolkit\Model\Shortcode[]
+     * @var \Moehrenzahn\Toolkit\Model\Shortcode[]
      */
     private $models = [];
 
@@ -37,11 +37,11 @@ class Shortcode
      */
     public function add(string $shortcode, BlockInterface $block)
     {
-        $this->models[] = new \Toolkit\Model\Shortcode($this->loader, $shortcode, $block);
+        $this->models[] = new \Moehrenzahn\Toolkit\Model\Shortcode($this->loader, $shortcode, $block);
     }
 
     /**
-     * @return \Toolkit\Model\Shortcode[]
+     * @return \Moehrenzahn\Toolkit\Model\Shortcode[]
      */
     public function getShortcodes(): array
     {

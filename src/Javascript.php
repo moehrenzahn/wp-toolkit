@@ -1,6 +1,6 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
 /**
  * Class Javascript
@@ -10,7 +10,7 @@ namespace Toolkit;
 class Javascript
 {
     /**
-     * @var \Toolkit\Model\Javascript[]
+     * @var \Moehrenzahn\Toolkit\Model\Javascript[]
      */
     private $models = [];
 
@@ -22,11 +22,11 @@ class Javascript
      */
     public function add(string $slug, string $filePath, string $version = '', array $dependencies = [])
     {
-        $this->models[$slug] = new \Toolkit\Model\Javascript($slug, $filePath, $version, $dependencies);
+        $this->models[$slug] = new \Moehrenzahn\Toolkit\Model\Javascript($slug, $filePath, $version, $dependencies);
     }
 
     /**
-     * @return \Toolkit\Model\Javascript[]
+     * @return \Moehrenzahn\Toolkit\Model\Javascript[]
      */
     public function getScripts(): array
     {

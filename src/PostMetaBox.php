@@ -1,15 +1,15 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Block\BlockFactory;
-use Toolkit\Block\Post\MetaBox;
-use Toolkit\Helper\ObjectManager;
+use Moehrenzahn\Toolkit\Block\BlockFactory;
+use Moehrenzahn\Toolkit\Block\Post\MetaBox;
+use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
  * Class PostMetaBox
  *
- * @package Toolkit\PostMetaBox
+ * @package Moehrenzahn\Toolkit\PostMetaBox
  */
 class PostMetaBox
 {
@@ -24,7 +24,7 @@ class PostMetaBox
     private $objectManager;
 
     /**
-     * @var \Toolkit\Model\PostMetaBox[]
+     * @var \Moehrenzahn\Toolkit\Model\PostMetaBox[]
      */
     private $metaBoxes = [];
 
@@ -44,7 +44,7 @@ class PostMetaBox
      * @param string $title
      * @param string $slug
      * @param string $templatePath
-     * @param \Toolkit\Model\Post\PostPreference[] $postPreferences
+     * @param \Moehrenzahn\Toolkit\Model\Post\PostPreference[] $postPreferences
      * @return Model\PostMetaBox
      */
     public function add(
@@ -62,7 +62,7 @@ class PostMetaBox
             ]
         );
         $this->metaBoxes[$slug] = $this->objectManager->create(
-            \Toolkit\Model\PostMetaBox::class,
+            \Moehrenzahn\Toolkit\Model\PostMetaBox::class,
             [
                 'title' => $title,
                 'slug' => $slug,

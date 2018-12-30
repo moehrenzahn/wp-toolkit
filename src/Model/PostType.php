@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit\Model;
+namespace Moehrenzahn\Toolkit\Model;
 
 /**
  * Class PostType
  *
- * @package Toolkit\Model
+ * @package Moehrenzahn\Toolkit\Model
  */
 class PostType
 {

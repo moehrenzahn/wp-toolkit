@@ -1,7 +1,7 @@
 <?php
-namespace Toolkit\Customizer;
+namespace Moehrenzahn\Toolkit\Customizer;
 
-use Toolkit\Loader;
+use Moehrenzahn\Toolkit\Loader;
 
 /**
  * Class CustomLogo
@@ -9,7 +9,7 @@ use Toolkit\Loader;
 class CustomLogo
 {
     /**
-     * @var \Toolkit\Loader
+     * @var \Moehrenzahn\Toolkit\Loader
      */
     private $loader;
 

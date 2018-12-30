@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit\Api\Model\Settings;
+namespace Moehrenzahn\Toolkit\Api\Model\Settings;
 
 /**
  * Interface SectionInterface
  *
- * @package Toolkit\Api\Model\Settings
+ * @package Moehrenzahn\Toolkit\Api\Model\Settings
  */
 interface SectionInterface
 {

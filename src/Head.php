@@ -1,8 +1,8 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Block\BlockFactory;
+use Moehrenzahn\Toolkit\Block\BlockFactory;
 
 /**
  * Class Head

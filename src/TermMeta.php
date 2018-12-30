@@ -1,9 +1,9 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Block\Taxonomy\Meta;
-use Toolkit\Helper\ObjectManager;
+use Moehrenzahn\Toolkit\Block\Taxonomy\Meta;
+use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
  * Class TermMeta
@@ -34,7 +34,7 @@ class TermMeta
     private $objectManager;
 
     /**
-     * @var \Toolkit\Model\TermMeta[]
+     * @var \Moehrenzahn\Toolkit\Model\TermMeta[]
      */
     private $termMeta = [];
 
@@ -77,7 +77,7 @@ class TermMeta
         );
 
         $this->termMeta[$slug] = $this->objectManager->create(
-            \Toolkit\Model\TermMeta::class,
+            \Moehrenzahn\Toolkit\Model\TermMeta::class,
             ['block' => $block, 'type' => $type]
         );
 

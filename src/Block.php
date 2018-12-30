@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Api\BlockInterface;
-use Toolkit\Block\BlockFactory;
-use Toolkit\Helper\Browser;
-use Toolkit\Helper\Strings;
+use Moehrenzahn\Toolkit\Api\BlockInterface;
+use Moehrenzahn\Toolkit\Block\BlockFactory;
+use Moehrenzahn\Toolkit\Helper\Browser;
+use Moehrenzahn\Toolkit\Helper\Strings;
 
 /**
  * Class Block

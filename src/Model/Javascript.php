@@ -1,13 +1,13 @@
 <?php
 
-namespace Toolkit\Model;
+namespace Moehrenzahn\Toolkit\Model;
 
-use Toolkit\Helper\Strings;
+use Moehrenzahn\Toolkit\Helper\Strings;
 
 /**
  * Class Javascript
  *
- * @package Toolkit\Model
+ * @package Moehrenzahn\Toolkit\Model
  */
 class Javascript
 {

@@ -1,14 +1,14 @@
 <?php
-namespace Toolkit\Block;
+namespace Moehrenzahn\Toolkit\Block;
 
-use Toolkit\Api\BlockInterface;
-use Toolkit\Block;
-use Toolkit\Helper\ObjectManager;
+use Moehrenzahn\Toolkit\Api\BlockInterface;
+use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
  * Class BlockFactory
  *
- * @package Toolkit\Block
+ * @package Moehrenzahn\Toolkit\Block
  */
 class BlockFactory
 {

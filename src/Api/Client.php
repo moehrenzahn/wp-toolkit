@@ -1,34 +1,34 @@
 <?php
 
-namespace Toolkit\Api;
+namespace Moehrenzahn\Toolkit\Api;
 
-use Toolkit\AdminNotice;
-use Toolkit\AdminPage;
-use Toolkit\AjaxAction;
-use Toolkit\Block;
-use Toolkit\CommentMeta;
-use Toolkit\CommentMetaBox;
-use Toolkit\ConfigAccessor;
-use Toolkit\Filter;
-use Toolkit\Head;
-use Toolkit\Helper\ObjectManager;
-use Toolkit\ImageSize;
-use Toolkit\Javascript;
-use Toolkit\Loader;
-use Toolkit\PostAction;
-use Toolkit\PostMetaBox;
-use Toolkit\PostPreference;
-use Toolkit\PostType;
-use Toolkit\Shortcode;
-use Toolkit\Stylesheet;
-use Toolkit\TermMeta;
-use Toolkit\Transient;
-use Toolkit\User;
+use Moehrenzahn\Toolkit\AdminNotice;
+use Moehrenzahn\Toolkit\AdminPage;
+use Moehrenzahn\Toolkit\AjaxAction;
+use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\CommentMeta;
+use Moehrenzahn\Toolkit\CommentMetaBox;
+use Moehrenzahn\Toolkit\ConfigAccessor;
+use Moehrenzahn\Toolkit\Filter;
+use Moehrenzahn\Toolkit\Head;
+use Moehrenzahn\Toolkit\Helper\ObjectManager;
+use Moehrenzahn\Toolkit\ImageSize;
+use Moehrenzahn\Toolkit\Javascript;
+use Moehrenzahn\Toolkit\Loader;
+use Moehrenzahn\Toolkit\PostAction;
+use Moehrenzahn\Toolkit\PostMetaBox;
+use Moehrenzahn\Toolkit\PostPreference;
+use Moehrenzahn\Toolkit\PostType;
+use Moehrenzahn\Toolkit\Shortcode;
+use Moehrenzahn\Toolkit\Stylesheet;
+use Moehrenzahn\Toolkit\TermMeta;
+use Moehrenzahn\Toolkit\Transient;
+use Moehrenzahn\Toolkit\User;
 
 /**
  * Class Client
  *
- * @package Toolkit\Api
+ * @package Moehrenzahn\Toolkit\Api
  */
 class Client
 {

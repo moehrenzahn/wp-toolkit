@@ -1,8 +1,8 @@
 <?php
 
-namespace Toolkit\Model\Post;
+namespace Moehrenzahn\Toolkit\Model\Post;
 
-use Toolkit\Model\Post\Storage\StorageInterface;
+use Moehrenzahn\Toolkit\Model\Post\Storage\StorageInterface;
 
 /**
  * Class PostPreference

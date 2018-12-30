@@ -1,6 +1,6 @@
 <?php
 
-namespace Toolkit\Model\Post;
+namespace Moehrenzahn\Toolkit\Model\Post;
 
 /**
  * Generic Preference Item

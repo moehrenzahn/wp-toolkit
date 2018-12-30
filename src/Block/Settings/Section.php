@@ -1,16 +1,16 @@
 <?php
 
-namespace Toolkit\Block\Settings;
+namespace Moehrenzahn\Toolkit\Block\Settings;
 
-use Toolkit\Api\Model\Settings\SectionInterface;
-use Toolkit\Block;
-use Toolkit\ImageSize;
-use Toolkit\Javascript;
+use Moehrenzahn\Toolkit\Api\Model\Settings\SectionInterface;
+use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\ImageSize;
+use Moehrenzahn\Toolkit\Javascript;
 
 /**
  * Class Section
  *
- * @package Toolkit\Block\Settings
+ * @package Moehrenzahn\Toolkit\Block\Settings
  */
 class Section extends Block
 {

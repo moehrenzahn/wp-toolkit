@@ -1,9 +1,9 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Block\Comment\MetaBox;
-use Toolkit\Helper\ObjectManager;
+use Moehrenzahn\Toolkit\Block\Comment\MetaBox;
+use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
  * Class CommentMetaBox
@@ -18,7 +18,7 @@ class CommentMetaBox
     private $objectManager;
 
     /**
-     * @var \Toolkit\Model\CommentMetaBox[]
+     * @var \Moehrenzahn\Toolkit\Model\CommentMetaBox[]
      */
     private $metaBoxes;
 
@@ -35,7 +35,7 @@ class CommentMetaBox
     /**
      * @param string $slug
      * @param string $title
-     * @param \Toolkit\Model\Comment\CommentMeta[] $commentMeta
+     * @param \Moehrenzahn\Toolkit\Model\Comment\CommentMeta[] $commentMeta
      * @param string $templatePath
      * @return Model\CommentMetaBox
      */
@@ -44,13 +44,13 @@ class CommentMetaBox
         string $title,
         array $commentMeta,
         string $templatePath = 'Template/Comment/MetaBox'
-    ) : \Toolkit\Model\CommentMetaBox {
+    ) : \Moehrenzahn\Toolkit\Model\CommentMetaBox {
         $block = $this->objectManager->create(
             MetaBox::class,
             ['templatePath' => $templatePath, 'commentMeta' => $commentMeta]
         );
         $this->metaBoxes[$title] = $this->objectManager->create(
-            \Toolkit\Model\CommentMetaBox::class,
+            \Moehrenzahn\Toolkit\Model\CommentMetaBox::class,
             [
                 'slug' => $slug,
                 'title' => $title,

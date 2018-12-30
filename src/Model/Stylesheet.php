@@ -1,8 +1,8 @@
 <?php
 
-namespace Toolkit\Model;
+namespace Moehrenzahn\Toolkit\Model;
 
-use Toolkit\Helper\Strings;
+use Moehrenzahn\Toolkit\Helper\Strings;
 
 /**
  * Class Stylesheet

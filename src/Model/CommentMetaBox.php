@@ -1,14 +1,14 @@
 <?php
-namespace Toolkit\Model;
+namespace Moehrenzahn\Toolkit\Model;
 
-use Toolkit\Loader;
-use Toolkit\Model\Comment\MetaAccessor;
-use Toolkit\Block\Comment\MetaBox as Block;
+use Moehrenzahn\Toolkit\Loader;
+use Moehrenzahn\Toolkit\Model\Comment\MetaAccessor;
+use Moehrenzahn\Toolkit\Block\Comment\MetaBox as Block;
 
 /**
  * Class CommentMetaBox
  *
- * @package Toolkit\Meta
+ * @package Moehrenzahn\Toolkit\Meta
  */
 class CommentMetaBox
 {

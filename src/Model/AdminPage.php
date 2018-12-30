@@ -1,9 +1,9 @@
 <?php
 
-namespace Toolkit\Model;
+namespace Moehrenzahn\Toolkit\Model;
 
-use Toolkit\Block;
-use Toolkit\Loader;
+use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\Loader;
 
 /**
  * Generic Admin Page in Wordpress Dashboard

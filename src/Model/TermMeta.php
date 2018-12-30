@@ -1,10 +1,10 @@
 <?php
 
-namespace Toolkit\Model;
+namespace Moehrenzahn\Toolkit\Model;
 
-use Toolkit\Block\Taxonomy\Meta;
-use Toolkit\Loader;
-use Toolkit\Model\Action\TermMetaSave;
+use Moehrenzahn\Toolkit\Block\Taxonomy\Meta;
+use Moehrenzahn\Toolkit\Loader;
+use Moehrenzahn\Toolkit\Model\Action\TermMetaSave;
 
 /**
  * Class TermMeta
@@ -16,7 +16,7 @@ use Toolkit\Model\Action\TermMetaSave;
  * 'created_$type' => 'save'
  * '$type_add_form_fields' => 'addField'
  *
- * @package Toolkit\Model
+ * @package Moehrenzahn\Toolkit\Model
  */
 class TermMeta
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
 /**
  * Class AdminNotice
  *
- * @package Toolkit\Wordpress
+ * @package Moehrenzahn\Toolkit\Wordpress
  */
 class AdminNotice
 {
@@ -20,16 +20,16 @@ class AdminNotice
     private $loader;
 
     /**
-     * @var \Toolkit\Model\AdminNotice[]
+     * @var \Moehrenzahn\Toolkit\Model\AdminNotice[]
      */
     private $notices = [];
 
     /**
      * AdminNotice constructor.
      *
-     * @param \Toolkit\Loader $loader
+     * @param \Moehrenzahn\Toolkit\Loader $loader
      */
-    public function __construct(\Toolkit\Loader $loader)
+    public function __construct(\Moehrenzahn\Toolkit\Loader $loader)
     {
         $this->loader = $loader;
     }
@@ -42,7 +42,7 @@ class AdminNotice
      */
     public function add(string $level, string $text, string $page, bool $dismissible = false)
     {
-        $this->notices[] = new \Toolkit\Model\AdminNotice(
+        $this->notices[] = new \Moehrenzahn\Toolkit\Model\AdminNotice(
             $this->loader,
             $level,
             $text,

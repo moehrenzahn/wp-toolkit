@@ -1,9 +1,9 @@
 <?php
 
-namespace Toolkit;
+namespace Moehrenzahn\Toolkit;
 
-use Toolkit\Model\Post\Storage\Meta;
-use Toolkit\Model\Post\Storage\Tag;
+use Moehrenzahn\Toolkit\Model\Post\Storage\Meta;
+use Moehrenzahn\Toolkit\Model\Post\Storage\Tag;
 
 /**
  * Class PostPreference
@@ -26,7 +26,7 @@ class PostPreference
     private $tagStorage;
 
     /**
-     * @var \Toolkit\Model\Post\PostPreference[]
+     * @var \Moehrenzahn\Toolkit\Model\Post\PostPreference[]
      */
     private $postPreferences;
 
@@ -49,16 +49,16 @@ class PostPreference
      * @param string $slug
      * @param string $title
      * @param string $description
-     * @param string $type The input type for rendering, see \Toolkit\Model\Post\PostPreference
+     * @param string $type The input type for rendering, see \Moehrenzahn\Toolkit\Model\Post\PostPreference
      * @param string $storageType The storage type, 'meta' or 'tag'
      * @param string|null $options
-     * @return \Toolkit\Model\Post\PostPreference
+     * @return \Moehrenzahn\Toolkit\Model\Post\PostPreference
      */
     public function add(
         string $slug,
         string $title,
         string $description = '',
-        string $type = \Toolkit\Model\Post\PostPreference::TYPE_BOOLEAN,
+        string $type = \Moehrenzahn\Toolkit\Model\Post\PostPreference::TYPE_BOOLEAN,
         string $storageType = self::TYPE_META,
         $options = null
     ) {
@@ -68,7 +68,7 @@ class PostPreference
             $storage = $this->metaStorage;
         }
 
-        $this->postPreferences[$slug] = new \Toolkit\Model\Post\PostPreference(
+        $this->postPreferences[$slug] = new \Moehrenzahn\Toolkit\Model\Post\PostPreference(
             $title,
             $slug,
             $description,
@@ -93,7 +93,7 @@ class PostPreference
      * @return Model\Post\PostPreference
      * @throws \Exception
      */
-    public function getBySlug(string $slug): \Toolkit\Model\Post\PostPreference
+    public function getBySlug(string $slug): \Moehrenzahn\Toolkit\Model\Post\PostPreference
     {
         if (isset($this->postPreferences[$slug])) {
             return $this->postPreferences[$slug];

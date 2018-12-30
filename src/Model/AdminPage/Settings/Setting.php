@@ -1,15 +1,15 @@
 <?php
 
-namespace Toolkit\Model\AdminPage\Settings;
+namespace Moehrenzahn\Toolkit\Model\AdminPage\Settings;
 
-use Toolkit\ConfigAccessor;
-use \Toolkit\Block\Settings\Setting as SettingBlock;
-use Toolkit\Api\Model\Settings\SettingInterface;
+use Moehrenzahn\Toolkit\ConfigAccessor;
+use \Moehrenzahn\Toolkit\Block\Settings\Setting as SettingBlock;
+use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
 
 /**
  * Class Setting
  *
- * @package Toolkit\Model\AdminPage\Settings
+ * @package Moehrenzahn\Toolkit\Model\AdminPage\Settings
  */
 class Setting implements SettingInterface
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Toolkit\Model;
+namespace Moehrenzahn\Toolkit\Model;
 
-use Toolkit\Loader;
+use Moehrenzahn\Toolkit\Loader;
 
 /**
  * Class InlineStyle
  *
- * @package Toolkit\Model
+ * @package Moehrenzahn\Toolkit\Model
  */
 class InlineStyle
 {
