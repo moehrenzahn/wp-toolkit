@@ -1,7 +1,8 @@
-<?php /** @var \Moehrenzahn\Toolkit\Block\Settings\Setting $block */ ?>
 <?php
+/** @var \Moehrenzahn\Toolkit\Block\Settings\Setting $block */
 $setting = $block->getSetting();
 $imageUrl = wp_get_attachment_url($setting->getValue()) ?? '';
+wp_enqueue_media();
 ?>
 <input type='hidden'
        name='<?php echo $setting->getId(); ?>'
@@ -11,12 +12,13 @@ $imageUrl = wp_get_attachment_url($setting->getValue()) ?? '';
 <label>
     <input id="<?php echo $setting->getId(); ?>-button"
            type="image"
-           width="100"
-           height="100"
-           alt="<?php echo $setting->getTitle(); ?>"
+           height="150"
+           width="200"
+           style="background: lightgray;object-fit: cover"
+           alt="Click here to select media"
            src='<?php echo $imageUrl; ?>'/>
 </label>
-<input id="<?php echo $setting->getId(); ?>-remove" type="button" class="button" value="Leeren"/>
+<input id="<?php echo $setting->getId(); ?>-remove" type="button" class="button" value="Remove"/>
 <p class="description">
     <?php echo $setting->getDescription(); ?>
 </p>

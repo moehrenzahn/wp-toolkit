@@ -4,6 +4,7 @@
 </label>
 <div>
     <textarea rows="10"
+              style="width: 100%"
               name="<?php echo $setting->getId(); ?>"
               id="<?php echo $setting->getId(); ?>"
     ><?php echo esc_textarea($setting->getValue($block->getPost()->ID)); ?></textarea>

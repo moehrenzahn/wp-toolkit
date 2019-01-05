@@ -14,11 +14,12 @@ wp_enqueue_media();
         <label  for="<?php echo $block->getSlug(); ?>">
             <input id="<?php echo $block->getSlug(); ?>-button"
                    type="image"
-                   width="100"
-                   style="min-height:50px;background: lightgray"
-                   alt="<?php echo $block->getTitle(); ?>"
+                   height="150"
+                   width="200"
+                   style="background: lightgray;object-fit: cover"
+                   alt="Click here to select media"
                    src='<?php echo $imageUrl; ?>'/>
-            <input id="<?php echo $block->getSlug(); ?>-remove" type="button" class="button" value="Entfernen"/>
+            <input id="<?php echo $block->getSlug(); ?>-remove" type="button" class="button" value="Remove"/>
             <?php echo $block->getDescription(); ?>
         </label>
     </td>

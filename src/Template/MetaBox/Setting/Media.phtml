@@ -1,4 +1,6 @@
 <?php
+/** @var \Moehrenzahn\Toolkit\Api\BlockInterface $block */
+/** @var \Moehrenzahn\Toolkit\Model\Post\PostPreference $setting */
 $setting = $block->getData('preference');
 $imageUrl = wp_get_attachment_url($setting->getValue($block->getPost()->ID)) ?? '';
 wp_enqueue_media();
@@ -14,14 +16,14 @@ wp_enqueue_media();
 <div>
     <input id="<?php echo $setting->getId(); ?>-button"
            type="image"
-           width="100"
-           style="min-height:50px;background: lightgray"
-           alt="<?php echo $setting->getTitle(); ?>"
+           height="150"
+           style="width: 100%;background:lightgray;object-fit: cover"
+           alt="Click here to select media"
            src='<?php echo $imageUrl; ?>'/>
-    <input id="<?php echo $setting->getId(); ?>-remove" type="button" class="button" value="Entfernen"/>
 </div>
 <p class="description">
     <?php echo $setting->getDescription(); ?>
+    <a href="#" id="<?php echo $setting->getId(); ?>-remove">Remove</a>
 </p>
 
 <script>
