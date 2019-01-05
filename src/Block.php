@@ -284,7 +284,8 @@ class Block implements BlockInterface
      */
     private function buildTemplatePath(string $path)
     {
-        if (!Strings::contains($path, '.')) {
+        $pathParts = explode('/', $path);
+        if (!Strings::contains(array_pop($pathParts), '.')) {
             $path .= ".$this->defaultTemplateExtension";
         }
 
