@@ -98,12 +98,12 @@ interface BlockInterface
     public function renderFooter(string $name = null);
 
     /**
-     * @return \WP_Post
+     * @return \WP_Post|null
      */
-    public function getPost(): \WP_Post;
+    public function getPost();
 
     /**
-     * @param null|\WP_Post $post
+     * @param \WP_Post $post
      */
     public function setPost(\WP_Post $post);
 
