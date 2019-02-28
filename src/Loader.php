@@ -79,9 +79,9 @@ class Loader
     {
         foreach ($this->filters as $hook) {
             if (!$hook['component']) {
-                add_filter($hook['hook'], $hook['callback']);
+                add_filter($hook['hook'], $hook['callback'], 10, 10);
             } else {
-                add_filter($hook['hook'], [$hook['component'], $hook['callback']]);
+                add_filter($hook['hook'], [$hook['component'], $hook['callback']], 10, 10);
             }
         }
 
@@ -95,9 +95,9 @@ class Loader
 
         foreach ($this->actions as $hook) {
             if (!$hook['component']) {
-                add_action($hook['hook'], $hook['callback']);
+                add_action($hook['hook'], $hook['callback'], 10, 10);
             } else {
-                add_action($hook['hook'], [$hook['component'], $hook['callback']]);
+                add_action($hook['hook'], [$hook['component'], $hook['callback']], 10, 10);
             }
         }
     }
