@@ -15,6 +15,7 @@ class PostPreference implements PreferenceInterface
     const TYPE_TEXTAREA = 'Textarea';
     const TYPE_BOOLEAN = 'Boolean';
     const TYPE_SELECT = 'Select';
+    const TYPE_RADIO = 'Radio';
     const TYPE_MEDIA = 'Media';
 
     /**
