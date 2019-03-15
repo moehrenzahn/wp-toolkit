@@ -10,6 +10,11 @@ namespace Moehrenzahn\Toolkit\Helper;
 class Dom
 {
     /**
+     * @var int[][]    Name of the DOM => [Target positions of injected items]
+     */
+    private $injectedItems;
+
+    /**
      * @param string $html
      * @return \DOMDocument
      */
@@ -47,18 +52,37 @@ class Dom
     }
 
     /**
-     * Insert $html string into a $targetDom at the specified node $position
+     * Insert $html string into a $targetDom at the specified node $position. Will increase $position
+     * by 3 if there previously was an item added to the same index.
      *
      * @param \DOMDocument $targetDom
      * @param string $html
      * @param int $position
      */
-    public function insertHtmlAtPosition(\DOMDocument $targetDom, string $html, int $position)
+    public function insertHtmlAtPosition(\DOMDocument $targetDom, string $html, int $position = 3)
     {
+
+        $domId = $this->generateDomId($targetDom);
+        if (isset($this->injectedItems[$domId]) && in_array($position, $this->injectedItems[$domId])) {
+            $position = $position + 3;
+        }
         $htmlDom = $this->domFromHtml($html);
         $targetDom->documentElement->insertBefore(
             $targetDom->importNode($htmlDom->documentElement, true),
             $targetDom->documentElement->childNodes->item($position)
         );
+
+        $this->injectedItems[$domId][] = $position;
+    }
+
+    /**
+     * Generate an ID for a DOMDocument element
+     *
+     * @param \DOMDocument $dom
+     * @return string
+     */
+    private function generateDomId(\DOMDocument $dom): string
+    {
+        return md5(substr($dom->textContent, 0, 25));
     }
 }
