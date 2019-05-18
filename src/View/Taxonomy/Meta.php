@@ -1,4 +1,5 @@
 <?php
+
 namespace Moehrenzahn\Toolkit\View\Taxonomy;
 
 use Moehrenzahn\Toolkit\View;

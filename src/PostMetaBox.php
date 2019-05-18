@@ -2,7 +2,6 @@
 
 namespace Moehrenzahn\Toolkit;
 
-use Moehrenzahn\Toolkit\View\ViewFactory;
 use Moehrenzahn\Toolkit\View\Post\MetaBox;
 use Moehrenzahn\Toolkit\Helper\ObjectManager;
 

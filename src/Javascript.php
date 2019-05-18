@@ -20,9 +20,18 @@ class Javascript
      * @param string $version
      * @param array $dependencies
      */
-    public function add(string $slug, string $filePath, string $version = '', array $dependencies = [])
-    {
-        $this->models[$slug] = new \Moehrenzahn\Toolkit\Model\Javascript($slug, $filePath, $version, $dependencies);
+    public function add(
+        string $slug,
+        string $filePath,
+        string $version = '',
+        array $dependencies = []
+    ) {
+        $this->models[$slug] = new \Moehrenzahn\Toolkit\Model\Javascript(
+            $slug,
+            $filePath,
+            $version,
+            $dependencies
+        );
     }
 
     /**

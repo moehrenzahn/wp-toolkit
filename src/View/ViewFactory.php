@@ -1,4 +1,5 @@
 <?php
+
 namespace Moehrenzahn\Toolkit\View;
 
 use Moehrenzahn\Toolkit\Api\ViewInterface;

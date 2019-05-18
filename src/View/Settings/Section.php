@@ -4,8 +4,6 @@ namespace Moehrenzahn\Toolkit\View\Settings;
 
 use Moehrenzahn\Toolkit\Api\Model\Settings\SectionInterface;
 use Moehrenzahn\Toolkit\View;
-use Moehrenzahn\Toolkit\ImageSize;
-use Moehrenzahn\Toolkit\Javascript;
 
 /**
  * Class Section

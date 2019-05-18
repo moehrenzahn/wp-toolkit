@@ -1,4 +1,5 @@
 <?php
+
 namespace Moehrenzahn\Toolkit\Model\Action;
 
 use Moehrenzahn\Toolkit\Api\ActionInterface;

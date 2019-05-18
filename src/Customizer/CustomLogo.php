@@ -1,4 +1,5 @@
 <?php
+
 namespace Moehrenzahn\Toolkit\Customizer;
 
 use Moehrenzahn\Toolkit\Loader;

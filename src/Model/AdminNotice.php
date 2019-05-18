@@ -1,4 +1,5 @@
 <?php
+
 namespace Moehrenzahn\Toolkit\Model;
 
 use Moehrenzahn\Toolkit\Loader;

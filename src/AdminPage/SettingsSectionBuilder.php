@@ -43,7 +43,7 @@ class SettingsSectionBuilder
      */
     public function __construct(ViewFactory $viewFactory, SettingBuilder $settingBuilder)
     {
-        $this->toolkit = $viewFactory;
+        $this->viewFactory = $viewFactory;
         $this->settingBuilder = $settingBuilder;
     }
 
@@ -76,11 +76,17 @@ class SettingsSectionBuilder
         string $description = ''
     ) {
         /** @var Section $view */
-        $view = $this->toolkit->create(
+        $view = $this->viewFactory->create(
             TOOLKIT_TEMPLATE_FOLDER . Section::DEFAULT_TEMPLATE,
             Section::class
         );
-        $section = new \Moehrenzahn\Toolkit\Model\AdminPage\Settings\Section($id, $title, $this->settings, $view, $description);
+        $section = new \Moehrenzahn\Toolkit\Model\AdminPage\Settings\Section(
+            $id,
+            $title,
+            $this->settings,
+            $view,
+            $description
+        );
 
         $this->resetData();
 

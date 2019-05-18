@@ -3,9 +3,11 @@
 namespace Moehrenzahn\Toolkit\Model\Post;
 
 /**
- * Generic Preference Item
+ * Interface PreferenceInterface
  *
- * @package Eule\Model\Preference
+ * Generic Preference Item.
+ *
+ * @package Moehrenzahn\Toolkit\Model\Post
  */
 interface PreferenceInterface
 {
