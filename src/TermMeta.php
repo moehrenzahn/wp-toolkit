@@ -2,7 +2,7 @@
 
 namespace Moehrenzahn\Toolkit;
 
-use Moehrenzahn\Toolkit\Block\Taxonomy\Meta;
+use Moehrenzahn\Toolkit\View\Taxonomy\Meta;
 use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
@@ -65,7 +65,7 @@ class TermMeta
         array $options = [],
         string $description = ''
     ) {
-        $block = $this->objectManager->create(
+        $view = $this->objectManager->create(
             Meta::class,
             [
                 'templatePath' => $this->getTemplateFor($inputType),
@@ -78,7 +78,7 @@ class TermMeta
 
         $this->termMeta[$slug] = $this->objectManager->create(
             \Moehrenzahn\Toolkit\Model\TermMeta::class,
-            ['block' => $block, 'type' => $type]
+            ['view' => $view, 'type' => $type]
         );
 
         return $this->termMeta[$slug];

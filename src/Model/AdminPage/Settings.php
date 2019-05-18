@@ -5,7 +5,7 @@ namespace Moehrenzahn\Toolkit\Model\AdminPage;
 use Moehrenzahn\Toolkit\Api\Model\Settings\SectionInterface;
 use Moehrenzahn\Toolkit\Loader;
 use Moehrenzahn\Toolkit\Model\AdminPage;
-use Moehrenzahn\Toolkit\Block\Settings as SettingsBlock;
+use Moehrenzahn\Toolkit\View\Settings as SettingsView;
 
 /**
  * Class Settings
@@ -25,21 +25,21 @@ class Settings extends AdminPage
      * Settings constructor.
      *
      * @param Loader $loader
-     * @param SettingsBlock $settingsBlock
+     * @param SettingsView $settingsView
      * @param string $title
      * @param string $slug
      * @param SectionInterface[] $sections
      */
     public function __construct(
         Loader $loader,
-        SettingsBlock $settingsBlock,
+        SettingsView $settingsView,
         string $title,
         string $slug,
         array $sections
     ) {
         $this->sections = $sections;
 
-        parent::__construct($loader, $title, $slug, '', 0, $settingsBlock);
+        parent::__construct($loader, $title, $slug, '', 0, $settingsView);
     }
 
     public function register()
@@ -48,14 +48,14 @@ class Settings extends AdminPage
             add_settings_section(
                 $section->getId(),
                 $section->getTitle(),
-                [$section->block, 'renderTemplate'],
+                [$section->view, 'renderTemplate'],
                 $this->slug
             );
             foreach ($section->getSettings() as $setting) {
                 add_settings_field(
                     $setting->getId(),
                     $setting->getTitle(),
-                    [$setting->getBlock(), 'renderTemplate'],
+                    [$setting->getView(), 'renderTemplate'],
                     $this->slug,
                     $section->getId()
                 );
@@ -71,7 +71,7 @@ class Settings extends AdminPage
             $this->title,
             "manage_options",
             $this->slug,
-            [$this->block, 'renderTemplate']
+            [$this->view, 'renderTemplate']
         );
     }
 }

@@ -2,7 +2,7 @@
 namespace Moehrenzahn\Toolkit\Model\Action;
 
 use Moehrenzahn\Toolkit\Api\ActionInterface;
-use Moehrenzahn\Toolkit\Api\BlockInterface;
+use Moehrenzahn\Toolkit\Api\ViewInterface;
 use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
@@ -32,14 +32,14 @@ class TemplateAjax implements ActionInterface
      */
     public function doAction(array $request)
     {
-        /** @var BlockInterface $block */
-        $block = $this->objectManager->create(
-            stripslashes($request['blockClass']),
+        /** @var ViewInterface $view */
+        $view = $this->objectManager->create(
+            stripslashes($request['viewClass']),
             [
                 'templatePath' => $request['templatePath'],
                 'post' => get_post($request['postId']),
             ]
         );
-        $block->renderTemplate();
+        $view->renderTemplate();
     }
 }

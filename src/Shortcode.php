@@ -2,7 +2,7 @@
 
 namespace Moehrenzahn\Toolkit;
 
-use Moehrenzahn\Toolkit\Api\BlockInterface;
+use Moehrenzahn\Toolkit\Api\ViewInterface;
 
 /**
  * Class Shortcode
@@ -33,11 +33,11 @@ class Shortcode
 
     /**
      * @param string $shortcode
-     * @param BlockInterface $block
+     * @param ViewInterface $view
      */
-    public function add(string $shortcode, BlockInterface $block)
+    public function add(string $shortcode, ViewInterface $view)
     {
-        $this->models[] = new \Moehrenzahn\Toolkit\Model\Shortcode($this->loader, $shortcode, $block);
+        $this->models[] = new \Moehrenzahn\Toolkit\Model\Shortcode($this->loader, $shortcode, $view);
     }
 
     /**

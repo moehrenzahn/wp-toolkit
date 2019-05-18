@@ -3,7 +3,7 @@
 namespace Moehrenzahn\Toolkit\Model\AdminPage\Settings;
 
 use Moehrenzahn\Toolkit\ConfigAccessor;
-use \Moehrenzahn\Toolkit\Block\Settings\Setting as SettingBlock;
+use \Moehrenzahn\Toolkit\View\Settings\Setting as SettingView;
 use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
 
 /**
@@ -39,9 +39,9 @@ class Setting implements SettingInterface
     private $options;
 
     /**
-     * @var SettingBlock
+     * @var SettingView
      */
-    private $block;
+    private $view;
 
     /**
      * Setting constructor.
@@ -51,7 +51,7 @@ class Setting implements SettingInterface
      * @param $title
      * @param $description
      * @param string[] $options
-     * @param SettingBlock $block
+     * @param SettingView $view
      */
     public function __construct(
         ConfigAccessor $configAccessor,
@@ -59,15 +59,15 @@ class Setting implements SettingInterface
         $title,
         $description,
         array $options,
-        SettingBlock $block
+        SettingView $view
     ) {
         $this->configAccessor = $configAccessor;
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->options = $options;
-        $this->block = $block;
-        $this->block->setSetting($this);
+        $this->view = $view;
+        $this->view->setSetting($this);
     }
 
     /**
@@ -111,10 +111,10 @@ class Setting implements SettingInterface
     }
 
     /**
-     * @return SettingBlock
+     * @return SettingView
      */
-    public function getBlock(): SettingBlock
+    public function getView(): SettingView
     {
-        return $this->block;
+        return $this->view;
     }
 }

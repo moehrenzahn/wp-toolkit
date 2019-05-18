@@ -1,15 +1,15 @@
 <?php
-/** @var \Moehrenzahn\Toolkit\Block\Taxonomy\Meta $block */
+/** @var \Moehrenzahn\Toolkit\View\Taxonomy\Meta $view */
 ?>
 <tr class="form-field">
-    <th><?php echo $block->getTitle(); ?></th>
+    <th><?php echo $view->getTitle(); ?></th>
     <td>
-        <label  for="<?php echo $block->getSlug(); ?>">
-            <input name="<?php echo $block->getSlug(); ?>"
+        <label  for="<?php echo $view->getSlug(); ?>">
+            <input name="<?php echo $view->getSlug(); ?>"
                    type="text"
-                   id="<?php echo $block->getSlug(); ?>"
-                   value="<?php echo $block->getValue(); ?>">
-            <?php echo $block->getDescription(); ?>
+                   id="<?php echo $view->getSlug(); ?>"
+                   value="<?php echo $view->getValue(); ?>">
+            <?php echo $view->getDescription(); ?>
         </label>
     </td>
 </tr>

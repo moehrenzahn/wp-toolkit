@@ -1,16 +1,16 @@
 <?php
-namespace Moehrenzahn\Toolkit\Block;
+namespace Moehrenzahn\Toolkit\View;
 
-use Moehrenzahn\Toolkit\Api\BlockInterface;
-use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\Api\ViewInterface;
+use Moehrenzahn\Toolkit\View;
 use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
- * Class BlockFactory
+ * Class ViewFactory
  *
- * @package Moehrenzahn\Toolkit\Block
+ * @package Moehrenzahn\Toolkit\View
  */
-class BlockFactory
+class ViewFactory
 {
     /**
      * @var ObjectManager
@@ -18,7 +18,7 @@ class BlockFactory
     private $objectManager;
 
     /**
-     * BlockFactory constructor.
+     * ViewFactory constructor.
      *
      * @param ObjectManager $objectManager
      */
@@ -28,15 +28,15 @@ class BlockFactory
     }
 
     /**
-     * Returns a new Block instance
+     * Returns a new View instance
      *
      * @param string $templatePath
-     * @param string $blockClass
+     * @param string $viewClass
      * @param \WP_Post|null $post
      * @param mixed[] $data
-     * @return BlockInterface|false
+     * @return ViewInterface|false
      */
-    public function create($templatePath = '', $blockClass = Block::class, $post = null, $data = []): BlockInterface
+    public function create($templatePath = '', $viewClass = View::class, $post = null, $data = []): ViewInterface
     {
         $params = [
             'templatePath' => $templatePath,
@@ -46,7 +46,7 @@ class BlockFactory
 
         try {
             return $this->objectManager->create(
-                $blockClass,
+                $viewClass,
                 $params
             );
         } catch (\Exception $exception) {

@@ -3,8 +3,8 @@
 namespace Moehrenzahn\Toolkit\AdminPage;
 
 use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
-use Moehrenzahn\Toolkit\Block\BlockFactory;
-use Moehrenzahn\Toolkit\Block\Settings\Section;
+use Moehrenzahn\Toolkit\View\ViewFactory;
+use Moehrenzahn\Toolkit\View\Settings\Section;
 
 /**
  * Class SettingsSectionBuilder
@@ -21,9 +21,9 @@ class SettingsSectionBuilder
     const SETTING_TYPE_TEXTAREA = 'Textarea';
 
     /**
-     * @var BlockFactory
+     * @var ViewFactory
      */
-    private $blockFactory;
+    private $viewFactory;
 
     /**
      * @var SettingBuilder
@@ -38,12 +38,12 @@ class SettingsSectionBuilder
     /**
      * SettingsSectionBuilder constructor.
      *
-     * @param BlockFactory $blockFactory
+     * @param ViewFactory $viewFactory
      * @param SettingBuilder $settingBuilder
      */
-    public function __construct(BlockFactory $blockFactory, SettingBuilder $settingBuilder)
+    public function __construct(ViewFactory $viewFactory, SettingBuilder $settingBuilder)
     {
-        $this->toolkit = $blockFactory;
+        $this->toolkit = $viewFactory;
         $this->settingBuilder = $settingBuilder;
     }
 
@@ -75,12 +75,12 @@ class SettingsSectionBuilder
         string $title,
         string $description = ''
     ) {
-        /** @var Section $block */
-        $block = $this->toolkit->create(
+        /** @var Section $view */
+        $view = $this->toolkit->create(
             TOOLKIT_TEMPLATE_FOLDER . Section::DEFAULT_TEMPLATE,
             Section::class
         );
-        $section = new \Moehrenzahn\Toolkit\Model\AdminPage\Settings\Section($id, $title, $this->settings, $block, $description);
+        $section = new \Moehrenzahn\Toolkit\Model\AdminPage\Settings\Section($id, $title, $this->settings, $view, $description);
 
         $this->resetData();
 

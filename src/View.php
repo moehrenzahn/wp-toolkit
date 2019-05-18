@@ -2,21 +2,20 @@
 
 namespace Moehrenzahn\Toolkit;
 
-use Moehrenzahn\Toolkit\Api\BlockInterface;
-use Moehrenzahn\Toolkit\Block\BlockFactory;
+use Moehrenzahn\Toolkit\Api\ViewInterface;
+use Moehrenzahn\Toolkit\View\ViewFactory;
 use Moehrenzahn\Toolkit\Helper\Browser;
 use Moehrenzahn\Toolkit\Helper\Request;
 use Moehrenzahn\Toolkit\Helper\Strings;
-use Moehrenzahn\Toolkit\Model\Action\TemplateAjax;
 
 /**
- * Class Block
+ * Class View
  *
- * Generic block class for template management.
+ * Generic view class for template management.
  *
  * @package Toolkit
  */
-class Block implements BlockInterface
+class View implements ViewInterface
 {
     /**
      * @var string
@@ -34,9 +33,9 @@ class Block implements BlockInterface
     private $imageSize;
 
     /**
-     * @var BlockFactory
+     * @var ViewFactory
      */
-    private $blockFactory;
+    private $viewFactory;
 
     /**
      * @var \WP_Post|null
@@ -54,11 +53,11 @@ class Block implements BlockInterface
     private $defaultTemplateExtension = 'phtml';
 
     /**
-     * Block constructor.
+     * View constructor.
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
-     * @param BlockFactory $blockFactory
+     * @param ViewFactory $viewFactory
      * @param string $templatePath The path of a template file, relative to the composer project root.
      * @param \WP_Post|null $post
      * @param mixed[] $data
@@ -66,14 +65,14 @@ class Block implements BlockInterface
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
-        BlockFactory $blockFactory,
+        ViewFactory $viewFactory,
         string $templatePath = '',
         \WP_Post $post = null,
         array $data = []
     ) {
         $this->javascript = $javascript;
         $this->imageSize = $imageSize;
-        $this->blockFactory = $blockFactory;
+        $this->viewFactory = $viewFactory;
         $this->post = $post;
         $this->data = $data;
         if ($templatePath) {
@@ -95,7 +94,7 @@ class Block implements BlockInterface
             return;
         }
 
-        $block = $this; // make the block instance avaliable as $block in the template
+        $view = $this; // make the view instance avaliable as $view in the template
         require($this->templatePath);
     }
 
@@ -115,7 +114,7 @@ class Block implements BlockInterface
     }
 
     /**
-     * Retrieve block template HTML
+     * Retrieve view template HTML
      *
      * @return string
      */
@@ -161,11 +160,11 @@ class Block implements BlockInterface
             $this->post = $postObject;
             $post = $postObject;
         }
-        /** @deprecated Use $block->getData to read data in templates. */
+        /** @deprecated Use $view->getData to read data in templates. */
         if ($data) {
             $this->data = $data;
         }
-        $block = $this; // make the block instance avaliable as $block.
+        $view = $this; // make the view instance avaliable as $view.
         require($this->buildTemplatePath($path));
     }
 
@@ -174,21 +173,21 @@ class Block implements BlockInterface
      * @param string $placeholder
      * @param \WP_Post|null $postObject
      * @param mixed[] $data
-     * @param string $blockClass
+     * @param string $viewClass
      */
     public function renderLazyPartial(
         string $path,
         string $placeholder,
         $postObject = null,
         $data = [],
-        $blockClass = ''
+        $viewClass = ''
     ) {
-        $blockClass = $blockClass ?: static::class;
+        $viewClass = $viewClass ?: static::class;
 
         if (Browser::isInternetExplorer()) {
-            if ($blockClass !== static::class) {
-                $block = $this->blockFactory->create('', $blockClass);
-                $block->renderPartial($path, $postObject, $data);
+            if ($viewClass !== static::class) {
+                $view = $this->viewFactory->create('', $viewClass);
+                $view->renderPartial($path, $postObject, $data);
             } else {
                 $this->renderPartial($path, $postObject, $data);
             }
@@ -209,7 +208,7 @@ class Block implements BlockInterface
 
         $data['template'] = $this->buildTemplatePath($path);
         $data['placeholder'] = $this->buildTemplatePath($placeholder);
-        $data['blockClass'] = $blockClass;
+        $data['viewClass'] = $viewClass;
         $data['postId'] = $postObject->ID ?? 0;
 
         $this->renderPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyPartial', $postObject, $data);

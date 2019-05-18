@@ -1,26 +1,26 @@
 <?php
-/** @var \Moehrenzahn\Toolkit\Block\Taxonomy\Meta $block */
-$imageUrl = wp_get_attachment_url($block->getValue() ?? '');
+/** @var \Moehrenzahn\Toolkit\View\Taxonomy\Meta $view */
+$imageUrl = wp_get_attachment_url($view->getValue() ?? '');
 wp_enqueue_media();
 ?>
 <input type='hidden'
-       name='<?php echo $block->getSlug(); ?>'
-       id='<?php echo $block->getSlug(); ?>'
-       value='<?php echo $block->getValue(); ?>'>
+       name='<?php echo $view->getSlug(); ?>'
+       id='<?php echo $view->getSlug(); ?>'
+       value='<?php echo $view->getValue(); ?>'>
 
 <tr class="form-field">
-    <th><?php echo $block->getTitle(); ?></th>
+    <th><?php echo $view->getTitle(); ?></th>
     <td>
-        <label  for="<?php echo $block->getSlug(); ?>">
-            <input id="<?php echo $block->getSlug(); ?>-button"
+        <label  for="<?php echo $view->getSlug(); ?>">
+            <input id="<?php echo $view->getSlug(); ?>-button"
                    type="image"
                    height="150"
                    width="200"
                    style="background: lightgray;object-fit: cover"
                    alt="Click here to select media"
                    src='<?php echo $imageUrl; ?>'/>
-            <input id="<?php echo $block->getSlug(); ?>-remove" type="button" class="button" value="Remove"/>
-            <?php echo $block->getDescription(); ?>
+            <input id="<?php echo $view->getSlug(); ?>-remove" type="button" class="button" value="Remove"/>
+            <?php echo $view->getDescription(); ?>
         </label>
     </td>
 </tr>
@@ -28,10 +28,10 @@ wp_enqueue_media();
 <script>
     jQuery(document).ready(function ($) {
         initMediaSelector(
-            '<?php echo $block->getValue(); ?>',
-            '<?php echo $block->getSlug(); ?>-button',
-            '<?php echo $block->getSlug(); ?>',
-            '<?php echo $block->getSlug(); ?>-remove'
+            '<?php echo $view->getValue(); ?>',
+            '<?php echo $view->getSlug(); ?>-button',
+            '<?php echo $view->getSlug(); ?>',
+            '<?php echo $view->getSlug(); ?>-remove'
         );
     });
 </script>

@@ -1,8 +1,8 @@
 <?php
 
-namespace Moehrenzahn\Toolkit\Block\Post;
+namespace Moehrenzahn\Toolkit\View\Post;
 
-use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\View;
 use Moehrenzahn\Toolkit\ImageSize;
 use Moehrenzahn\Toolkit\Javascript;
 use Moehrenzahn\Toolkit\Model\Post\PostPreference;
@@ -12,7 +12,7 @@ use Moehrenzahn\Toolkit\Model\Post\PostPreference;
  *
  * @package Toolkit
  */
-class MetaBox extends Block
+class MetaBox extends View
 {
     /**
      * @var PostPreference[]
@@ -24,20 +24,20 @@ class MetaBox extends Block
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
-     * @param Block\BlockFactory $blockFactory
+     * @param View\ViewFactory $viewFactory
      * @param string $templatePath
      * @param array $postPreferences
      */
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
-        Block\BlockFactory $blockFactory,
+        View\ViewFactory $viewFactory,
         string $templatePath,
         array $postPreferences
     ) {
         $this->postPreferences = $postPreferences;
 
-        parent::__construct($javascript, $imageSize, $blockFactory, $templatePath);
+        parent::__construct($javascript, $imageSize, $viewFactory, $templatePath);
     }
 
     /**

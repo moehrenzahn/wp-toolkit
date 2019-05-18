@@ -1,5 +1,5 @@
 <?php
-/** @var \Moehrenzahn\Toolkit\Block\Comment\MetaBox $block */
-foreach ($block->getCommentMeta() as $meta) {
-    $block->renderPartial("Template/Comment/Meta/$meta->type", null, $meta);
+/** @var \Moehrenzahn\Toolkit\View\Comment\MetaBox $view */
+foreach ($view->getCommentMeta() as $meta) {
+    $view->renderPartial("Template/Comment/Meta/$meta->type", null, $meta);
 }

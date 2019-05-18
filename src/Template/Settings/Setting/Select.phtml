@@ -1,7 +1,7 @@
-<?php /** @var \Moehrenzahn\Toolkit\Block\Settings\Setting $block */ ?>
+<?php /** @var \Moehrenzahn\Toolkit\View\Settings\Setting $view */ ?>
 <?php
 /** @var \Moehrenzahn\Toolkit\AdminPage\Settings\Setting\Select $setting */
-$setting = $block->getSetting();
+$setting = $view->getSetting();
 ?>
 <select name="<?php echo $setting->getId(); ?>"
         id="<?php echo $setting->getId(); ?>">

@@ -4,7 +4,7 @@ namespace Moehrenzahn\Toolkit\Model\AdminPage\Settings;
 
 use Moehrenzahn\Toolkit\Api\Model\Settings\SectionInterface;
 use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
-use Moehrenzahn\Toolkit\Block\Settings\Section as SectionBlock;
+use Moehrenzahn\Toolkit\View\Settings\Section as SectionView;
 
 /**
  * Class Section
@@ -34,9 +34,9 @@ class Section implements SectionInterface
     private $settings = [];
 
     /**
-     * @var SectionBlock
+     * @var SectionView
      */
-    public $block;
+    public $view;
 
     /**
      * Section constructor.
@@ -44,22 +44,22 @@ class Section implements SectionInterface
      * @param string $id
      * @param string $title
      * @param SettingInterface[] $settings
-     * @param SectionBlock $block
+     * @param SectionView $view
      * @param string $description
      */
     public function __construct(
         string $id,
         string $title,
         array $settings,
-        SectionBlock $block,
+        SectionView $view,
         string $description = ''
     ) {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->settings = $settings;
-        $this->block = $block;
-        $this->block->setSection($this);
+        $this->view = $view;
+        $this->view->setSection($this);
     }
 
     /**

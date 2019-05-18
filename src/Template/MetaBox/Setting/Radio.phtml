@@ -1,17 +1,17 @@
 <?php
 /** @var \Moehrenzahn\Toolkit\Model\Post\PostPreference $setting */
-$setting = $block->getData('preference');
+$setting = $view->getData('preference');
 ?>
 <div>
     <label>
         <strong><?php echo $setting->getTitle(); ?></strong>
     </label>
     <?php foreach ($setting->getOptions() as $optionSlug => $optionName) : ?>
-            <label style="display: block; margin: 6px 0">
+            <label style="display: view; margin: 6px 0">
                 <input type="radio"
                        value="<?php echo $optionSlug; ?>"
                        name="<?php echo $setting->getId(); ?>"
-                    <?php echo ($optionSlug === $setting->getValue($block->getPost()->ID)) ? 'checked' : ''; ?>>
+                    <?php echo ($optionSlug === $setting->getValue($view->getPost()->ID)) ? 'checked' : ''; ?>>
                 <?php echo $optionName; ?>
             </label>
     <?php endforeach; ?>

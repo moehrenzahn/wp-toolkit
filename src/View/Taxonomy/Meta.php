@@ -1,7 +1,7 @@
 <?php
-namespace Moehrenzahn\Toolkit\Block\Taxonomy;
+namespace Moehrenzahn\Toolkit\View\Taxonomy;
 
-use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\View;
 use Moehrenzahn\Toolkit\ImageSize;
 use Moehrenzahn\Toolkit\Javascript;
 use Moehrenzahn\Toolkit\TaxonomyMetaAccessor;
@@ -9,9 +9,9 @@ use Moehrenzahn\Toolkit\TaxonomyMetaAccessor;
 /**
  * Class Meta
  *
- * @package Moehrenzahn\Toolkit\Block\Taxonomy
+ * @package Moehrenzahn\Toolkit\View\Taxonomy
  */
-class Meta extends Block
+class Meta extends View
 {
     /**
      * @var TaxonomyMetaAccessor
@@ -46,7 +46,7 @@ class Meta extends Block
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
-     * @param Block\BlockFactory $blockFactory
+     * @param View\ViewFactory $viewFactory
      * @param TaxonomyMetaAccessor $metaAccessor
      * @param string $templatePath
      * @param string $slug
@@ -57,7 +57,7 @@ class Meta extends Block
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
-        Block\BlockFactory $blockFactory,
+        View\ViewFactory $viewFactory,
         TaxonomyMetaAccessor $metaAccessor,
         string $templatePath,
         string $slug,
@@ -71,7 +71,7 @@ class Meta extends Block
         $this->options = $options;
         $this->description = $description;
 
-        parent::__construct($javascript, $imageSize, $blockFactory, $templatePath);
+        parent::__construct($javascript, $imageSize, $viewFactory, $templatePath);
     }
 
 

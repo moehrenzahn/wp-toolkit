@@ -2,7 +2,7 @@
 
 namespace Moehrenzahn\Toolkit\Api\Model\Settings;
 
-use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\View;
 
 /**
  * Interface SettingInterface
@@ -37,7 +37,7 @@ interface SettingInterface
     public function getOptions();
 
     /**
-     * @return Block
+     * @return View
      */
-    public function getBlock();
+    public function getView();
 }

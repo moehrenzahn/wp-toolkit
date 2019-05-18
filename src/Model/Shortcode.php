@@ -2,7 +2,7 @@
 
 namespace Moehrenzahn\Toolkit\Model;
 
-use Moehrenzahn\Toolkit\Api\BlockInterface;
+use Moehrenzahn\Toolkit\Api\ViewInterface;
 use Moehrenzahn\Toolkit\Loader;
 
 /**
@@ -23,22 +23,22 @@ class Shortcode
     private $shortCode;
 
     /**
-     * @var BlockInterface
+     * @var ViewInterface
      */
-    private $block;
+    private $view;
 
     /**
      * Shortcode constructor.
      *
      * @param Loader $loader
      * @param string $shortCode
-     * @param BlockInterface $block
+     * @param ViewInterface $view
      */
-    public function __construct(Loader $loader, string $shortCode, BlockInterface $block)
+    public function __construct(Loader $loader, string $shortCode, ViewInterface $view)
     {
         $this->loader = $loader;
         $this->shortCode = $shortCode;
-        $this->block = $block;
+        $this->view = $view;
         $this->loader->addShortcode($this->shortCode, $this, 'getShortcodeContent');
     }
 
@@ -50,12 +50,12 @@ class Shortcode
      */
     public function getShortcodeContent($attributes, $content, $shortcodeTag)
     {
-        $this->block->setData([
+        $this->view->setData([
             'attributes' => $attributes,
             'content' => $content,
             'shortcodeTag' => $shortcodeTag,
         ]);
 
-        return $this->block->getHtml();
+        return $this->view->getHtml();
     }
 }

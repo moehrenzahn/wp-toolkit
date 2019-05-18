@@ -1,18 +1,18 @@
 <?php
-/** @var \Moehrenzahn\Toolkit\Block\Taxonomy\Meta $block */
+/** @var \Moehrenzahn\Toolkit\View\Taxonomy\Meta $view */
 ?>
 <tr class="form-field">
-    <th><label for="<?php echo $block->getSlug(); ?>"><?php echo $block->getTitle(); ?></label></th>
+    <th><label for="<?php echo $view->getSlug(); ?>"><?php echo $view->getTitle(); ?></label></th>
     <td>
         <p>
-        <label for="<?php echo $block->getSlug(); ?>">
+        <label for="<?php echo $view->getSlug(); ?>">
             <input type="checkbox"
-                   value="<?php echo $block->getSlug(); ?>"
-                   name="<?php echo $block->getSlug(); ?>"
-                   id="<?php echo $block->getSlug(); ?>"
-                <?php echo $block->getValue() ? 'checked' : ''; ?>
+                   value="<?php echo $view->getSlug(); ?>"
+                   name="<?php echo $view->getSlug(); ?>"
+                   id="<?php echo $view->getSlug(); ?>"
+                <?php echo $view->getValue() ? 'checked' : ''; ?>
             >
-            <?php echo $block->getDescription(); ?>
+            <?php echo $view->getDescription(); ?>
         </label>
         </p>
     </td>

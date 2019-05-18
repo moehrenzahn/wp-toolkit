@@ -2,7 +2,7 @@
 
 namespace Moehrenzahn\Toolkit\Model;
 
-use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\View;
 use Moehrenzahn\Toolkit\Loader;
 
 /**
@@ -38,9 +38,9 @@ class AdminPage
     protected $position;
 
     /**
-     * @var Block
+     * @var View
      */
-    protected $block;
+    protected $view;
 
     /**
      * AdminPage constructor.
@@ -50,7 +50,7 @@ class AdminPage
      * @param string $slug
      * @param string $icon
      * @param int $position
-     * @param Block $block
+     * @param View $view
      */
     public function __construct(
         Loader $loader,
@@ -58,14 +58,14 @@ class AdminPage
         string $slug,
         string $icon,
         int $position,
-        Block $block
+        View $view
     ) {
         $this->loader = $loader;
         $this->title = $title;
         $this->slug = $slug;
         $this->icon = $icon;
         $this->position = $position;
-        $this->block = $block;
+        $this->view = $view;
 
         $this->loader->addAction('admin_menu', $this, 'registerCallback');
     }
@@ -94,7 +94,7 @@ class AdminPage
             $this->title,
             "read",
             $this->slug,
-            [$this->block, 'renderTemplate'],
+            [$this->view, 'renderTemplate'],
             $this->icon,
             $this->position
         );

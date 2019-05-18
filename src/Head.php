@@ -2,7 +2,7 @@
 
 namespace Moehrenzahn\Toolkit;
 
-use Moehrenzahn\Toolkit\Block\BlockFactory;
+use Moehrenzahn\Toolkit\View\ViewFactory;
 
 /**
  * Class Head
@@ -17,29 +17,29 @@ class Head
     private $loader;
 
     /**
-     * @var BlockFactory
+     * @var ViewFactory
      */
-    private $blockFactory;
+    private $viewFactory;
 
     /**
      * Head constructor.
      *
      * @param Loader $loader
-     * @param BlockFactory $blockFactory
+     * @param ViewFactory $viewFactory
      */
-    public function __construct(Loader $loader, BlockFactory $blockFactory)
+    public function __construct(Loader $loader, ViewFactory $viewFactory)
     {
         $this->loader = $loader;
-        $this->blockFactory = $blockFactory;
+        $this->viewFactory = $viewFactory;
     }
 
     /**
      * @param string $templatePath Full path to the template file to render.
-     * @param string $blockClass Full class name of a Api\BlockInterface implementation
+     * @param string $viewClass Full class name of a Api\ViewInterface implementation
      */
-    public function addTemplate(string $templatePath, string $blockClass = Block::class)
+    public function addTemplate(string $templatePath, string $viewClass = View::class)
     {
-        $block = $this->blockFactory->create($templatePath, $blockClass);
-        $this->loader->addAction('wp_head', $block, 'renderTemplate');
+        $view = $this->viewFactory->create($templatePath, $viewClass);
+        $this->loader->addAction('wp_head', $view, 'renderTemplate');
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Moehrenzahn\Toolkit\Block\Settings;
+namespace Moehrenzahn\Toolkit\View\Settings;
 
-use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\View;
 use Moehrenzahn\Toolkit\ImageSize;
 use Moehrenzahn\Toolkit\Javascript;
 use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
@@ -10,9 +10,9 @@ use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
 /**
  * Class Setting
  *
- * @package Moehrenzahn\Toolkit\Block
+ * @package Moehrenzahn\Toolkit\View
  */
-class Setting extends Block
+class Setting extends View
 {
     /**
      * @var SettingInterface|null
@@ -24,20 +24,20 @@ class Setting extends Block
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
-     * @param Block\BlockFactory $blockFactory
+     * @param View\ViewFactory $viewFactory
      * @param string $templatePath
      * @param SettingInterface|null $setting
      */
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
-        Block\BlockFactory $blockFactory,
+        View\ViewFactory $viewFactory,
         string $templatePath = '',
         SettingInterface $setting = null
     ) {
         $this->setting = $setting;
 
-        parent::__construct($javascript, $imageSize, $blockFactory, $templatePath);
+        parent::__construct($javascript, $imageSize, $viewFactory, $templatePath);
     }
 
     /**

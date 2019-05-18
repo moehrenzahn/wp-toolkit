@@ -3,7 +3,7 @@ namespace Moehrenzahn\Toolkit\Model;
 
 use Moehrenzahn\Toolkit\Loader;
 use Moehrenzahn\Toolkit\Model\Comment\MetaAccessor;
-use Moehrenzahn\Toolkit\Block\Comment\MetaBox as Block;
+use Moehrenzahn\Toolkit\View\Comment\MetaBox as View;
 
 /**
  * Class CommentMetaBox
@@ -26,9 +26,9 @@ class CommentMetaBox
     private $title;
 
     /**
-     * @var Block
+     * @var View
      */
-    private $block;
+    private $view;
 
     /**
      * @var Loader
@@ -48,24 +48,24 @@ class CommentMetaBox
     /**
      * CommentMetaBox constructor.
      *
-     * @TODO: The CommentMeta models should be added here instead of in the block.
+     * @TODO: The CommentMeta models should be added here instead of in the view.
      *
      * @param $slug
      * @param $title
-     * @param Block $block
+     * @param View $view
      * @param Loader $loader
      * @param MetaAccessor $metaAccessor
      */
     public function __construct(
         string $slug,
         string $title,
-        Block $block,
+        View $view,
         Loader $loader,
         MetaAccessor $metaAccessor
     ) {
         $this->slug = $slug;
         $this->title = $title;
-        $this->block = $block;
+        $this->view = $view;
         $this->loader = $loader;
         $this->metaAccessor = $metaAccessor;
 
@@ -84,7 +84,7 @@ class CommentMetaBox
         add_meta_box(
             $this->slug,
             $this->title,
-            [$this->block, 'renderTemplate'],
+            [$this->view, 'renderTemplate'],
             'comment',
             'normal',
             'high'
@@ -98,7 +98,7 @@ class CommentMetaBox
      */
     public function saveData($commentId)
     {
-        foreach ($this->block->getCommentMeta() as $meta) {
+        foreach ($this->view->getCommentMeta() as $meta) {
             if (isset($_POST[$meta->slug])) {
                 $this->metaAccessor->update($commentId, $meta->slug, esc_attr($_POST[$meta->slug]));
             } else {

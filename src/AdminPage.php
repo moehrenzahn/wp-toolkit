@@ -3,7 +3,7 @@
 namespace Moehrenzahn\Toolkit;
 
 use Moehrenzahn\Toolkit\Api\Model\Settings\SectionInterface;
-use Moehrenzahn\Toolkit\Block\Settings;
+use Moehrenzahn\Toolkit\View\Settings;
 use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
@@ -55,14 +55,14 @@ class AdminPage
         int $position,
         string $templatePath
     ) {
-        $block = $this->objectManager->create(Block::class, ['templatePath' => $templatePath]);
+        $view = $this->objectManager->create(View::class, ['templatePath' => $templatePath]);
         $this->adminPages[$slug] = new \Moehrenzahn\Toolkit\Model\AdminPage(
             $this->loader,
             $title,
             $slug,
             $icon,
             $position,
-            $block
+            $view
         );
 
         return $this->adminPages[$slug];
@@ -78,10 +78,10 @@ class AdminPage
         string $slug,
         array $sections
     ) {
-        $block = $this->objectManager->create(Settings::class, ['title' => $title, 'page' => $slug]);
+        $view = $this->objectManager->create(Settings::class, ['title' => $title, 'page' => $slug]);
         $this->adminPages[$slug] = new \Moehrenzahn\Toolkit\Model\AdminPage\Settings(
             $this->loader,
-            $block,
+            $view,
             $title,
             $slug,
             $sections

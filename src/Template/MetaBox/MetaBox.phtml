@@ -1,7 +1,7 @@
 <?php
-/** @var \Moehrenzahn\Toolkit\Block\Post\MetaBox $block */
-foreach ($block->getPostPreferences() as $preference) {
-    $block->renderPartial(
+/** @var \Moehrenzahn\Toolkit\View\Post\MetaBox $view */
+foreach ($view->getPostPreferences() as $preference) {
+    $view->renderPartial(
         TOOLKIT_TEMPLATE_FOLDER . "MetaBox/Setting/$preference->type",
             null,
         ['preference' => $preference]

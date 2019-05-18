@@ -1,8 +1,8 @@
 <?php
 
-namespace Moehrenzahn\Toolkit\Block\Comment;
+namespace Moehrenzahn\Toolkit\View\Comment;
 
-use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\View;
 use Moehrenzahn\Toolkit\ImageSize;
 use Moehrenzahn\Toolkit\Javascript;
 use Moehrenzahn\Toolkit\Model\Comment\CommentMeta;
@@ -12,7 +12,7 @@ use Moehrenzahn\Toolkit\Model\Comment\CommentMeta;
  *
  * @package Toolkit
  */
-class MetaBox extends Block
+class MetaBox extends View
 {
     /**
      * @var CommentMeta[]
@@ -24,20 +24,20 @@ class MetaBox extends Block
      *
      * @param Javascript $javascript
      * @param ImageSize $imageSize
-     * @param Block\BlockFactory $blockFactory
+     * @param View\ViewFactory $viewFactory
      * @param string $templatePath
      * @param array $commentMeta
      */
     public function __construct(
         Javascript $javascript,
         ImageSize $imageSize,
-        Block\BlockFactory $blockFactory,
+        View\ViewFactory $viewFactory,
         string $templatePath,
         array $commentMeta
     ) {
         $this->commentMeta = $commentMeta;
 
-        parent::__construct($javascript, $imageSize, $blockFactory, $templatePath);
+        parent::__construct($javascript, $imageSize, $viewFactory, $templatePath);
     }
 
 

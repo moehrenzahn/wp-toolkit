@@ -1,16 +1,16 @@
 <?php
-/** @var \Moehrenzahn\Toolkit\Block\Taxonomy\Meta $block */
+/** @var \Moehrenzahn\Toolkit\View\Taxonomy\Meta $view */
 ?>
 
 <tr class="form-field">
-    <th><?php echo $block->getTitle(); ?></th>
+    <th><?php echo $view->getTitle(); ?></th>
     <td>
-        <label  for="<?php echo $block->getSlug(); ?>">
+        <label  for="<?php echo $view->getSlug(); ?>">
             <textarea rows="10"
-                      name="<?php echo $block->getSlug(); ?>"
-                      id="<?php echo $block->getSlug(); ?>"
-            ><?php echo esc_textarea($block->getValue()); ?></textarea>
-            <?php echo $block->getDescription(); ?>
+                      name="<?php echo $view->getSlug(); ?>"
+                      id="<?php echo $view->getSlug(); ?>"
+            ><?php echo esc_textarea($view->getValue()); ?></textarea>
+            <?php echo $view->getDescription(); ?>
         </label>
     </td>
 </tr>

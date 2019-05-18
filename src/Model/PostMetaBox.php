@@ -2,7 +2,7 @@
 
 namespace Moehrenzahn\Toolkit\Model;
 
-use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\View;
 use Moehrenzahn\Toolkit\Helper\Request;
 use Moehrenzahn\Toolkit\Loader;
 use Moehrenzahn\Toolkit\Model\Post\PostPreference;
@@ -32,9 +32,9 @@ class PostMetaBox
     private $slug;
 
     /**
-     * @var Block
+     * @var View
      */
-    private $block;
+    private $view;
 
     /**
      * @var Loader
@@ -47,20 +47,20 @@ class PostMetaBox
      * @param string $title
      * @param string $slug
      * @param PostPreference[] $postPreferences
-     * @param Block\Post\MetaBox $block
+     * @param View\Post\MetaBox $view
      * @param Loader $loader
      */
     public function __construct(
         string $title,
         string $slug,
         array $postPreferences,
-        Block\Post\MetaBox $block,
+        View\Post\MetaBox $view,
         Loader $loader
     ) {
         $this->title = $title;
         $this->slug = $slug;
         $this->postPreferences = $postPreferences;
-        $this->block = $block;
+        $this->view = $view;
         $this->loader = $loader;
 
         $this->loader->addAction('add_meta_boxes', $this, 'register');
@@ -75,7 +75,7 @@ class PostMetaBox
         add_meta_box(
             $this->slug,
             $this->title,
-            [$this->block, 'renderTemplate'],
+            [$this->view, 'renderTemplate'],
             self::SCREEN_NAME,
             'side',
             'high'

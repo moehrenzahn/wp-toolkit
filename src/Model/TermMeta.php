@@ -2,7 +2,7 @@
 
 namespace Moehrenzahn\Toolkit\Model;
 
-use Moehrenzahn\Toolkit\Block\Taxonomy\Meta;
+use Moehrenzahn\Toolkit\View\Taxonomy\Meta;
 use Moehrenzahn\Toolkit\Loader;
 use Moehrenzahn\Toolkit\Model\Action\TermMetaSave;
 
@@ -33,7 +33,7 @@ class TermMeta
     /**
      * @var Meta
      */
-    private $block;
+    private $view;
 
     /**
      * Can be 'category' or 'post_tag'.
@@ -45,16 +45,16 @@ class TermMeta
     /**
      * TermMeta constructor.
      *
-     * @param Meta $block
+     * @param Meta $view
      * @param string $type
      * @param Loader $loader
      * @param TermMetaSave $saveController
      */
-    public function __construct(Loader $loader, TermMetaSave $saveController, Meta $block, $type)
+    public function __construct(Loader $loader, TermMetaSave $saveController, Meta $view, $type)
     {
         $this->loader = $loader;
         $this->saveController = $saveController;
-        $this->block = $block;
+        $this->view = $view;
         $this->type = $type;
 
         $this->loader->addAction("{$type}_edit_form_fields", $this, "editField");
@@ -68,7 +68,7 @@ class TermMeta
      */
     public function addField()
     {
-        $this->block->renderTemplate();
+        $this->view->renderTemplate();
     }
 
     /**
@@ -78,8 +78,8 @@ class TermMeta
      */
     public function editField($term)
     {
-        $this->block->setTermId($term->term_id);
-        $this->block->renderTemplate();
+        $this->view->setTermId($term->term_id);
+        $this->view->renderTemplate();
     }
 
     /**
@@ -90,11 +90,11 @@ class TermMeta
     public function save($termId)
     {
         $request = $_POST;
-        $this->block->setTermId($termId);
+        $this->view->setTermId($termId);
         $this->saveController->doSaveAction(
             $request,
             $termId,
-            $this->block->getSlug()
+            $this->view->getSlug()
         );
     }
 }

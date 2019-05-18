@@ -2,8 +2,8 @@
 
 namespace Moehrenzahn\Toolkit;
 
-use Moehrenzahn\Toolkit\Block\BlockFactory;
-use Moehrenzahn\Toolkit\Block\Post\MetaBox;
+use Moehrenzahn\Toolkit\View\ViewFactory;
+use Moehrenzahn\Toolkit\View\Post\MetaBox;
 use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
@@ -53,8 +53,8 @@ class PostMetaBox
         array $postPreferences = [],
         string $templatePath = 'Template/MetaBox/MetaBox'
     ) {
-        /** @var MetaBox $block */
-        $block = $this->objectManager->create(
+        /** @var MetaBox $view */
+        $view = $this->objectManager->create(
             MetaBox::class,
             [
                 'templatePath' => $templatePath,
@@ -67,7 +67,7 @@ class PostMetaBox
                 'title' => $title,
                 'slug' => $slug,
                 'postPreferences' => $postPreferences,
-                'block' => $block,
+                'view' => $view,
             ]
         );
 

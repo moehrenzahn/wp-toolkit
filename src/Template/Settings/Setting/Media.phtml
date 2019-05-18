@@ -1,6 +1,6 @@
 <?php
-/** @var \Moehrenzahn\Toolkit\Block\Settings\Setting $block */
-$setting = $block->getSetting();
+/** @var \Moehrenzahn\Toolkit\View\Settings\Setting $view */
+$setting = $view->getSetting();
 $imageUrl = wp_get_attachment_url($setting->getValue()) ?? '';
 wp_enqueue_media();
 ?>

@@ -1,11 +1,11 @@
-<?php $setting = $block->getData('preference'); ?>
+<?php $setting = $view->getData('preference'); ?>
 <input type='hidden' value='0' name='<?php echo $setting->getId(); ?>'>
 
 <div>
     <input name="<?php echo $setting->getId(); ?>"
            type="checkbox"
            id="<?php echo $setting->getId(); ?>"
-        <?php echo $setting->getValue($block->getPost()->ID) ? 'checked' : ''; ?>>
+        <?php echo $setting->getValue($view->getPost()->ID) ? 'checked' : ''; ?>>
     <label for="<?php echo $setting->getId(); ?>">
         <?php echo $setting->getTitle(); ?>
     </label>

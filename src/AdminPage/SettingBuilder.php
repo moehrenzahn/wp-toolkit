@@ -3,7 +3,7 @@
 namespace Moehrenzahn\Toolkit\AdminPage;
 
 use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
-use Moehrenzahn\Toolkit\Block\BlockFactory;
+use Moehrenzahn\Toolkit\View\ViewFactory;
 use Moehrenzahn\Toolkit\ConfigAccessor;
 use Moehrenzahn\Toolkit\Model\AdminPage\Settings\Setting;
 
@@ -32,20 +32,20 @@ class SettingBuilder
     private $configAccessor;
 
     /**
-     * @var BlockFactory
+     * @var ViewFactory
      */
-    private $blockFactory;
+    private $viewFactory;
 
     /**
      * SettingBuilder constructor.
      *
      * @param ConfigAccessor $configAccessor
-     * @param BlockFactory $blockFactory
+     * @param ViewFactory $viewFactory
      */
-    public function __construct(ConfigAccessor $configAccessor, BlockFactory $blockFactory)
+    public function __construct(ConfigAccessor $configAccessor, ViewFactory $viewFactory)
     {
         $this->configAccessor = $configAccessor;
-        $this->blockFactory = $blockFactory;
+        $this->viewFactory = $viewFactory;
     }
 
     /**
@@ -65,14 +65,14 @@ class SettingBuilder
     ) {
         $settingModel = $this->getModelForType($type);
         $template = $this->getTemplateForType($type);
-        /** @var \Moehrenzahn\Toolkit\Block\Settings\Setting $block */
-        $block = $this->blockFactory->create(
+        /** @var \Moehrenzahn\Toolkit\View\Settings\Setting $view */
+        $view = $this->viewFactory->create(
             $template,
-            \Moehrenzahn\Toolkit\Block\Settings\Setting::class,
+            \Moehrenzahn\Toolkit\View\Settings\Setting::class,
             []
         );
         /** @var SettingInterface $setting */
-        $setting = new $settingModel($this->configAccessor, $id, $title, $description, $options, $block);
+        $setting = new $settingModel($this->configAccessor, $id, $title, $description, $options, $view);
 
         return $setting;
     }
@@ -100,8 +100,8 @@ class SettingBuilder
             return $type;
         }
 
-        if (class_exists("\Moehrenzahn\Toolkit\Block\Settings\Setting\\$type")) {
-            return "\Moehrenzahn\Toolkit\Block\Settings\Setting\\$type";
+        if (class_exists("\Moehrenzahn\Toolkit\View\Settings\Setting\\$type")) {
+            return "\Moehrenzahn\Toolkit\View\Settings\Setting\\$type";
         }
 
         return Setting::class;

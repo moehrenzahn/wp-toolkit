@@ -1,5 +1,5 @@
 <?php
-/** @var \Moehrenzahn\Toolkit\Api\BlockInterface $block */
+/** @var \Moehrenzahn\Toolkit\Api\ViewInterface $view */
 /** @var array $data */
 ?>
 <img class='image-lazy loading js-only <?php echo $data['classList']; ?>'
@@ -9,5 +9,5 @@
      <?php echo $data['lazyLoadScript']; ?>
 />
 <noscript>
-    <?php echo $block->renderPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyImageFallback', null, $data); ?>
+    <?php echo $view->renderPartial(TOOLKIT_TEMPLATE_FOLDER . 'LazyImageFallback', null, $data); ?>
 </noscript>

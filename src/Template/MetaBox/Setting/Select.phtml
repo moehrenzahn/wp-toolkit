@@ -1,5 +1,5 @@
 <?php
-$setting = $block->getData('preference');
+$setting = $view->getData('preference');
 ?>
 <div>
     <label for="<?php echo $setting->getId(); ?>">
@@ -9,7 +9,7 @@ $setting = $block->getData('preference');
             id="<?php echo $setting->getId(); ?>">
         <?php foreach ($setting->getOptions() as $optionSlug => $optionName) : ?>
             <option value="<?php echo $optionSlug; ?>"
-                <?php echo ($optionSlug === $setting->getValue($block->getPost()->ID)) ? 'selected' : ''; ?>>
+                <?php echo ($optionSlug === $setting->getValue($view->getPost()->ID)) ? 'selected' : ''; ?>>
                 <?php echo $optionName; ?>
             </option>
         <?php endforeach; ?>

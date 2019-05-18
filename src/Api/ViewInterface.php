@@ -2,14 +2,12 @@
 
 namespace Moehrenzahn\Toolkit\Api;
 
-use Moehrenzahn\Toolkit\Block;
-
 /**
- * Interface BlockInterface
+ * Interface ViewInterface
  *
  * @package Moehrenzahn\Toolkit\Api
  */
-interface BlockInterface
+interface ViewInterface
 {
     /**
      * Output template into output
@@ -25,7 +23,7 @@ interface BlockInterface
     public function renderTemplatePart(string $slug, $postObject = null);
 
     /**
-     * Retrieve block template HTML
+     * Retrieve view template HTML
      *
      * @return string
      */
@@ -55,14 +53,14 @@ interface BlockInterface
      * @param string $placeholder Placeholder template path
      * @param \WP_Post|null $postObject
      * @param mixed[] $data
-     * @param string $blockClass Full class name of the block type to use for the partial. Defaults to the parent block.
+     * @param string $viewClass Full class name of the view type to use for the partial. Defaults to the parent view.
      */
     public function renderLazyPartial(
         string $path,
         string $placeholder,
         $postObject = null,
         $data = [],
-        $blockClass = ''
+        $viewClass = ''
     );
 
     /**

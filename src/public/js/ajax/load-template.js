@@ -1,10 +1,10 @@
 /**
- * @param {string} templatePath The template path for the PHP block
+ * @param {string} templatePath The template path for the PHP view
  * @param {Element} container
- * @param {string} blockClass   The FQN of a custom PHP block class
+ * @param {string} viewClass   The FQN of a custom PHP view class
  * @param {int} postId
  */
-function loadTemplate(templatePath, container, blockClass, postId)
+function loadTemplate(templatePath, container, viewClass, postId)
 {
     var loading = false;
     container.classList.add('ajax-container');
@@ -23,7 +23,7 @@ function loadTemplate(templatePath, container, blockClass, postId)
             var data = {
                 'action': 'load_template',
                 'templatePath': templatePath,
-                'blockClass': blockClass,
+                'viewClass': viewClass,
                 'postId': postId,
             };
             jQuery.post(requestData.ajaxUrl, data)

@@ -2,7 +2,7 @@
 
 namespace Moehrenzahn\Toolkit;
 
-use Moehrenzahn\Toolkit\Block\Comment\MetaBox;
+use Moehrenzahn\Toolkit\View\Comment\MetaBox;
 use Moehrenzahn\Toolkit\Helper\ObjectManager;
 
 /**
@@ -45,7 +45,7 @@ class CommentMetaBox
         array $commentMeta,
         string $templatePath = 'Template/Comment/MetaBox'
     ) : \Moehrenzahn\Toolkit\Model\CommentMetaBox {
-        $block = $this->objectManager->create(
+        $view = $this->objectManager->create(
             MetaBox::class,
             ['templatePath' => $templatePath, 'commentMeta' => $commentMeta]
         );
@@ -54,7 +54,7 @@ class CommentMetaBox
             [
                 'slug' => $slug,
                 'title' => $title,
-                'block' => $block,
+                'view' => $view,
             ]
         );
 

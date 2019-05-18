@@ -5,7 +5,7 @@ namespace Moehrenzahn\Toolkit\Api;
 use Moehrenzahn\Toolkit\AdminNotice;
 use Moehrenzahn\Toolkit\AdminPage;
 use Moehrenzahn\Toolkit\AjaxAction;
-use Moehrenzahn\Toolkit\Block;
+use Moehrenzahn\Toolkit\View;
 use Moehrenzahn\Toolkit\CommentMeta;
 use Moehrenzahn\Toolkit\CommentMetaBox;
 use Moehrenzahn\Toolkit\Filter;
@@ -61,11 +61,11 @@ class Client
     }
 
     /**
-     * @return Block\BlockFactory
+     * @return View\ViewFactory
      */
-    public function getBlockFactory(): Block\BlockFactory
+    public function getViewFactory(): View\ViewFactory
     {
-        return $this->objectManager->getSingleton(Block\BlockFactory::class);
+        return $this->objectManager->getSingleton(View\ViewFactory::class);
     }
 
     /**

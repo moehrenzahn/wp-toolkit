@@ -1,17 +1,17 @@
 <?php
-/** @var Moehrenzahn\Toolkit\Block $block */
+/** @var Moehrenzahn\Toolkit\View $view */
 /** @var array $data */
 $id = uniqid('lazy-');
 ?>
 <section id="<?php echo $id ?>">
-    <?php $block->renderPartial($data['placeholder']); ?>
+    <?php $view->renderPartial($data['placeholder']); ?>
 </section>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         loadTemplate(
             '<?php echo $data['template']; ?>',
             document.querySelector('#<?php echo $id; ?>'),
-            '<?php echo addslashes($data['blockClass']); ?>',
+            '<?php echo addslashes($data['viewClass']); ?>',
             <?php echo $data['postId']; ?>
         );
     }, false);
