@@ -20,6 +20,11 @@ class Setting extends View
     private $setting;
 
     /**
+     * @var string[]
+     */
+    private $depends;
+
+    /**
      * Setting constructor.
      *
      * @param Javascript $javascript
@@ -54,5 +59,21 @@ class Setting extends View
     public function setSetting(SettingInterface $setting)
     {
         $this->setting = $setting;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDepends(): array
+    {
+        return $this->depends;
+    }
+
+    /**
+     * @param string[] $depends
+     */
+    public function setDepends(array $depends)
+    {
+        $this->depends = $depends;
     }
 }

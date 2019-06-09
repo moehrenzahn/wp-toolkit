@@ -1,2 +1,5 @@
 <?php /** @var \Moehrenzahn\Toolkit\View\Settings\Section $view */ ?>
-<p><?php echo $view->getSection()->getDescription(); ?></p>
+<p class="config-section"
+   data-depends="<?php echo implode(';', $view->getDepends()); ?>">
+    <?php echo $view->getSection()->getDescription(); ?>
+</p>

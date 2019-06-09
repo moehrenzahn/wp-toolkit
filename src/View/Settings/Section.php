@@ -20,6 +20,11 @@ class Section extends View
     private $section;
 
     /**
+     * @var string[]
+     */
+    private $depends;
+
+    /**
      * @return SectionInterface
      */
     public function getSection()
@@ -33,5 +38,21 @@ class Section extends View
     public function setSection(SectionInterface $section)
     {
         $this->section = $section;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDepends(): array
+    {
+        return $this->depends;
+    }
+
+    /**
+     * @param string[] $depends
+     */
+    public function setDepends(array $depends)
+    {
+        $this->depends = $depends;
     }
 }

@@ -2,12 +2,11 @@
 <?php $setting = $view->getSetting(); ?>
 <input type='hidden' value='0' name='<?php echo $setting->getId(); ?>'>
 
-<div>
 <label class="description">
     <input name="<?php echo $setting->getId(); ?>"
            type="checkbox"
+           data-depends="<?php echo implode(';', $view->getDepends()); ?>"
            id="<?php echo $setting->getId(); ?>"
            <?php echo $setting->getValue() ? 'checked' : ''; ?>>
     <?php echo $setting->getDescription(); ?>
 </label>
-</div>

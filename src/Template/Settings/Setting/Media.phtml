@@ -15,10 +15,14 @@ wp_enqueue_media();
            height="150"
            width="200"
            style="background: lightgray;object-fit: cover"
+           data-depends="<?php echo implode(';', $view->getDepends()); ?>"
            alt="Click here to select media"
            src='<?php echo $imageUrl; ?>'/>
 </label>
-<input id="<?php echo $setting->getId(); ?>-remove" type="button" class="button" value="Remove"/>
+<input id="<?php echo $setting->getId(); ?>-remove"
+       type="button"
+       class="button"
+       value="Remove"/>
 <p class="description">
     <?php echo $setting->getDescription(); ?>
 </p>

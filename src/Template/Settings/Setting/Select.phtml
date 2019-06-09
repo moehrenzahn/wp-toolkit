@@ -4,6 +4,7 @@
 $setting = $view->getSetting();
 ?>
 <select name="<?php echo $setting->getId(); ?>"
+        data-depends="<?php echo implode(';', $view->getDepends()); ?>"
         id="<?php echo $setting->getId(); ?>">
     <?php foreach ($setting->getOptions() as $optionSlug => $optionName) : ?>
         <option value="<?php echo $optionSlug; ?>"

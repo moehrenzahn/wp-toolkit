@@ -3,6 +3,7 @@
 namespace Moehrenzahn\Toolkit\AdminPage;
 
 use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface;
+use Moehrenzahn\Toolkit\Javascript;
 use Moehrenzahn\Toolkit\View\ViewFactory;
 use Moehrenzahn\Toolkit\ConfigAccessor;
 use Moehrenzahn\Toolkit\Model\AdminPage\Settings\Setting;
@@ -37,15 +38,25 @@ class SettingBuilder
     private $viewFactory;
 
     /**
+     * @var Javascript
+     */
+    private $javaScript;
+
+    /**
      * SettingBuilder constructor.
      *
      * @param ConfigAccessor $configAccessor
      * @param ViewFactory $viewFactory
+     * @param Javascript $javaScript
      */
-    public function __construct(ConfigAccessor $configAccessor, ViewFactory $viewFactory)
-    {
+    public function __construct(
+        ConfigAccessor $configAccessor,
+        ViewFactory $viewFactory,
+        Javascript $javaScript
+    ) {
         $this->configAccessor = $configAccessor;
         $this->viewFactory = $viewFactory;
+        $this->javaScript = $javaScript;
     }
 
     /**
@@ -54,6 +65,7 @@ class SettingBuilder
      * @param string $type
      * @param string $description
      * @param array $options
+     * @param string[] $depends
      * @return SettingInterface
      */
     public function create(
@@ -61,8 +73,17 @@ class SettingBuilder
         string $title,
         string $type,
         string $description = '',
-        array $options = []
+        array $options = [],
+        array $depends = []
     ) {
+        if ($depends) {
+            $this->javaScript->add(
+                'config-depends',
+                TOOLKIT_PUB_URL . 'js/config-depends',
+                '1.0.0'
+            );
+        }
+
         $settingModel = $this->getModelForType($type);
         $template = $this->getTemplateForType($type);
         /** @var \Moehrenzahn\Toolkit\View\Settings\Setting $view */
@@ -71,6 +92,7 @@ class SettingBuilder
             \Moehrenzahn\Toolkit\View\Settings\Setting::class,
             []
         );
+        $view->setDepends($depends);
         /** @var SettingInterface $setting */
         $setting = new $settingModel($this->configAccessor, $id, $title, $description, $options, $view);
 

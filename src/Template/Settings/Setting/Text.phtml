@@ -1,9 +1,8 @@
 <?php /** @var \Moehrenzahn\Toolkit\View\Settings\Setting $view */ ?>
 <?php $setting = $view->getSetting(); ?>
-<div>
-    <input name="<?php echo $setting->getId(); ?>"
-           type="text"
-           id="<?php echo $setting->getId(); ?>"
-           value="<?php echo $setting->getValue(); ?>">
-    <p class="description"><?php echo $setting->getDescription(); ?></p>
-</div>
+<input name="<?php echo $setting->getId(); ?>"
+       type="text"
+       data-depends="<?php echo implode(';', $view->getDepends()); ?>"
+       id="<?php echo $setting->getId(); ?>"
+       value="<?php echo $setting->getValue(); ?>">
+<p class="description"><?php echo $setting->getDescription(); ?></p>
