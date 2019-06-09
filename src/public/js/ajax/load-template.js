@@ -7,7 +7,11 @@
 function loadTemplate(templatePath, container, viewClass, postId)
 {
     var loading = false;
-    container.classList.add('ajax-container');
+    var aroundContainer = document.createElement('div');
+    container.classList.add('ajax-container-inner');
+    container.parentNode.insertBefore(aroundContainer, container);
+    aroundContainer.appendChild(container);
+    aroundContainer.classList.add('ajax-container');
     load();
     scrollHandler.doOnScroll(function () {
         load();
@@ -28,7 +32,13 @@ function loadTemplate(templatePath, container, viewClass, postId)
             };
             jQuery.post(requestData.ajaxUrl, data)
                 .done(function (response) {
-                    container.innerHTML = response;
+                    container.classList.add('hidden');
+                    container.style.position = 'absolute';
+                    container.style.width = '100%';
+                    container.insertAdjacentHTML('afterend', response);
+                    setTimeout(function () {
+                        container.remove();
+                    }, 3000)
                 })
                 .error(function () {
                     console.error('Template Ajax request failed.');
