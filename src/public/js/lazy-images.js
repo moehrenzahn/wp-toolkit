@@ -4,7 +4,8 @@ var lazyImages = {
     /**
      * @public
      */
-    loadImages: function loadImages() {
+    loadImages: function loadImages()
+    {
         this.images.forEach(function (image) {
             if (this.isLoading(image) && utils.isInView(image, true)) {
                 this.loadFull(image);
@@ -37,10 +38,10 @@ var lazyImages = {
      * @private
      * @param {Element} image
      */
-     loadFull: function(image) {
+    loadFull: function (image) {
         var full = image.dataset.full;
         var downloadingImage = new Image();
-        downloadingImage.onload = function() {
+        downloadingImage.onload = function () {
             image.src = downloadingImage.src;
             image.classList.remove('loading');
         };
@@ -57,6 +58,6 @@ var lazyImages = {
     }
 };
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     lazyImages.loadImages();
 });

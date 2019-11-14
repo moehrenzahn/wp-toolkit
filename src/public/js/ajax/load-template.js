@@ -17,7 +17,8 @@ function loadTemplate(templatePath, container, viewClass, postId)
         load();
     });
 
-    function load() {
+    function load()
+    {
         /**
          * Grab request data from global object set via wp_localize_script.
          */
@@ -38,7 +39,7 @@ function loadTemplate(templatePath, container, viewClass, postId)
                     container.insertAdjacentHTML('afterend', response);
                     setTimeout(function () {
                         container.remove();
-                    }, 3000)
+                    }, 300)
                 })
                 .error(function () {
                     console.error('Template Ajax request failed.');

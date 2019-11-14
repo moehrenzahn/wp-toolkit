@@ -2,7 +2,7 @@ var scrollHandler = {
     /**
      * @public
      * @param {Function} callback
-     * @param {int} timeout
+     * @param {int} [timeout]
      */
     doOnScroll: function(callback, timeout) {
         if (!timeout) {

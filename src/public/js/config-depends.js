@@ -60,7 +60,7 @@ configDepends = {
     /**
      * @returns {Element[]}
      */
-    collectDependencies: function() {
+    collectDependencies: function () {
         var dependencies = [];
         this.mergeNodeLists(this.dependentInputs, this.dependentSections).forEach(function (element) {
             if (element.dataset.depends) {

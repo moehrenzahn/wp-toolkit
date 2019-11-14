@@ -61,10 +61,9 @@ class Dom
      */
     public function insertHtmlAtPosition(\DOMDocument $targetDom, string $html, int $position = 3)
     {
-
         $domId = $this->generateDomId($targetDom);
         if (isset($this->injectedItems[$domId]) && in_array($position, $this->injectedItems[$domId])) {
-            $position = $position + 3;
+            $position = $position + 5;
         }
         $htmlDom = $this->domFromHtml($html);
         $targetDom->documentElement->insertBefore(
@@ -76,6 +75,20 @@ class Dom
     }
 
     /**
+     * Similar to insertHtmlAtPosition,
+     * but will add the html to just before a h2 tag.
+     *
+     * @param \DOMDocument $targetDom
+     * @param string       $html
+     * @param int          $position
+     */
+    public function insertHtmlAth2(\DOMDocument $targetDom, string $html, int $position = 2)
+    {
+        $position = $this->getPositionForh2($targetDom, $position);
+        $this->insertHtmlAtPosition($targetDom, $html, $position);
+    }
+
+    /**
      * Generate an ID for a DOMDocument element
      *
      * @param \DOMDocument $dom
@@ -84,5 +97,29 @@ class Dom
     private function generateDomId(\DOMDocument $dom): string
     {
         return md5(substr($dom->textContent, 0, 25));
+    }
+
+    /**
+     * Find the position just before a <h2> element.
+     *
+     * @param \DOMDocument $dom
+     * @param int $number
+     * @return int
+     */
+    private function getPositionForh2(\DOMDocument $dom, int $number): int
+    {
+        $position = 0;
+        $numberOfH2s = 0;
+        foreach ($dom->documentElement->childNodes as $node) {
+            if ($node->tagName === 'h2') {
+                $numberOfH2s++;
+            }
+            if ($numberOfH2s >= $number) {
+                break;
+            }
+            $position++;
+        }
+
+        return $position;
     }
 }
