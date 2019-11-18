@@ -1,6 +1,8 @@
-<?php /** @var \Moehrenzahn\Toolkit\View\Settings\Setting $view */ ?>
+<?php /** @var \Moehrenzahn\Toolkit\View\Settings\Setting $view */
+
+use Moehrenzahn\Toolkit\Api\Model\Settings\SettingInterface; ?>
 <?php
-/** @var \Moehrenzahn\Toolkit\AdminPage\Settings\Setting\Select $setting */
+/** @var SettingInterface $setting */
 $setting = $view->getSetting();
 ?>
 <select name="<?php echo $setting->getId(); ?>"
@@ -8,7 +10,7 @@ $setting = $view->getSetting();
         id="<?php echo $setting->getId(); ?>">
     <?php foreach ($setting->getOptions() as $optionSlug => $optionName) : ?>
         <option value="<?php echo $optionSlug; ?>"
-            <?php echo ($optionSlug === $setting->getValue()) ? 'selected' : ''; ?>>
+            <?php echo ((string)$optionSlug === (string)$setting->getValue()) ? 'selected' : ''; ?>>
             <?php echo $optionName; ?>
         </option>
     <?php endforeach; ?>
