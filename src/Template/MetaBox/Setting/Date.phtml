@@ -1,0 +1,11 @@
+<?php $setting = $view->getData('preference'); ?>
+
+<label for="<?php echo $setting->getId(); ?>">
+    <?php echo $setting->getTitle(); ?>
+</label>
+<div>
+    <input type="date"
+           name="<?php echo $setting->getId(); ?>"
+           value="<?php echo esc_attr($setting->getValue($view->getPost()->ID)); ?>"/>
+</div>
+<p class="description"><?php echo $setting->getDescription(); ?></p>

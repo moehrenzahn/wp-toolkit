@@ -17,6 +17,7 @@ class PostPreference implements PreferenceInterface
     const TYPE_SELECT = 'Select';
     const TYPE_RADIO = 'Radio';
     const TYPE_MEDIA = 'Media';
+    const TYPE_DATE = 'Date';
 
     /**
      * @var string
