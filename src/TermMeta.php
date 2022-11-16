@@ -20,12 +20,14 @@ class TermMeta
     const INPUT_TYPE_BOOLEAN = 'Boolean';
     const INPUT_TYPE_SELECT = 'Select';
     const INPUT_TYPE_MEDIA = 'Media';
+    const INPUT_TYPE_LIST = 'List';
     const INPUT_TYPES = [
         self::INPUT_TYPE_TEXT,
         self::INPUT_TYPE_TEXTAREA,
         self::INPUT_TYPE_BOOLEAN,
         self::INPUT_TYPE_SELECT,
         self::INPUT_TYPE_MEDIA,
+        self::INPUT_TYPE_LIST
     ];
 
     /**

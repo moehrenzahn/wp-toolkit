@@ -74,6 +74,44 @@ class PostMetaBox
     }
 
     /**
+     * More flexible version of add.
+     * Use this to add a meta box to a custom post type
+     * or to define the "context" (position) of the meta box.
+     */
+    public function addCustom(
+        string $title,
+        string $slug,
+        string $screenName,
+        string $context = 'side',
+        array $postPreferences = [],
+        string $templatePath = 'Template/MetaBox/MetaBox'
+    ) {
+        /** @var MetaBox $view */
+        $view = $this->objectManager->create(
+            MetaBox::class,
+            [
+                'templatePath' => $templatePath,
+                'postPreferences' => $postPreferences
+            ]
+        );
+        $this->metaBoxes[$slug] = $this->objectManager->create(
+            \Moehrenzahn\Toolkit\Model\CustomMetaBox::class,
+            [
+                'title' => $title,
+                'slug' => $slug,
+                'screenName' => $screenName,
+                'context' => $context,
+                'postPreferences' => $postPreferences,
+                'view' => $view,
+            ]
+        );
+
+        return $this->metaBoxes[$title];
+    }
+
+
+
+    /**
      * @return Model\PostMetaBox[]
      */
     public function getMetaBoxes(): array

@@ -15,22 +15,24 @@ class PostType
     private $types = [];
 
     /**
-     * @param string $label
-     * @param string $plural
-     * @param string $description
-     * @param string $icon
+     * @param $labels   Use to override individual default labels
+     * @param $params   Use to override individual default params (other than labels)
      */
     public function add(
         string $label,
         string $plural,
         string $description = '',
-        string $icon = 'dashicons-admin-post'
+        string $icon = 'dashicons-admin-post',
+        array $labels = [],
+        array $params = []
     ) {
         $this->types[$label] = new \Moehrenzahn\Toolkit\Model\PostType(
             $label,
             $plural,
             $description,
-            $icon
+            $icon,
+            $labels,
+            $params
         );
     }
 

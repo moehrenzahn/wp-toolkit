@@ -44,7 +44,6 @@ class PostPreference
         $this->tagStorage = $tagStorage;
     }
 
-
     /**
      * @param string $slug
      * @param string $title

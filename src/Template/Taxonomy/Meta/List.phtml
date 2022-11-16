@@ -1,0 +1,55 @@
+<?php
+/** @var \Moehrenzahn\Toolkit\View\Taxonomy\Meta $view */
+
+if (is_array($view->getValue())) {
+    $values = $view->getValue();
+} else {
+    $values = [$view->getValue()];
+}
+if (count($values) === 0) {
+    $values = [""];
+}
+
+?>
+<script>
+    function addListItem(slug) {
+        inputs = document.querySelectorAll("input[id^=" + slug + "-]");
+        lastInput = inputs[inputs.length - 1];
+        index = Number(lastInput.getAttribute("id").split("-").slice(-1)[0]);
+        newId = slug + "-" + (index+1);
+        newDiv = lastInput.parentNode.cloneNode(true);
+        newDiv.children[0].setAttribute("id", newId);
+        newDiv.children[0].value = "";
+        newDiv.children[1].removeAttribute("disabled");
+        lastInput.parentNode.parentNode.appendChild(newDiv);
+    }
+</script>
+<tr class="form-field">
+    <th><?= $view->getTitle(); ?></th>
+    <td>
+        <label for="<?= $view->getSlug(); ?>[]"
+               style="display: flex; flex-direction: column; gap: 10px">
+            <div class="list-inputs-group" style="display: contents">
+                <?php foreach ($values as $index=>$value) : ?>
+                    <div style="display: flex; gap: 10px">
+                        <input name="<?= $view->getSlug(); ?>[]"
+                            type="text"
+                            class="list-input"
+                            style="flex-grow: 1"
+                            id="<?= $view->getSlug(); ?>-<?= $index ?>"
+                            value="<?= $value; ?>"/>
+                            <button type="button"
+                                    <?= ($index == 0) ? 'disabled' : '' ?>
+                                    class="button button-secondary remove-item"
+                                    onclick="this.parentNode.remove()">-</button>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <button type="button"
+                    style="align-self: flex-end"
+                    class="button button-secondary"
+                    onclick="addListItem('<?= $view->getSlug(); ?>')">+</button>
+            <?= $view->getDescription(); ?>
+        </label>
+    </td>
+</tr>

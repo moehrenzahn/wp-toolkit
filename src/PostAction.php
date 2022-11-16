@@ -42,4 +42,20 @@ class PostAction
             }
         );
     }
+
+    /**
+     * Use this to allow users who are not logged in to the admin area.
+     */
+    public function addNoPriv(string $actionId, string $returnUrl, ActionInterface $action)
+    {
+        $this->loader->addAction(
+            "admin_post_nopriv_$actionId",
+            null,
+            function () use ($action, $returnUrl) {
+                $action->doAction($_POST);
+                wp_redirect($returnUrl);
+                exit;
+            }
+        );
+    }
 }

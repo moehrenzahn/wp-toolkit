@@ -39,7 +39,7 @@ class TermMetaSave
     public function doSaveAction(array $request, string $termId, string $slug)
     {
         if (isset($request[$slug])) {
-            $this->metaAccessor->setValue($termId, $slug, true);
+            $this->metaAccessor->setValue($termId, $slug, $request[$slug]);
         } else {
             $this->metaAccessor->setValue($termId, $slug, false);
         }
