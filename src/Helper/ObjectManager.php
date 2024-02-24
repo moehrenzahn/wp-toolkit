@@ -63,7 +63,7 @@ class ObjectManager
             $dependencies = [];
             if ($reflection->getConstructor()) {
                 foreach ($reflection->getConstructor()->getParameters() as $parameter) {
-                    $paramClassName = $parameter->getClass()->name;
+                    $paramClassName = (string) $parameter->getType();
                     if (in_array($parameter->name, array_keys($params))) {
                         // get dependency from params array
                         $dependencies[] = $params[$parameter->getName()];
