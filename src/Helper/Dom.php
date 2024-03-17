@@ -2,6 +2,8 @@
 
 namespace Moehrenzahn\Toolkit\Helper;
 
+use DOMElement;
+
 /**
  * Class Dom
  *
@@ -111,8 +113,11 @@ class Dom
         $position = 0;
         $numberOfH2s = 0;
         foreach ($dom->documentElement->childNodes as $node) {
-            if ($node->tagName === 'h2') {
-                $numberOfH2s++;
+            if ($node instanceof DOMElement) {
+                /** @var DomElement $node */
+                if ($node->tagName === 'h2') {
+                    $numberOfH2s++;
+                }
             }
             if ($numberOfH2s >= $number) {
                 break;

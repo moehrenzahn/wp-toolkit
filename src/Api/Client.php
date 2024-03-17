@@ -47,9 +47,15 @@ class Client
         if (Request::isAjax()) {
             $this->loadAjaxActions();
         }
-        define('TOOLKIT_ROOT_FOLDER', dirname(__DIR__));
-        define('TOOLKIT_TEMPLATE_FOLDER', TOOLKIT_ROOT_FOLDER . '/Template/');
-        define('TOOLKIT_PUB_URL', 'vendor/moehrenzahn/wp-toolkit/src/public/');
+        if (!defined('TOOLKIT_ROOT_FOLDER')) {
+            define('TOOLKIT_ROOT_FOLDER', dirname(__DIR__));
+        }
+        if (!defined('TOOLKIT_TEMPLATE_FOLDER')) {
+            define('TOOLKIT_TEMPLATE_FOLDER', TOOLKIT_ROOT_FOLDER . '/Template/');
+        }
+        if (!defined('TOOLKIT_PUB_URL')) {
+            define('TOOLKIT_PUB_URL', 'vendor/moehrenzahn/wp-toolkit/src/public/');
+        }
     }
 
     /**

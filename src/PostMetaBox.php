@@ -70,7 +70,7 @@ class PostMetaBox
             ]
         );
 
-        return $this->metaBoxes[$title];
+        return $this->metaBoxes[$slug];
     }
 
     /**
